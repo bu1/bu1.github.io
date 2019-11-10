@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="任务标题： 搭建 web 运行的基础环境第一周环境准备任务任务目标：准备学习环境，学习 web 服务器的搭建过程，并做相应的加固学习 电脑要求：必须有一台自己的电脑，配置最好高一点，自己用着舒服就行 操作系统：主机不限制操作系统，需要安装虚拟机 推荐环境：linux+nginx+php-fpm+mysql（为后续搭建 nginx+lua 的 waf 做准备，不可以使用集成好的环境） 报告要求：将整">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一周:搭建WEB运行的基础环境">
+<meta property="og:url" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="任务标题： 搭建 web 运行的基础环境第一周环境准备任务任务目标：准备学习环境，学习 web 服务器的搭建过程，并做相应的加固学习 电脑要求：必须有一台自己的电脑，配置最好高一点，自己用着舒服就行 操作系统：主机不限制操作系统，需要安装虚拟机 推荐环境：linux+nginx+php-fpm+mysql（为后续搭建 nginx+lua 的 waf 做准备，不可以使用集成好的环境） 报告要求：将整">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573299435303.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371680169.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371738537.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371746861.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371764721.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371771440.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371790815.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371817818.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371841956.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371999784.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372029169.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372085998.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372093348.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372115639.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372122220.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372141441.png">
+<meta property="og:updated_time" content="2019-11-10T09:06:36.161Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第一周:搭建WEB运行的基础环境">
+<meta name="twitter:description" content="任务标题： 搭建 web 运行的基础环境第一周环境准备任务任务目标：准备学习环境，学习 web 服务器的搭建过程，并做相应的加固学习 电脑要求：必须有一台自己的电脑，配置最好高一点，自己用着舒服就行 操作系统：主机不限制操作系统，需要安装虚拟机 推荐环境：linux+nginx+php-fpm+mysql（为后续搭建 nginx+lua 的 waf 做准备，不可以使用集成好的环境） 报告要求：将整">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/1573299435303.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/">
+
+
+
+
+
+  <title>第一周:搭建WEB运行的基础环境 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bu1'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第一周:搭建WEB运行的基础环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-10T16:50:52+08:00">
+                2019-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/信安之路/" itemprop="url" rel="index">
+                    <span itemprop="name">信安之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/10/第一周：-搭建-web-运行的基础环境/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/10/第一周：-搭建-web-运行的基础环境/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="任务标题：-搭建-web-运行的基础环境"><a href="#任务标题：-搭建-web-运行的基础环境" class="headerlink" title="任务标题： 搭建 web 运行的基础环境"></a>任务标题： 搭建 web 运行的基础环境</h1><h2 id="第一周环境准备任务"><a href="#第一周环境准备任务" class="headerlink" title="第一周环境准备任务"></a>第一周环境准备任务</h2><p><strong>任务目标：</strong>准备学习环境，学习 web 服务器的搭建过程，并做相应的加固学习</p>
+<p><strong>电脑要求：</strong>必须有一台自己的电脑，配置最好高一点，自己用着舒服就行</p>
+<p><strong>操作系统：</strong>主机不限制操作系统，需要安装虚拟机</p>
+<p><strong>推荐环境：</strong>linux+nginx+php-fpm+mysql（为后续搭建 nginx+lua 的 waf 做准备，不可以使用集成好的环境）</p>
+<p><strong>报告要求：</strong>将整个环境的搭建过程进行详细记录，收集网络上的加固文档，学习加固技术，从而思考不加固可能存在的安全问题，对于加固的过程以及对于安全的思考都需要做详细的记录。</p>
+<p><strong>最终目标：</strong>能够运行 php 代码并且可以使用 php 连接 mysql，成功执行 mysql 的语句</p>
+<p><strong>拓展任务：</strong>除了这个 web 环境还有其他的环境可以搭建，能力强者可以做更多的练习，比如：基于 apache 的环境、基于 Windows server 的 iis 环境等</p>
+<a id="more"></a>
+
+<h2 id="可能存在的问题"><a href="#可能存在的问题" class="headerlink" title="可能存在的问题"></a>可能存在的问题</h2><p><strong>1、可以使用一键安装脚本不？</strong></p>
+<p>原则上不允许使用一键的方式安装，因为这个任务的目的是让大家了解整个 web 环境的搭建过程，对于学习而言，越复杂越好，这样对你的理解才能更加深刻，当你使用一键安装脚本时，你学到了什么？所以为了自己的成长请一步一步操作并思考每一步的意义和作用。</p>
+<p><strong>2、加固要做到啥标准呢？</strong></p>
+<p>做服务器的安全加固，原则上不做要求，因为这个是跟你学习的程度和理解有关系的，所以这个可以自由发挥，尽自己最大努力将服务器设置的更安全，并且理解该操作的意义，从而反思出现实环境的安全问题。</p>
+<p><strong>3、我的基础很扎实，很快主要任务就完成了，怎么办？</strong></p>
+<p>那你可以做一些扩展任务，多配置几套环境，我们在验收的时候，可以在基础分值上增加一些额外分数，这样在最终的评价中可以有所体现。</p>
+<p><strong>4、报告怎么提交，提交给谁，什么时候截止？</strong></p>
+<p>这个后续会在知识星球里更新具体的情况，敬请期待！第一周截止时间于 8 月 3 日结束，过时不侯！</p>
+<p><strong>5、linux 用 kali 行吗？</strong></p>
+<p>建议使用一个全新的系统进行学习搭建和加固等操作，不然很容易出问题。</p>
+<p><strong>6、nginx 的版本有要求吗？</strong></p>
+<p>关于版本的问题，我们不做任何的要求，因为这样大家的环境有所差别，更具有多样性，互相学习才更有价值。</p>
+<h1 id="学习报告"><a href="#学习报告" class="headerlink" title="学习报告"></a>学习报告</h1><h2 id="Linux-系统的安装"><a href="#Linux-系统的安装" class="headerlink" title="Linux 系统的安装"></a>Linux 系统的安装</h2><p>电脑上已经有 kali 系统了，为了完成这次的学习任务首先找一个 linux 镜像装虚拟机上，因为对 linux 系统不怎么熟悉，所以我首先查询了下各个发行版本的区别。</p>
+<p><strong>一.</strong> Redhat 系列： Redhat 应该说是在国内使用人群最多 的 Linux 版本，甚至有人将 Redhat等同于 Linux，而有些老鸟更是只用这一个版本的 Linux。 Redhat 系列的包管 理方式采用的是基于 RPM 包的 YUM 包管理方式，包分发方式是编译好的二进制文件。稳定性方面 RHEL和 CentOS 的稳定性非常好。</p>
+<p><strong>二.</strong> Debian 系列： 包括 Debian 和 Ubuntu， 是迄今为止最遵循 GNU 规范 的 Linux 系统。Debian最具特色的是 apt-get / dpkg 包管理方式，其实 Redhat 的 YUM 也是在模仿 Debian 的 APT 方式，但在二进制文件发行方式中， APT 应该是最好的了。</p>
+<p><strong>三.</strong>Gentoo，伟大的 Gentoo 是 Linux 世界最年轻的发行版本，正因为年轻，所以能吸取在她之前的所有发行版本的优点，这也是 Gentoo 被称为最完美的 Linux发行版本的原因之一。不同于 APT 和 YUM 等二进制文件分发的包管理系统， Portage 是基于源代码分发的，必须编译后才能运行，对于大型软 件而言比较慢，不过正因为所有软件都是在本地机器编译的，在经过各种定制的编译参数优化后，能将机器的硬件性能发挥到极致。</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573299435303.png" alt></p>
+<p><em>由上我觉得采用ubuntu比较好，访问官网下载。打开vm新建一个虚拟机并安装ubuntu</em></p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p><strong>-</strong>首先可以将更新源换为国内的阿里源</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371680169.png" alt="1573371680169"></p>
+<p><strong>-</strong>安装和启动Apache</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371738537.png" alt="1573371738537"></p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371746861.png" alt="1573371746861"></p>
+<p><strong>-</strong>安装php-fpm</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371764721.png" alt="1573371764721"></p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371771440.png" alt="1573371771440"></p>
+<p><strong>-</strong>安装mysql</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371790815.png" alt="1573371790815"></p>
+<p><strong>-</strong>安装Php-mysql</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371817818.png" alt="1573371817818"></p>
+<p><strong>-</strong>PHP链接数据库测试</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371841956.png" alt="1573371841956"></p>
+<h2 id="服务器加固"><a href="#服务器加固" class="headerlink" title="服务器加固"></a>服务器加固</h2><p><strong>-</strong>开启安全补丁更新</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573371999784.png" alt="1573371999784"></p>
+<p><strong>-</strong>启动密码策略，定时修改密码</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372029169.png" alt="1573372029169"></p>
+<p><strong>-</strong>设置为ssh登入方式，禁止root登入，禁止密码登录，并且使用密钥。</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372085998.png" alt="1573372085998"></p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372093348.png" alt="1573372093348"></p>
+<p><strong>-</strong>配置防火墙，只开放必要端口</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372115639.png" alt="1573372115639"></p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372122220.png" alt="1573372122220"></p>
+<p><strong>-</strong>禁用root用户</p>
+<p><img src="/2019/11/10/第一周：-搭建-web-运行的基础环境/1573372141441.png" alt="1573372141441"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><p><a href="https://zhuanlan.zhihu.com/p/61228593" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/61228593</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/Ersan_Yi/article/details/82107552" target="_blank" rel="noopener">https://blog.csdn.net/Ersan_Yi/article/details/82107552</a>   </p>
+<p>服务器加固：</p>
+</li>
+<li><p><a href="https://help.ubuntu.com/community/UFW#Allow_Access" target="_blank" rel="noopener">https://help.ubuntu.com/community/UFW#Allow_Access</a></p>
+</li>
+<li><p><a href="https://ywnz.com/linuxyffq/36.html" target="_blank" rel="noopener">https://ywnz.com/linuxyffq/36.html</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/qq_33168577/article/details/79585116" target="_blank" rel="noopener">https://blog.csdn.net/qq_33168577/article/details/79585116</a></p>
+</li>
+<li><p><a href="https://www.centos.bz/2017/07/ubuntu-16-04-iptables/" target="_blank" rel="noopener">https://www.centos.bz/2017/07/ubuntu-16-04-iptables/</a></p>
+</li>
+<li><p><a href="https://www.centos.bz/2018/03/配置ufw防火墙，守护你的ubuntu/" target="_blank" rel="noopener">https://www.centos.bz/2018/03/%E9%85%8D%E7%BD%AEufw%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%8C%E5%AE%88%E6%8A%A4%E4%BD%A0%E7%9A%84ubuntu/</a></p>
+</li>
+<li><p><a href="https://wiki.ubuntu.org.cn/UFW%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E8%AE%BE%E7%BD%AE" target="_blank" rel="noopener">https://wiki.ubuntu.org.cn/UFW%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E8%AE%BE%E7%BD%AE</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Bu1
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/" title="第一周:搭建WEB运行的基础环境">http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------END<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Bu1">
+            
+              <p class="site-author-name" itemprop="name">Bu1</p>
+              <p class="site-description motion-element" itemprop="description">最为惊艳的是思想碰撞的火花。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tanpuhan.github.io" title="CoCo1er" target="_blank">CoCo1er</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#任务标题：-搭建-web-运行的基础环境"><span class="nav-number">1.</span> <span class="nav-text">任务标题： 搭建 web 运行的基础环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一周环境准备任务"><span class="nav-number">1.1.</span> <span class="nav-text">第一周环境准备任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可能存在的问题"><span class="nav-number">1.2.</span> <span class="nav-text">可能存在的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习报告"><span class="nav-number">2.</span> <span class="nav-text">学习报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-系统的安装"><span class="nav-number">2.1.</span> <span class="nav-text">Linux 系统的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-number">2.2.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器加固"><span class="nav-number">2.3.</span> <span class="nav-text">服务器加固</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">2.4.</span> <span class="nav-text">参考文档</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>"
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/';
+          this.page.identifier = '2019/11/10/第一周：-搭建-web-运行的基础环境/';
+          this.page.title = '第一周:搭建WEB运行的基础环境';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
