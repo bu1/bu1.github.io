@@ -115,16 +115,17 @@
 
 
 
-<meta name="description" content="最为惊艳的是思想碰撞的火花。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bu1&#39;Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="今天又碰到了需要使用到hydra的场景，为了加深自己对使用命令的印象，同时也是为了今后再忘记时可以快速索引到自己所需要的知识点写下了今天这篇博客。 所用到的知识均来自网络。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hydra使用笔记">
+<meta property="og:url" content="http://yoursite.com/2019/11/11/Hydra使用笔记/index.html">
 <meta property="og:site_name" content="Bu1&#39;Blog">
-<meta property="og:description" content="最为惊艳的是思想碰撞的火花。">
+<meta property="og:description" content="今天又碰到了需要使用到hydra的场景，为了加深自己对使用命令的印象，同时也是为了今后再忘记时可以快速索引到自己所需要的知识点写下了今天这篇博客。 所用到的知识均来自网络。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-11T11:27:00.125Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bu1&#39;Blog">
-<meta name="twitter:description" content="最为惊艳的是思想碰撞的火花。">
+<meta name="twitter:title" content="Hydra使用笔记">
+<meta name="twitter:description" content="今天又碰到了需要使用到hydra的场景，为了加深自己对使用命令的印象，同时也是为了今后再忘记时可以快速索引到自己所需要的知识点写下了今天这篇博客。 所用到的知识均来自网络。">
 
 
 
@@ -154,13 +155,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/11/11/Hydra使用笔记/">
 
 
 
 
 
-  <title>Bu1'Blog</title>
+  <title>Hydra使用笔记 | Bu1'Blog</title>
   
 
 
@@ -179,8 +180,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -273,9 +273,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -305,9 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/11/Hydra使用笔记/" itemprop="url">Hydra使用笔记</a></h1>
+          <h1 class="post-title" itemprop="name headline">Hydra使用笔记</h1>
         
 
         <div class="post-meta">
@@ -420,17 +418,67 @@
       
 
       
-        
-          <p>今天又碰到了需要使用到hydra的场景，为了加深自己对使用命令的印象，同时也是为了今后再忘记时可以快速索引到自己所需要的知识点写下了今天这篇博客。</p>
+        <p>今天又碰到了需要使用到hydra的场景，为了加深自己对使用命令的印象，同时也是为了今后再忘记时可以快速索引到自己所需要的知识点写下了今天这篇博客。</p>
 <p>所用到的知识均来自网络。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/11/11/Hydra使用笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+
+<hr>
+<h2 id="Hydra简介"><a href="#Hydra简介" class="headerlink" title="Hydra简介"></a>Hydra简介</h2><p>hydra是一个自动化的爆破工具，暴力破解弱密码，是一个支持众多协议的爆破工具，已经集成到KaliLinux中，直接在终端打开即可。</p>
+<p>支持的常用服务：POP3，SMB，RDP，SSH，FTP，POP3，Telnet，MYSQL…</p>
+<h2 id="Hydta使用参数"><a href="#Hydta使用参数" class="headerlink" title="Hydta使用参数"></a>Hydta使用参数</h2><p>-h 帮助文档baop</p>
+<p>-R  继续上一次进度破解</p>
+<p>-S 采用SSL连接</p>
+<p>-s PORT  指定非默认端口</p>
+<p>-e 空密码探测和指定用户密码探测</p>
+<p>-l  LOGIN 指定要破解的用户</p>
+<p>-L FILE   指定用户名字典破解</p>
+<p>-p FILE  指定单密码</p>
+<p>-P FILE  指定要使用的密码字典破解</p>
+<p>-C FILE 使用冒号分割的格式，如“login:pass”来替代-L/-P参数</p>
+<p>-t TASKS  同时运行的线程数量，默认16线程</p>
+<p>-M 指定多目标(文件内格式为地址：端口)</p>
+<p>-w TIME  设置最大超时时间，单位秒。默认30s</p>
+<p>-v/-V 显示爆破详细信息</p>
+<p>-f 如果爆破成功则停止爆破</p>
+<h2 id="Hydta实战用法"><a href="#Hydta实战用法" class="headerlink" title="Hydta实战用法"></a>Hydta实战用法</h2><ul>
+<li>爆破SSH服务</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l root -P /usr/share/wordlists/metasploit/unix_passwords.txt -t 11 -s 20000 -v -f ssh://192.168.0.110</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra 192.168.0.110 ssh -l root -P /usr/share/wordlists/metasploit/unix_passwords.txt -t 11 -s 20000 -v -f</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>攻击目标：192.168.0.110</p>
+<p>使用的模块：ssh</p>
+<p>爆破的用户名：root(-l)</p>
+<p>爆破的密码字典：/usr/share/wordlists/metasploit/unix_passwords.txt（<em>kali自带字典目     录：/usr/share/wordlists/metasploit/</em>）(-P)</p>
+<p>爆破的线程数：11(-t)</p>
+<p>显示详细信息：(-v)</p>
+<p>爆破成功一个后停止(-f)</p>
+</blockquote>
+<ul>
+<li>爆破FTP服务</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l root -P /usr/share/wordlists/metasploit/unix_passwords.txt -t 11 -s 20000 -v -f ftp://192.168.0.110</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra 192.168.0.110 ftp -l root -P /usr/share/wordlists/metasploit/unix_passwords.txt -t 11 -s 20000 -v -f</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>攻击目标：192.168.0.110</p>
+<p>使用的模块：ftp</p>
+<p>其余同上</p>
+</blockquote>
+<ul>
+<li>爆破Mysql</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -L username.txt -P password.txt mysql://192.168.0.110:mysql端口号</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>破解web登录</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get方式：hydra -l 用户名 -p 密码字典 -t 线程 -vV IP http-get /login.php</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -442,220 +490,59 @@
     
 
     
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Bu1
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/11/11/Hydra使用笔记/" title="Hydra使用笔记">http://yoursite.com/2019/11/11/Hydra使用笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
 	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------END<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
       
     </div>
     <footer class="post-footer">
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-  
-  
-  
-  
-  
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/第一周：-搭建-web-运行的基础环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bu1">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bu1'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/10/第一周：-搭建-web-运行的基础环境/" itemprop="url">第一周:搭建WEB运行的基础环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-10T16:50:52+08:00">
-                2019-11-10
-              </time>
+              <a href="/2019/11/10/第一周：-搭建-web-运行的基础环境/" rel="next" title="第一周:搭建WEB运行的基础环境">
+                <i class="fa fa-chevron-left"></i> 第一周:搭建WEB运行的基础环境
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/信安之路/" itemprop="url" rel="index">
-                    <span itemprop="name">信安之路</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/11/10/第一周：-搭建-web-运行的基础环境/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/10/第一周：-搭建-web-运行的基础环境/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.4k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h1 id="任务标题：-搭建-web-运行的基础环境"><a href="#任务标题：-搭建-web-运行的基础环境" class="headerlink" title="任务标题： 搭建 web 运行的基础环境"></a>任务标题： 搭建 web 运行的基础环境</h1><h2 id="第一周环境准备任务"><a href="#第一周环境准备任务" class="headerlink" title="第一周环境准备任务"></a>第一周环境准备任务</h2><p><strong>任务目标：</strong>准备学习环境，学习 web 服务器的搭建过程，并做相应的加固学习</p>
-<p><strong>电脑要求：</strong>必须有一台自己的电脑，配置最好高一点，自己用着舒服就行</p>
-<p><strong>操作系统：</strong>主机不限制操作系统，需要安装虚拟机</p>
-<p><strong>推荐环境：</strong>linux+nginx+php-fpm+mysql（为后续搭建 nginx+lua 的 waf 做准备，不可以使用集成好的环境）</p>
-<p><strong>报告要求：</strong>将整个环境的搭建过程进行详细记录，收集网络上的加固文档，学习加固技术，从而思考不加固可能存在的安全问题，对于加固的过程以及对于安全的思考都需要做详细的记录。</p>
-<p><strong>最终目标：</strong>能够运行 php 代码并且可以使用 php 连接 mysql，成功执行 mysql 的语句</p>
-<p><strong>拓展任务：</strong>除了这个 web 环境还有其他的环境可以搭建，能力强者可以做更多的练习，比如：基于 apache 的环境、基于 Windows server 的 iis 环境等</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/11/10/第一周：-搭建-web-运行的基础环境/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	<div>
-      
-    </div>
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -671,10 +558,11 @@
   
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -682,6 +570,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -702,8 +604,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -770,6 +681,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hydra简介"><span class="nav-number">1.</span> <span class="nav-text">Hydra简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hydta使用参数"><span class="nav-number">2.</span> <span class="nav-text">Hydta使用参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hydta实战用法"><span class="nav-number">3.</span> <span class="nav-text">Hydta实战用法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -912,6 +839,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -929,6 +860,18 @@
       <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/11/11/Hydra使用笔记/';
+          this.page.identifier = '2019/11/11/Hydra使用笔记/';
+          this.page.title = 'Hydra使用笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
