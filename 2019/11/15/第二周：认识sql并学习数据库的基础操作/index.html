@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="任务标题：认识 sql 并学习数据库的基础操作要求1、什么是关系型和非关系型数据库，两者都包含哪些种类的数据库 2、选择一种关系型数据库进行学习（选择自己不熟悉的进行学习） 3、学习数据库中的字段类型并创建库和用户表，需要包含所有字段类型 4、学习数据库的增删改查，记录学习过程（重点是 sql 语句的理解）并形成报告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二周：认识sql并学习数据库的基础操作">
+<meta property="og:url" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="任务标题：认识 sql 并学习数据库的基础操作要求1、什么是关系型和非关系型数据库，两者都包含哪些种类的数据库 2、选择一种关系型数据库进行学习（选择自己不熟悉的进行学习） 3、学习数据库中的字段类型并创建库和用户表，需要包含所有字段类型 4、学习数据库的增删改查，记录学习过程（重点是 sql 语句的理解）并形成报告">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image002.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image004.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image006.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image007.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image008.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image009.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image011.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image012.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image013.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image015.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image016.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image018.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image020.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image022.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image024.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image026.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image028.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image030.jpg">
+<meta property="og:updated_time" content="2019-11-15T09:05:36.343Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二周：认识sql并学习数据库的基础操作">
+<meta name="twitter:description" content="任务标题：认识 sql 并学习数据库的基础操作要求1、什么是关系型和非关系型数据库，两者都包含哪些种类的数据库 2、选择一种关系型数据库进行学习（选择自己不熟悉的进行学习） 3、学习数据库中的字段类型并创建库和用户表，需要包含所有字段类型 4、学习数据库的增删改查，记录学习过程（重点是 sql 语句的理解）并形成报告">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image002.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/">
+
+
+
+
+
+  <title>第二周：认识sql并学习数据库的基础操作 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bu1'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第二周：认识sql并学习数据库的基础操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-15T16:59:35+08:00">
+                2019-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/信安之路/" itemprop="url" rel="index">
+                    <span itemprop="name">信安之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/15/第二周：认识sql并学习数据库的基础操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/15/第二周：认识sql并学习数据库的基础操作/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="任务标题：认识-sql-并学习数据库的基础操作"><a href="#任务标题：认识-sql-并学习数据库的基础操作" class="headerlink" title="任务标题：认识 sql 并学习数据库的基础操作"></a>任务标题：认识 sql 并学习数据库的基础操作</h1><h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>1、什么是关系型和非关系型数据库，两者都包含哪些种类的数据库</p>
+<p>2、选择一种关系型数据库进行学习（选择自己不熟悉的进行学习）</p>
+<p>3、学习数据库中的字段类型并创建库和用户表，需要包含所有字段类型</p>
+<p>4、学习数据库的增删改查，记录学习过程（重点是 sql 语句的理解）并形成报告</p>
+<a id="more"></a>
+
+<h2 id="部分解释"><a href="#部分解释" class="headerlink" title="部分解释"></a>部分解释</h2><p>1、对于关系型数据库，都会提供文件读写的功能，但是具体如何实现略有不同，文件读写在我们利用数据库注入漏洞获取 webshell 的时候非常有帮助，所以读写文件的基础是必须要学的。</p>
+<p>2、任何关系型数据库，在默认安装成功之后会自带一些默认的系统库和表，这些库和表存储了数据库中很多关键的信息，比如用户创建的库相关信息、表相关信息、用户相关信息、权限相关信息、安装配置相关信息等，在我们利用注入漏洞获取更多信息和权限的过程中有很大的帮助，所以熟悉数据库默认的系统库和表也是很必要的。</p>
+<p>3、对于关系型数据库，为了安全都会存在用户和密码，但是密码是经过哈希之后存储在系统表中的，当我们通过注入获取数据库的账号和哈希之后，想要知道哈希之前的明文信息，需要进行暴力破解操作，对于跑哈希来说，hashcat 可以利用 GPU 快速破解哈希，支持非常多的哈希格式，在未来的红蓝对抗中帮助很大。</p>
+<p>以上就是下周任务学习的意义，具体学习到什么程度还是取决于自己，大家加油吧！</p>
+<h1 id="学习报告"><a href="#学习报告" class="headerlink" title="学习报告"></a>学习报告</h1><h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><p>​     关系型数据库，是指采用了关系模型来组织数据的数据库。简单来说，关系模型指的就是二维表格模型，而一个关系型数据库就是由二维表及其之间的联系所组成的一个数据组织。比如一个老师对应多个学生的数据（“多对多”），一本书对应多个作者（“一对多”），一本书对应一个出版日期（“一对一”）。</p>
+<ul>
+<li>数据的存储形式：</li>
+</ul>
+<p><img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image002.jpg" alt="img"></p>
+<ul>
+<li>关系的处理形式：</li>
+</ul>
+<p><img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image004.jpg" alt="img"></p>
+<ul>
+<li>多个模型一起用的情况：</li>
+</ul>
+<p><img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image006.jpg" alt="img"></p>
+<p>常见的关系型数据库：</p>
+<p>Oracle、DB2、PostgreSQL、Microsoft SQL Server、Microsoft Access、MySQL</p>
+<h2 id="非关系型数据库"><a href="#非关系型数据库" class="headerlink" title="非关系型数据库"></a>非关系型数据库</h2><p>​     为了区别于关系型数据库，其他数据库统称为非关系型数据库。而常见的非关系型数据库模型及数据库名有</p>
+<ul>
+<li>面向高性能并发读写的key-value数据库：</li>
+</ul>
+<p>key-value数据库的主要特点即使具有极高的并发读写性能，Redis,Tokyo Cabinet,Flare就是这类的代表。</p>
+<ul>
+<li>面向海量数据访问的面向文档数据库：</li>
+</ul>
+<p>这类数据库的特点是，可以在海量的数据中快速的查询数据，典型代表为MongoDB以及CouchDB</p>
+<ul>
+<li>面向可扩展性的分布式数据库：</li>
+</ul>
+<p>这类数据库想解决的问题就是传统数据库存在可扩展性上的缺陷，这类数据库可以适应数据量的增加以及数据结构的变化，如Hbase。</p>
+<h2 id="Mysql基础操作"><a href="#Mysql基础操作" class="headerlink" title="Mysql基础操作"></a>Mysql基础操作</h2><ul>
+<li><p>登录Mysql<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image007.png" alt="img"></p>
+</li>
+<li><p>查看数据库<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image008.png" alt="img"></p>
+</li>
+<li><p>创建数据库<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image009.png" alt="img"></p>
+</li>
+<li><p>当前数据库<img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image011.jpg" alt="img"></p>
+</li>
+<li><p>登录数据库<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image012.png" alt="img"></p>
+</li>
+<li><p>显示数据表<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image013.png" alt="img"></p>
+</li>
+<li><p>创建数据表<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image015.jpg" alt="img"></p>
+</li>
+</ul>
+<p><img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image016.png" alt="img"></p>
+<ul>
+<li><p>查看表结构<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image018.jpg" alt="img"></p>
+</li>
+<li><p>插入数据<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image020.jpg" alt="img"></p>
+</li>
+<li><p>查询数据<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image022.jpg" alt="img"></p>
+</li>
+<li><p>删除数据<br><img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image024.jpg" alt="img"></p>
+</li>
+<li><p>更改数据<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image026.jpg" alt="img"></p>
+</li>
+<li><p>删除数据表<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image028.jpg" alt="img"></p>
+</li>
+<li><p>删除数据库<br> <img src="/2019/11/15/第二周：认识sql并学习数据库的基础操作/%C2%96%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%9A%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%5Cclip_image030.jpg" alt="img"></p>
+</li>
+<li><p>常用命令列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">create database new_dbname;--新建数据库</span><br><span class="line"></span><br><span class="line">drop database old_dbnane; --删除数据库</span><br><span class="line"></span><br><span class="line">show databases;--显示数据库</span><br><span class="line"></span><br><span class="line">use databasename;--使用数据库</span><br><span class="line"></span><br><span class="line">select database();--查看已选择的数据库</span><br><span class="line"></span><br><span class="line">show tables;--显示当前库的所有表</span><br><span class="line"></span><br><span class="line">create table tablename(fieldname1 fieldtype1,fieldname2 fieldtype2,..)[ENGINE=engine_name];创建表</span><br><span class="line"></span><br><span class="line">drop table tablename; --删除表</span><br><span class="line"></span><br><span class="line">create table tablename select statement;--通过子查询创建表</span><br><span class="line"></span><br><span class="line">desc tablename;--查看表结构</span><br><span class="line"></span><br><span class="line">show create table tablename;--查看建表语句</span><br><span class="line"></span><br><span class="line">alter table tablename add new_fielname new_fieldtype;--新增列</span><br><span class="line"></span><br><span class="line">alter table tablename add new_fielname new_fieldtype after 列名1;--在列名1后新增列</span><br><span class="line"></span><br><span class="line">alter table tablename modify fieldname new_fieldtype;--修改列</span><br><span class="line"></span><br><span class="line">alter table tablename drop fieldname;--删除列</span><br><span class="line"></span><br><span class="line">alter table tablename_old rename tablename_new;--表重命名</span><br><span class="line"></span><br><span class="line">insert into tablename(fieldname1,fieldname2,fieldnamen) valuse(value1,value2,valuen);--增</span><br><span class="line"></span><br><span class="line">delete from tablename [where fieldname=value];--删</span><br><span class="line"></span><br><span class="line">update tablename set fieldname1=new_value where filename2=value;--改</span><br><span class="line"></span><br><span class="line">select * from tablename [where filename=value];--查</span><br><span class="line"></span><br><span class="line">truncate table tablename;--清空表中所有数据，DDL语句</span><br><span class="line"></span><br><span class="line">show engines;--查看mysql现在已提供的存储引擎:</span><br><span class="line"></span><br><span class="line">show variables like &apos;%storage_engine%&apos;;--查看mysql当前默认的存储引擎</span><br><span class="line"></span><br><span class="line">show create table tablename;--查看某张表用的存储引擎（结果的&quot;ENGINE=&quot;部分）</span><br><span class="line"></span><br><span class="line">alter table tablename ENGINE=InnoDB--修改引擎</span><br><span class="line"></span><br><span class="line">create table tablename(fieldname1 fieldtype1,fieldname2 fieldtype2,..) ENGINE=engine_name;--创建表时设置存储引擎</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><blockquote>
+<ul>
+<li><a href="https://www.cnblogs.com/progor/p/8729798.html" target="_blank" rel="noopener">https://www.cnblogs.com/progor/p/8729798.html</a></li>
+<li><a href="https://blog.csdn.net/robinjwong/article/details/18502195" target="_blank" rel="noopener">https://blog.csdn.net/robinjwong/article/details/18502195</a> <a href="https://blog.csdn.net/weixin_42105345/article/details/80380444" target="_blank" rel="noopener">https://blog.csdn.net/weixin_42105345/article/details/80380444</a></li>
+<li><a href="https://blog.csdn.net/weixin_41949714/article/details/81877112" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41949714/article/details/81877112</a></li>
+<li><a href="https://www.cnblogs.com/cxx8181602/p/9525950.html" target="_blank" rel="noopener">https://www.cnblogs.com/cxx8181602/p/9525950.html</a></li>
+<li><a href="https://blog.csdn.net/wjlwangluo/article/details/78165588" target="_blank" rel="noopener">https://blog.csdn.net/wjlwangluo/article/details/78165588</a></li>
+<li><a href="https://www.w3cschool.cn/mysql/mysql-drop-database.html" target="_blank" rel="noopener">https://www.w3cschool.cn/mysql/mysql-drop-database.html</a></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Bu1
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/" title="第二周：认识sql并学习数据库的基础操作">http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------END<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/13/从一道CTF题中学习php反序列化与伪协议/" rel="next" title="从一道CTF题中学习php反序列化与伪协议">
+                <i class="fa fa-chevron-left"></i> 从一道CTF题中学习php反序列化与伪协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  
+  
+  
+  
+  
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Bu1">
+            
+              <p class="site-author-name" itemprop="name">Bu1</p>
+              <p class="site-description motion-element" itemprop="description">最为惊艳的是思想碰撞的火花。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tanpuhan.github.io" title="CoCo1er" target="_blank">CoCo1er</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#任务标题：认识-sql-并学习数据库的基础操作"><span class="nav-number">1.</span> <span class="nav-text">任务标题：认识 sql 并学习数据库的基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#要求"><span class="nav-number">1.1.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部分解释"><span class="nav-number">1.2.</span> <span class="nav-text">部分解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习报告"><span class="nav-number">2.</span> <span class="nav-text">学习报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关系型数据库"><span class="nav-number">2.1.</span> <span class="nav-text">关系型数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非关系型数据库"><span class="nav-number">2.2.</span> <span class="nav-text">非关系型数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql基础操作"><span class="nav-number">2.3.</span> <span class="nav-text">Mysql基础操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">2.4.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">4.4k</span>
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>"
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/11/15/第二周：认识sql并学习数据库的基础操作/';
+          this.page.identifier = '2019/11/15/第二周：认识sql并学习数据库的基础操作/';
+          this.page.title = '第二周：认识sql并学习数据库的基础操作';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
