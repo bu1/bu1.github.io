@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="任务标题： 数据库基础之数据库系统功能相关学习1、学习数据库自带函数的功能与用法（思考在什么情况下可以执行命令） 2、将所有涉及的函数进行测试并举例说明其用法并形成报告 扩展学习：针对自己所选数据库，尝试执行系统命令，自己构造所需环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四周：数据库系统功能相关学习">
+<meta property="og:url" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="任务标题： 数据库基础之数据库系统功能相关学习1、学习数据库自带函数的功能与用法（思考在什么情况下可以执行命令） 2、将所有涉及的函数进行测试并举例说明其用法并形成报告 扩展学习：针对自己所选数据库，尝试执行系统命令，自己构造所需环境">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image002.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image004.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image006.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image008.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image010.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image012.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image014.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image016.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image018.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image020.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image022.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image024.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image026.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image028.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image030.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image032.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image034.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image036.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image038.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image040.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image042.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image044.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image046.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image048.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image050.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image052.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image054.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image056.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image058.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image060.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image062.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image064.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image066.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image068.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image070.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image072.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image074.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image076.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image078.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image080.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image082.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image084.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image086.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image088.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image090.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image092.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image094.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image096.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image098.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image100.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image102.jpg">
+<meta property="og:updated_time" content="2019-11-21T10:50:26.962Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第四周：数据库系统功能相关学习">
+<meta name="twitter:description" content="任务标题： 数据库基础之数据库系统功能相关学习1、学习数据库自带函数的功能与用法（思考在什么情况下可以执行命令） 2、将所有涉及的函数进行测试并举例说明其用法并形成报告 扩展学习：针对自己所选数据库，尝试执行系统命令，自己构造所需环境">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/clip_image002.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/">
+
+
+
+
+
+  <title>第四周：数据库系统功能相关学习 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bu1'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第四周：数据库系统功能相关学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-21T18:47:34+08:00">
+                2019-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/信安之路/" itemprop="url" rel="index">
+                    <span itemprop="name">信安之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/21/第四周：数据库系统功能相关学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/21/第四周：数据库系统功能相关学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="任务标题：-数据库基础之数据库系统功能相关学习"><a href="#任务标题：-数据库基础之数据库系统功能相关学习" class="headerlink" title="任务标题： 数据库基础之数据库系统功能相关学习"></a>任务标题： 数据库基础之数据库系统功能相关学习</h1><p>1、学习数据库自带函数的功能与用法（思考在什么情况下可以执行命令）</p>
+<p>2、将所有涉及的函数进行测试并举例说明其用法并形成报告</p>
+<p>扩展学习：针对自己所选数据库，尝试执行系统命令，自己构造所需环境</p>
+<a id="more"></a>
+
+<h2 id="具体解释"><a href="#具体解释" class="headerlink" title="具体解释"></a>具体解释</h2><p>在 sql 注入时为了应对各种限制措施，利用数据库自带的一些系统函数经过各种变换之后可以绕过一些安全设备或者一些基础防御的措施，比如一些字符串转换的函数、截取字符串长度的函数等，参考学习：</p>
+<p>&gt; <a href="https://www.runoob.com/mysql/mysql-functions.html" target="_blank" rel="noopener">https://www.runoob.com/mysql/mysql-functions.html</a></p>
+<p>应用的场景包括：通过注入获取数据、变换字符串绕过 WAF、盲注猜解字符数据等</p>
+<p>我们经常在注入时候想要利用数据库来执行系统命令，不同的数据库可能使用不不同的方式，比如 Mysql 的 udf、Mssql 的 xp_cmdshell 等，这个在利用注入提权的时候非常有帮助，通过数据库执行系统命令所拥有的权限跟数据库的安装过程是有关系的，所以搞清楚这个关系也很重要，这样我们在安装配置数据库的时候可以尽量避免权限过高，造成安全隐患。</p>
+<p>除了学习这些基础基础知识外，自己可以动手构造一些可以利用数据库执行命令的场景然后进行测试，完全理解这个提权的过程。</p>
+<h1 id="学习报告"><a href="#学习报告" class="headerlink" title="学习报告"></a>学习报告</h1><h2 id="MySQL常用内置函数"><a href="#MySQL常用内置函数" class="headerlink" title="MySQL常用内置函数"></a>MySQL常用内置函数</h2><ul>
+<li><p>数学函数 </p>
+<p>abs(X)返回X的绝对值</p>
+</li>
+</ul>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image002.jpg" alt="img"></p>
+<p>​       mod(N,M)或%返回 N 被 M 除的余数</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image004.jpg" alt="img"></p>
+<p>​        floor(X)返回不大于X的最大整数值。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image006.jpg" alt="img"></p>
+<p>​        ceiling(X)返回不小于X的最小整数值。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image008.jpg" alt="img"></p>
+<p>​         round(X)返回参数X的四舍五入的一个整数。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image010.jpg" alt="img"></p>
+<ul>
+<li><p>字符串函数</p>
+<p>ascii(str)返回字符串str的最左面字符的ASCII代码值。如果str是空字符串，返回0。如果str是NULL，返回NULL。</p>
+</li>
+</ul>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image012.jpg" alt="img"></p>
+<p>​       concat(str1,str2,…)返回来自于参数连结的字符串。如果任何参数是NULL，返回NULL。可以有超过2个                      的参数。一个数字参数被变换为等价的字符串形式。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image014.jpg" alt="img"></p>
+<p>​       length(str)返回字符串str的长度。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image016.jpg" alt="img"></p>
+<p>​       locate(substr,str)返回子串substr在字符串str第一个出现的位置，如果substr不是在str里面，返回0.</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image018.jpg" alt="img"></p>
+<p>​        instr(str,substr)返回子串substr在字符串str中的第一个出现的位置。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image020.jpg" alt="img"></p>
+<p>​        left(str,len)返回字符串str的最左面len个字符。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image022.jpg" alt="img"></p>
+<p>​        right(str,len)返回字符串str的最右面len个字符。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image024.jpg" alt="img"></p>
+<p>​        substr(str,pos)从字符串str的起始位置pos返回一个子串,和substr()一样</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image026.jpg" alt="img"></p>
+<p>​        trim(str)返回字符串str，所有前缀或后缀被删除了</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image028.jpg" alt="img"></p>
+<p>​        ltrim(str)返回删除了其前置空格字符的字符串str</p>
+<p>​            <img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image030.jpg" alt>                                                      </p>
+<p>​        rtrim(str)返回删除了其拖后空格字符的字符串str。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image032.jpg" alt="img"></p>
+<p>​        replace(str,from_str,to_str)返回字符串str，其字符串from_str的所有出现由字符串to_str代替。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image034.jpg" alt="img"></p>
+<p>​         repeat(str,count)返回由重复count次的字符串str组成的一个字符串。如果count &lt;= 0，返回一个空字符                                         串。如果str或count是NULL，返回NULL。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image036.jpg" alt="img"></p>
+<p>​         reverse(str)返回颠倒字符顺序的字符串str</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image038.jpg" alt="img"></p>
+<p>​         insert(str,pos,len,newstr)返回字符串str，在位置pos起始的子串且len个字符长的子串由字符串newstr                 代替。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image040.jpg" alt="img"></p>
+<p>​         substring_index(str,delim,count)从str中找到delim字符串按下标获取字符串</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image042.jpg" alt="img"></p>
+<ul>
+<li>日期和时间函数</li>
+</ul>
+<p>​         WEEKDAY(date):返回date的星期索引(0=星期一，1=星期二, ……6= 星期天)。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image044.jpg" alt="img"></p>
+<p>​        DAYOFMONTH(date):返回date的月份中的日期，在1到31范围内.</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image046.jpg" alt="img"></p>
+<p>​        DAYOFYEAR(date):返回date在一年中的日数, 在1到366范围内。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image048.jpg" alt="img"></p>
+<p>​        MONTH(date):返回date的月份，范围1到12.</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image050.jpg" alt="img"></p>
+<p>​         DAYNAME(date):返回date的星期名字</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image052.jpg" alt="img"></p>
+<p>​         MONTHNAME(date) :返回date的月份名字。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image054.jpg" alt="img"></p>
+<p>​         QUARTER(date):返回date一年中的季度，范围1到4。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image056.jpg" alt="img"></p>
+<p>​          WEEK(date,first):对于星期天是一周的第一天的地方，有一个单个参数，返回date的周数，范围在0到                        52，2个参数形式WEEK()允许你指定星期是否开始于星期天或星期一。如果第二个参数是0，星期从星                      期天开始，如果第二个参数是1，从星期一开始。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image058.jpg" alt="img"></p>
+<p>​           YEAR(date):返回date的年份，范围在1000到9999。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image060.jpg" alt="img"></p>
+<p>​           HOUR(time):返回time的小时，范围是0到23。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image062.jpg" alt="img"></p>
+<p>​            MINUTE(time):返回time的分钟，范围是0到59。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image064.jpg" alt="img"></p>
+<p>​            SECOND(time):回来time的秒数，范围是0到59。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image066.jpg" alt="img"></p>
+<p>​            DATE_ADD(date,INTERVAL expr type) ,进行日期增加的操作，可以精确到秒</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image068.jpg" alt="img"></p>
+<p>​            DATE_SUB(date,INTERVAL expr type) ，进行日期减少的操作，可以精确到秒, 和上面相加用法一样</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image070.jpg" alt="img"></p>
+<p>​            时间格式化date_format()</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image072.jpg" alt="img"></p>
+<ul>
+<li><p>条件判断函数</p>
+<p>IF(expr1,expr2,expr3)如果 expr1 是TRUE (expr1 &lt;&gt; 0 and expr1 &lt;&gt; NULL)，则 IF()的返回值为expr2。否则返回值则为 expr3。IF() 的返回值为数字值或字符串值，具体情况视其所在语境而定。</p>
+</li>
+</ul>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image074.jpg" alt="img"></p>
+<p>​        ifnull(expr1, expr2), 如果expr1为null, 则返回expr2</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image076.jpg" alt="img"></p>
+<p>​        Strcmp(str1,str2):如果str1&gt;str2返回1,str1=str2返回0，str1&lt;str2返回-1)</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image078.jpg" alt="img"></p>
+<ul>
+<li><p>系统信息函数</p>
+<p>version()函数返回数据库的版本号</p>
+</li>
+</ul>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image080.jpg" alt="img"></p>
+<p>​       connection_id() 函数返回服务器的连接数，也就是到现在为止MySQL服务的连接次数</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image082.jpg" alt="img"></p>
+<p>​       database()和schema() 返回当前数据库名</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image084.jpg" alt="img"></p>
+<p>​       获取用户名的函数（select user(), system_user(), session_user(), current_user();）</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image086.jpg" alt="img"></p>
+<p>​        CHARSET(str)函数返回字符串str的字符集，一般情况这个字符集就是系统的默认字符集；    </p>
+<p>​        COLLATION(str)函数返回字符串str的字符排列方式。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image088.jpg" alt="img"></p>
+<p>​         LAST_INSERT_ID()函数返回最后生成的AUTO_INCREMENT值</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image090.jpg" alt="img"></p>
+<ul>
+<li><p>加密函数</p>
+<p>加密函数 md5(str)</p>
+</li>
+</ul>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image092.jpg" alt="img"></p>
+<p>​       加密函数 encode(str,pswd_str)</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image094.jpg" alt="img"></p>
+<p>​       解密函数 decode(crypt_str,pswd_str)</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image096.jpg" alt="img"></p>
+<ul>
+<li>格式化函数</li>
+</ul>
+<p>​         FORMAT(x,n)函数可以将数字x进行格式化，将x保留到小数点后n位。这个过程需要进行四舍五入。</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image098.jpg" alt="img"></p>
+<h2 id="数据库提权方式"><a href="#数据库提权方式" class="headerlink" title="数据库提权方式"></a>数据库提权方式</h2><ul>
+<li><p>Udf提权</p>
+<p>Udf全称为user defined function即‘用户自定义函数’。是通过添加新函数，对MYSQL的功能进行扩充，性质就象使用本地MYSQL函数如abs()或concat()。udf在mysql5.1以后的版本中，存在于‘mysql/lib/plugin’目录下，文件后缀为‘.dll’，常用c语言编写。</p>
+<p>一般步骤：</p>
+<p>a)  将udf文件放到指定位置（Mysql&gt;5.1放在Mysql根目录的lib\plugin文件夹下）</p>
+<p>b)  从udf文件中引入自定义函数(user defined function)</p>
+<p>c)   执行自定义函数</p>
+</li>
+</ul>
+<ul>
+<li><p>xp_cmdshell提权</p>
+<p>xp_cmdshell是SQL server扩展功能，它可以将命令字符串作为操作系统命令 shell 执行，并以文本行的形式返回所有输出。</p>
+<p>a)    开启xp_cmdshell</p>
+</li>
+</ul>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image100.jpg" alt="img"></p>
+<p>​       b)    提权，添加管理账号</p>
+<p><img src="/2019/11/21/第四周：数据库系统功能相关学习/clip_image102.jpg" alt="img"></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><blockquote>
+<p><a href="https://blog.csdn.net/qq_34845394/article/details/90077070" target="_blank" rel="noopener">https://blog.csdn.net/qq_34845394/article/details/90077070</a></p>
+<p><a href="https://blog.csdn.net/hellokandy/article/details/82964077" target="_blank" rel="noopener">https://blog.csdn.net/hellokandy/article/details/82964077</a></p>
+<p><a href="https://www.cnblogs.com/litlife/p/9030673.html" target="_blank" rel="noopener">https://www.cnblogs.com/litlife/p/9030673.html</a></p>
+<p><a href="https://blog.csdn.net/qq_36119192/article/details/93213487" target="_blank" rel="noopener">https://blog.csdn.net/qq_36119192/article/details/93213487</a></p>
+<p><a href="https://www.freebuf.com/articles/web/55577.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/55577.html</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Bu1
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/" title="第四周：数据库系统功能相关学习">http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------END<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/" rel="next" title="第三周：数据库基础之数据库系统表相关学习">
+                <i class="fa fa-chevron-left"></i> 第三周：数据库基础之数据库系统表相关学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  
+  
+  
+  
+  
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Bu1">
+            
+              <p class="site-author-name" itemprop="name">Bu1</p>
+              <p class="site-description motion-element" itemprop="description">最为惊艳的是思想碰撞的火花。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tanpuhan.github.io" title="CoCo1er" target="_blank">CoCo1er</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#任务标题：-数据库基础之数据库系统功能相关学习"><span class="nav-number">1.</span> <span class="nav-text">任务标题： 数据库基础之数据库系统功能相关学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#具体解释"><span class="nav-number">1.1.</span> <span class="nav-text">具体解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习报告"><span class="nav-number">2.</span> <span class="nav-text">学习报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL常用内置函数"><span class="nav-number">2.1.</span> <span class="nav-text">MySQL常用内置函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库提权方式"><span class="nav-number">2.2.</span> <span class="nav-text">数据库提权方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">2.3.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">6.9k</span>
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>"
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/11/21/第四周：数据库系统功能相关学习/';
+          this.page.identifier = '2019/11/21/第四周：数据库系统功能相关学习/';
+          this.page.title = '第四周：数据库系统功能相关学习';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
