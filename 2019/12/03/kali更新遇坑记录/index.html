@@ -115,32 +115,17 @@
 
 
 
-<meta name="description" content="任务标题： 数据库基础之数据库系统表相关学习1、如何利用数据库的功能读写文件，需要什么样的条件才可以读写 2、学习数据库系统表的功能，如何利用 sql 语句查询库名、表名、字段名、内容以及当前用户等基本信息，将学习过程中关键部分整理成报告 扩展学习：尝试查询出用户的 hash，并使用 hashcat 来对获取的 hash 进行暴力破解">
+<meta name="description" content="前言最近kali发了一个新版本，非常喜欢里面的win10伪装功能，但是这里有一个坑，就是直接升级的kali不能一键切换到win10桌面模式。原因就在于之前的kali版本默认使用的桌面程序是gnome桌面，而新版本的桌面是采用xfce4桌面。 想起每次都要去网上找源再修改，因此趁着这机会自己总结一波。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第三周：数据库基础之数据库系统表相关学习">
-<meta property="og:url" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/index.html">
+<meta property="og:title" content="kali更新遇坑记录">
+<meta property="og:url" content="http://yoursite.com/2019/12/03/kali更新遇坑记录/index.html">
 <meta property="og:site_name" content="Bu1&#39;Blog">
-<meta property="og:description" content="任务标题： 数据库基础之数据库系统表相关学习1、如何利用数据库的功能读写文件，需要什么样的条件才可以读写 2、学习数据库系统表的功能，如何利用 sql 语句查询库名、表名、字段名、内容以及当前用户等基本信息，将学习过程中关键部分整理成报告 扩展学习：尝试查询出用户的 hash，并使用 hashcat 来对获取的 hash 进行暴力破解">
+<meta property="og:description" content="前言最近kali发了一个新版本，非常喜欢里面的win10伪装功能，但是这里有一个坑，就是直接升级的kali不能一键切换到win10桌面模式。原因就在于之前的kali版本默认使用的桌面程序是gnome桌面，而新版本的桌面是采用xfce4桌面。 想起每次都要去网上找源再修改，因此趁着这机会自己总结一波。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image002.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image003.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image004.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image006.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image008.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image010.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image012.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image014.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image016.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image018.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image020.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image022.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image024.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image026.jpg">
-<meta property="og:updated_time" content="2019-11-18T11:14:36.240Z">
+<meta property="og:updated_time" content="2019-12-03T11:29:42.232Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第三周：数据库基础之数据库系统表相关学习">
-<meta name="twitter:description" content="任务标题： 数据库基础之数据库系统表相关学习1、如何利用数据库的功能读写文件，需要什么样的条件才可以读写 2、学习数据库系统表的功能，如何利用 sql 语句查询库名、表名、字段名、内容以及当前用户等基本信息，将学习过程中关键部分整理成报告 扩展学习：尝试查询出用户的 hash，并使用 hashcat 来对获取的 hash 进行暴力破解">
-<meta name="twitter:image" content="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image002.jpg">
+<meta name="twitter:title" content="kali更新遇坑记录">
+<meta name="twitter:description" content="前言最近kali发了一个新版本，非常喜欢里面的win10伪装功能，但是这里有一个坑，就是直接升级的kali不能一键切换到win10桌面模式。原因就在于之前的kali版本默认使用的桌面程序是gnome桌面，而新版本的桌面是采用xfce4桌面。 想起每次都要去网上找源再修改，因此趁着这机会自己总结一波。">
 
 
 
@@ -170,13 +155,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/03/kali更新遇坑记录/">
 
 
 
 
 
-  <title>第三周：数据库基础之数据库系统表相关学习 | Bu1'Blog</title>
+  <title>kali更新遇坑记录 | Bu1'Blog</title>
   
 
 
@@ -303,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/03/kali更新遇坑记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bu1">
@@ -320,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">第三周：数据库基础之数据库系统表相关学习</h1>
+          <h1 class="post-title" itemprop="name headline">kali更新遇坑记录</h1>
         
 
         <div class="post-meta">
@@ -332,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-18T19:09:42+08:00">
-                2019-11-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-03T19:23:52+08:00">
+                2019-12-03
               </time>
             
 
@@ -355,8 +340,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/信安之路/" itemprop="url" rel="index">
-                    <span itemprop="name">信安之路</span>
+                  <a href="/categories/WEB安全学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB安全学习笔记</span>
                   </a>
                 </span>
 
@@ -373,8 +358,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/18/第三周：数据库基础之数据库系统表相关学习/" itemprop="commentCount"></span>
+                <a href="/2019/12/03/kali更新遇坑记录/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/03/kali更新遇坑记录/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -396,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  736 字
+                  730 字
                 </span>
               
 
@@ -412,7 +397,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -433,97 +418,52 @@
       
 
       
-        <h1 id="任务标题：-数据库基础之数据库系统表相关学习"><a href="#任务标题：-数据库基础之数据库系统表相关学习" class="headerlink" title="任务标题： 数据库基础之数据库系统表相关学习"></a>任务标题： 数据库基础之数据库系统表相关学习</h1><p><strong>1、</strong>如何利用数据库的功能读写文件，需要什么样的条件才可以读写</p>
-<p><strong>2、</strong>学习数据库系统表的功能，如何利用 sql 语句查询库名、表名、字段名、内容以及当前用户等基本信息，将学习过程中关键部分整理成报告</p>
-<p><strong>扩展学习</strong>：尝试查询出用户的 hash，并使用 hashcat 来对获取的 hash 进行暴力破解</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近kali发了一个新版本，非常喜欢里面的win10伪装功能，但是这里有一个坑，就是直接升级的kali不能一键切换到win10桌面模式。原因就在于之前的kali版本默认使用的桌面程序是gnome桌面，而新版本的桌面是采用xfce4桌面。</p>
+<p>想起每次都要去网上找源再修改，因此趁着这机会自己总结一波。</p>
 <a id="more"></a>
 
-<h1 id="学习报告"><a href="#学习报告" class="headerlink" title="学习报告"></a>学习报告</h1><h2 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h2><ul>
-<li><p>关于实现Mysql的文件读写功能，首先需要了解secure_file_priv的特性。</p>
-<p>a)   secure_file_priv为null，表示不允许导入导出</p>
-<p>b)   secure_file_priv指定文件夹时，表示mysql的导入导出只能发生在指定的文件夹</p>
-<p>c)   secure_file_priv没有设置时，则表示没有任何限制</p>
-</li>
-<li><p>在进行读写操作时，我们需要以下条件：</p>
-<p>a)    必须有权限读取并且文件必须完全可读 </p>
-<p>b)    and (select count(<em>) from mysql.user)&gt;0/</em> 如果结果返回正常,说明具有读写权限。</p>
-<p>c)    and (select count(<em>) from mysql.user)&gt;0/</em> 返回错误，账户权限不够</p>
-<p>d)    欲读取文件必须在服务器上 </p>
-<p>e)    必须指定文件完整的路径 </p>
-<p>f)    欲读取文件必须小于 max_allowed_packet</p>
-</li>
-<li><p>实例操作，读取nginx配置文件</p>
-<p>命令：show global variables like ‘%secure%’;</p>
-</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image002.jpg" alt="img"></p>
-<ul>
-<li><p>这里我们发现读写操作已经限制在了指定文件夹，要想读取nginx的配置文件必须先进行修改把限制去掉。</p>
-<p>命令：sudo gedit /etc/mysql/mysql.conf.d/mysqld.cnf  </p>
-<p>在文档末尾添加secure_file_priv=”/“</p>
-</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image003.png" alt="img"></p>
-<ul>
-<li>重启mysql:</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image004.png" alt="img"></p>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image006.jpg" alt></p>
-<p>​        命令：select load_file(‘etc/nginx/nginx.conf’);</p>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image008.jpg" alt="img"></p>
-<p>这里已经读到这个文件了，但是文件内容没有显示，折腾了一会也没有解决办法。。。</p>
-<ul>
-<li><p>写文件：</p>
-<p>a)    LOAD DATA INFILE语句可以用于高速地从一个文本文件中读取行，并装入一个表中</p>
-<p>b)    SELECT…..INTO OUTFILE ‘file_name’语句将内容写入文件。（可插入一句话） </p>
-</li>
-</ul>
-<h2 id="系统数据表"><a href="#系统数据表" class="headerlink" title="系统数据表"></a>系统数据表</h2><ul>
-<li>查询库名。命令: show databases;</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image010.jpg" alt="img"></p>
-<ul>
-<li>进入数据库。命令: use information_schema;</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image012.jpg" alt="img"></p>
-<ul>
-<li>查询表名。命令：show tables;</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image014.jpg" alt="img"></p>
-<ul>
-<li>查询字段名。命令：desc USER_PRIVILEGES;</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image016.jpg" alt="img"></p>
-<ul>
-<li>查看当前用户。命令：select user();</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image018.jpg" alt="img"></p>
-<ul>
-<li>参考内容：上周学习内容。</li>
-</ul>
-<h2 id="使用Hashcat破解哈希"><a href="#使用Hashcat破解哈希" class="headerlink" title="使用Hashcat破解哈希"></a>使用Hashcat破解哈希</h2><ul>
-<li><p>根据第二点，选择mysql数据库，查询表名得到user表，再查询字段，选择我们想要的。</p>
-<p>具体显示命令：select User,Host,authentication_string from user;</p>
-</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image020.jpg" alt="img"></p>
-<p>​        先识别下所属类型。命令：hashid -em *。。。</p>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image022.jpg" alt="img"></p>
-<p>​        到这里有个错误</p>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image024.jpg" alt="img"></p>
-<p>​        后面经过一番查找，原因是没有安装OpenCL（<a href="https://blog.csdn.net/u011781521/article/details/69485934）。" target="_blank" rel="noopener">https://blog.csdn.net/u011781521/article/details/69485934）。</a></p>
-<p>国内直链下载太慢了，需要FQ。虚拟机暂时没有配置。</p>
-<ul>
-<li>也可使用网站在线破解。</li>
-</ul>
-<p><img src="/2019/11/18/第三周：数据库基础之数据库系统表相关学习/clip_image026.jpg" alt="img"></p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><blockquote>
-<p><a href="https://blog.csdn.net/lixiangminghate/article/details/80548048" target="_blank" rel="noopener">https://blog.csdn.net/lixiangminghate/article/details/80548048</a></p>
-<p><a href="https://www.cnblogs.com/xm17/p/9691070.html" target="_blank" rel="noopener">https://www.cnblogs.com/xm17/p/9691070.html</a></p>
-<p><a href="https://blog.csdn.net/qq_25899635/article/details/90449323" target="_blank" rel="noopener">https://blog.csdn.net/qq_25899635/article/details/90449323</a></p>
-<p><a href="https://techglimpse.com/cracking-linux-password-hashes-with-hashcat" target="_blank" rel="noopener">https://techglimpse.com/cracking-linux-password-hashes-with-hashcat</a></p>
-<p><a href="https://xz.aliyun.com/t/4008" target="_blank" rel="noopener">https://xz.aliyun.com/t/4008</a></p>
+<h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><p>修改配置文件时养成备份配置文件的好习惯</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy /etc/apt/sources.list /etc/apt/sources.list.bak</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改更新源"><a href="#修改更新源" class="headerlink" title="修改更新源"></a>修改更新源</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/apt/sources.list          //也可以使用gedit文本编辑器来修改更新源文件</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>#中科大  </p>
+<p>deb <a href="http://mirrors.ustc.edu.cn/kali" target="_blank" rel="noopener">http://mirrors.ustc.edu.cn/kali</a> kali-rolling main non-free contrib  </p>
+<p>deb-src <a href="http://mirrors.ustc.edu.cn/kali" target="_blank" rel="noopener">http://mirrors.ustc.edu.cn/kali</a> kali-rolling main non-free contrib  </p>
+<p>#阿里云 </p>
+<p>deb <a href="http://mirrors.aliyun.com/kali" target="_blank" rel="noopener">http://mirrors.aliyun.com/kali</a> kali-rolling main non-free contrib  </p>
+<p>deb-src <a href="http://mirrors.aliyun.com/kali" target="_blank" rel="noopener">http://mirrors.aliyun.com/kali</a> kali-rolling main non-free contrib </p>
+<p>#清华大学</p>
+<p>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/kali" target="_blank" rel="noopener">http://mirrors.tuna.tsinghua.edu.cn/kali</a> kali-rolling main contrib non-free</p>
+<p>deb-src <a href="https://mirrors.tuna.tsinghua.edu.cn/kali" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/kali</a> kali-rolling main contrib non-free</p>
+<p>#浙大</p>
+<p>deb <a href="http://mirrors.zju.edu.cn/kali" target="_blank" rel="noopener">http://mirrors.zju.edu.cn/kali</a> kali-rolling main contrib non-free</p>
+<p>deb-src <a href="http://mirrors.zju.edu.cn/kali" target="_blank" rel="noopener">http://mirrors.zju.edu.cn/kali</a> kali-rolling main contrib non-free</p>
+<p>#东软大学 </p>
+<p>deb <a href="http://mirrors.neusoft.edu.cn/kali" target="_blank" rel="noopener">http://mirrors.neusoft.edu.cn/kali</a> kali-rolling/main non-free contrib  </p>
+<p>deb-src <a href="http://mirrors.neusoft.edu.cn/kali" target="_blank" rel="noopener">http://mirrors.neusoft.edu.cn/kali</a> kali-rolling/main non-free contrib  </p>
+<p>#官方源 </p>
+<p>deb <a href="http://http.kali.org/kali" target="_blank" rel="noopener">http://http.kali.org/kali</a> kali-rolling main non-free contrib  </p>
+<p>deb-src <a href="http://http.kali.org/kali" target="_blank" rel="noopener">http://http.kali.org/kali</a> kali-rolling main non-free contrib </p>
 </blockquote>
+<h1 id="更新系统软件并升级系统"><a href="#更新系统软件并升级系统" class="headerlink" title="更新系统软件并升级系统"></a>更新系统软件并升级系统</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">①可以使用命令apt-get update &amp;&amp; apt-get upgrade &amp;&amp; apt-get clean来一键更新</span><br><span class="line"></span><br><span class="line">在上面中先从更新源读取最新的软件列表再下载软件安装，安装完后清楚缓存。</span><br><span class="line"></span><br><span class="line">@如果再安装时一直使用默认设置可用命令apt-get update &amp;&amp; apt -y full-upgrade &amp;&amp; apt-get clean</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.更新apt资源列表</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2.下载并安装软件</span><br><span class="line">sudo apt-get upgrade </span><br><span class="line">sudo apt-get dist-upgrade</span><br><span class="line"></span><br><span class="line">对于apt-get upgrade 和 apt-get dist-upgrade而言都是装软件</span><br><span class="line">但是dist-upgrade会识别出当依赖关系改变的情形并作出处理，而upgrade则不会处理。</span><br><span class="line"></span><br><span class="line">可参考https://www.cnblogs.com/kungfupanda/archive/2013/01/15/2861718.html</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3.清除缓存</span><br><span class="line">sudo apt-get autoclean //清理旧版本的软件缓存</span><br><span class="line">sudo apt-get clean //清理所有软件缓存</span><br><span class="line">sudo apt-get autoremove //删除系统不再使用的孤立软件</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4.查看系统版本</span><br><span class="line">uname -a</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5.尝试切换成win10桌面</span><br><span class="line">kali-undercover</span><br></pre></td></tr></table></figure>
+
+<h1 id="切换桌面"><a href="#切换桌面" class="headerlink" title="切换桌面"></a>切换桌面</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.首先下载xfce4桌面</span><br><span class="line"> apt -y install kali-desktop-xfce</span><br><span class="line">2.切换桌面模式，选择xfce4桌面模式</span><br><span class="line">update-alternatives --config x-session-manager</span><br><span class="line">3.重启kalli</span><br></pre></td></tr></table></figure>
+
+<h1 id="更换字体"><a href="#更换字体" class="headerlink" title="更换字体"></a>更换字体</h1><p>有时候用中文会有乱码，这时候我们可以尝试换个字体</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.选择我们需要的语言包，这里选en_US.UTF-8 UTF-8和zh_CN.UTF-8 UTF-8，空格选中。</span><br><span class="line">dpkg-reconfigure locales</span><br><span class="line"></span><br><span class="line">2.下载安装中文字体</span><br><span class="line">apt-get install xfonts-intl-chinese </span><br><span class="line">apt-get install ttf-wqy-microhei</span><br><span class="line"></span><br><span class="line">3.重启kali系统</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -544,7 +484,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/" title="第三周：数据库基础之数据库系统表相关学习">http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/</a>
+    <a href="http://yoursite.com/2019/12/03/kali更新遇坑记录/" title="kali更新遇坑记录">http://yoursite.com/2019/12/03/kali更新遇坑记录/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -574,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/15/第二周：-认识sql并学习数据库的基础操作/" rel="next" title="第二周： 认识sql并学习数据库的基础操作">
-                <i class="fa fa-chevron-left"></i> 第二周： 认识sql并学习数据库的基础操作
+              <a href="/2019/12/02/从一到CTF题中学习哈希长度拓展攻击/" rel="next" title="从一到CTF题中学习哈希长度拓展攻击">
+                <i class="fa fa-chevron-left"></i> 从一到CTF题中学习哈希长度拓展攻击
               </a>
             
           </div>
@@ -583,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/21/第四周：数据库系统功能相关学习/" rel="prev" title="第四周：数据库系统功能相关学习">
-                第四周：数据库系统功能相关学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -745,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#任务标题：-数据库基础之数据库系统表相关学习"><span class="nav-number">1.</span> <span class="nav-text">任务标题： 数据库基础之数据库系统表相关学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习报告"><span class="nav-number">2.</span> <span class="nav-text">学习报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件读写"><span class="nav-number">2.1.</span> <span class="nav-text">文件读写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统数据表"><span class="nav-number">2.2.</span> <span class="nav-text">系统数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Hashcat破解哈希"><span class="nav-number">2.3.</span> <span class="nav-text">使用Hashcat破解哈希</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">2.4.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#备份"><span class="nav-number">2.</span> <span class="nav-text">备份</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改更新源"><span class="nav-number">3.</span> <span class="nav-text">修改更新源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新系统软件并升级系统"><span class="nav-number">4.</span> <span class="nav-text">更新系统软件并升级系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切换桌面"><span class="nav-number">5.</span> <span class="nav-text">切换桌面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更换字体"><span class="nav-number">6.</span> <span class="nav-text">更换字体</span></a></li></ol></div>
             
 
           </div>
@@ -917,9 +853,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/11/18/第三周：数据库基础之数据库系统表相关学习/';
-          this.page.identifier = '2019/11/18/第三周：数据库基础之数据库系统表相关学习/';
-          this.page.title = '第三周：数据库基础之数据库系统表相关学习';
+          this.page.url = 'http://yoursite.com/2019/12/03/kali更新遇坑记录/';
+          this.page.identifier = '2019/12/03/kali更新遇坑记录/';
+          this.page.title = 'kali更新遇坑记录';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
