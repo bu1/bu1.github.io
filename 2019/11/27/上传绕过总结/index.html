@@ -122,7 +122,7 @@
 <meta property="og:site_name" content="Bu1&#39;Blog">
 <meta property="og:description" content="最近在学习绕过上传方面的知识，恰好看到了零组知识库对这一个方面进行了总结，而且整理出来的绕过知识点很齐全。因此对这篇文章做一个转载，同时也添加自己对于绕过点的一些理解。  原文链接：http://www.0-sec.org">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-10T08:41:37.634Z">
+<meta property="og:updated_time" content="2019-12-11T14:15:01.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="上传绕过总结">
 <meta name="twitter:description" content="最近在学习绕过上传方面的知识，恰好看到了零组知识库对这一个方面进行了总结，而且整理出来的绕过知识点很齐全。因此对这篇文章做一个转载，同时也添加自己对于绕过点的一些理解。  原文链接：http://www.0-sec.org">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.6k 字
+                  2.7k 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10 分钟
+                  11 分钟
                 </span>
               
             </div>
@@ -462,11 +462,11 @@
 
 <h2 id="MIME类型绕过"><a href="#MIME类型绕过" class="headerlink" title="MIME类型绕过"></a>MIME类型绕过</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">上传木马时，提示格式错误。直接抓包修改Content-Type 为正确的格式尝试绕过</span><br><span class="line"></span><br><span class="line">text/html ： HTML格式</span><br><span class="line">text/plain ：纯文本格式</span><br><span class="line">text/xml ： XML格式</span><br><span class="line">image/gif ：gif图片格式</span><br><span class="line">image/jpeg ：jpg图片格式</span><br><span class="line">image/png：png图片格式</span><br></pre></td></tr></table></figure>
 
-<h2 id="文件内容检测绕过"><a href="#文件内容检测绕过" class="headerlink" title="文件内容检测绕过"></a>文件内容检测绕过</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">①抓包，在正常图片末尾添加一句话木马</span><br><span class="line"></span><br><span class="line">@文件幻数头绕过</span><br><span class="line">常见文件头：</span><br><span class="line">（1） .JPEG;.JPE;.JPG，”JPGGraphic File”</span><br><span class="line">（2） .gif，”GIF 89A”</span><br><span class="line">（3） .zip，”Zip Compressed”</span><br><span class="line">（4） .doc;.xls;.xlt;.ppt;.apr，”MS Compound Document v1 or Lotus Approach APRfile”</span><br></pre></td></tr></table></figure>
+<h2 id="文件内容检测绕过"><a href="#文件内容检测绕过" class="headerlink" title="文件内容检测绕过"></a>文件内容检测绕过</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">①抓包，在正常图片末尾添加一句话木马</span><br><span class="line"></span><br><span class="line">@文件幻数头绕过</span><br><span class="line">常见文件头：</span><br><span class="line">（1） .JPEG;.JPE;.JPG，”JPGGraphic File”</span><br><span class="line">（2） .gif，”GIF 89A”</span><br><span class="line">（3） .zip，”Zip Compressed”</span><br><span class="line">（4） .doc;.xls;.xlt;.ppt;.apr，”MS Compound Document v1 or Lotus Approach APRfile”</span><br><span class="line"></span><br><span class="line">（5）.JPEG/JPG: FF D8 </span><br><span class="line">（6）.PNG:89 50</span><br><span class="line">（7）.GIF:47 49</span><br></pre></td></tr></table></figure>
 
 <h2 id="多次上传Win特性绕过"><a href="#多次上传Win特性绕过" class="headerlink" title="多次上传Win特性绕过"></a>多次上传Win特性绕过</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">多次上传同一个文件，windows会自动更新补全TEST (1).php。</span><br><span class="line">有时会触发条件竞争，导致绕过。</span><br></pre></td></tr></table></figure>
 
-<h2 id="条件竞争绕过"><a href="#条件竞争绕过" class="headerlink" title="条件竞争绕过"></a>条件竞争绕过</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过BURP不断发包，导致不断写入Webshell，再写入速度频率上超过安全软件查杀频率，导致绕过。</span><br></pre></td></tr></table></figure>
+<h2 id="条件竞争绕过"><a href="#条件竞争绕过" class="headerlink" title="条件竞争绕过"></a>条件竞争绕过</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">通过BURP不断发包，导致不断写入Webshell，再写入速度频率上超过安全软件查杀频率，导致绕过。</span><br><span class="line"></span><br><span class="line">shell.php</span><br><span class="line"><span class="meta">&lt;?php</span> fputs(fopen(<span class="string">'1.php'</span>,<span class="string">'w'</span>),<span class="string">'&lt;?php @eval($_POST["bu1"]);?&gt;'</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="CONTENT-LENGTH绕过"><a href="#CONTENT-LENGTH绕过" class="headerlink" title="CONTENT-LENGTH绕过"></a>CONTENT-LENGTH绕过</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">针对这种类型的验证，我们可以通过上传一些非常短的恶意代码来绕过。上传文件的大小取决于，Web服务器上的最大长度限制。我们可以使用不同大小的文件来fuzzing上传程序，从而计算出它的限制范围。</span><br><span class="line"></span><br><span class="line">#有些主机WAF软件为了不影响web服务器的性能，会对校验的用户数据设置大小上限，比如1M。此种情况可以构造一个大文件，前面1M的内容为垃圾内容，后面才是真正的木马内容，便可以绕过WAF对文件内容的校验；</span><br></pre></td></tr></table></figure>
 
@@ -492,7 +492,7 @@
 
 <h2 id="突破MIME限制上传"><a href="#突破MIME限制上传" class="headerlink" title="突破MIME限制上传"></a>突破MIME限制上传</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方法：找一个正常的可上传的查看其的MIME类型，然后将马子的MIME改成合法的MIME即可。</span><br></pre></td></tr></table></figure>
 
-<h2 id="Apache解析漏洞"><a href="#Apache解析漏洞" class="headerlink" title="Apache解析漏洞"></a>Apache解析漏洞</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.一个文件名为test.x1.x2.x3的文件，apache会从x3的位置开始尝试解析，如果x3不属于apache能够解析的扩展名，那么apache会尝试去解析x2，直到能够解析到能够解析的为止，否则就会报错。</span><br><span class="line">2.CVE-2017-15715，这个漏洞利用方式就是上传一个文件名最后带有换行符(只能是\x0A，如上传a.php，然后在burp中修改文件名为a.php\x0A)，以此来绕过一些黑名单过滤。</span><br></pre></td></tr></table></figure>
+<h2 id="Apache解析漏洞"><a href="#Apache解析漏洞" class="headerlink" title="Apache解析漏洞"></a>Apache解析漏洞</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.一个文件名为test.x1.x2.x3的文件，apache会从x3的位置开始尝试解析，如果x3不属于apache能够解析的扩展名，那么apache会尝试去解析x2，直到能够解析到能够解析的为止，否则就会报错。</span><br><span class="line">可将文件名设为shell.php.7z</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">&quot;.doc&quot;, &quot;.xls&quot;, &quot;.txt&quot;, &quot;.pdf&quot;,  &quot;.zip&quot;, &quot;.rar&quot;, &quot;.7z&quot;,&quot;.ppt&quot;,&quot;.tiff&quot;);</span><br><span class="line"></span><br><span class="line">2.CVE-2017-15715，这个漏洞利用方式就是上传一个文件名最后带有换行符(只能是\x0A，如上传a.php，然后在burp中修改文件名为a.php\x0A)，以此来绕过一些黑名单过滤。</span><br></pre></td></tr></table></figure>
 
 <h2 id="IIS解析漏洞"><a href="#IIS解析漏洞" class="headerlink" title="IIS解析漏洞"></a>IIS解析漏洞</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IIS6.0在解析asp格式的时候有两个解析漏洞，一个是如果目录名包含&quot;.asp&quot;字符串，那么这个目录下所有的文件都会按照asp去解析，另一个是只要文件名中含有&quot;.asp;&quot;会优先按asp来解析</span><br><span class="line"></span><br><span class="line">IIS7.0/7.5是对php解析时有一个类似于Nginx的解析漏洞，对任意文件名只要在URL后面追加上字符串&quot;/任意文件名.php&quot;就会按照php的方式去解析；</span><br></pre></td></tr></table></figure>
 
@@ -690,7 +690,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -701,7 +701,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -788,7 +788,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">32k</span>
+    <span title="Site words total count">33.1k</span>
   
 </div>
 
