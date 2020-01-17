@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近一直在忙，都没能抽出时间来认认真真的学点东西，寒假去了一家圈子内比较有名的公司呆了几天学了点东西。从今天开始整理下自己所学到东西，也为这几天的学习做一个总结。 这一篇写的是密码学方向的内容，因为之前看WEB的东西看的更多所以每次碰到密码学方向的题目我其实挺懵的，这次机会正好补补基础。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学基础">
+<meta property="og:url" content="http://yoursite.com/2020/01/15/密码学基础/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="最近一直在忙，都没能抽出时间来认认真真的学点东西，寒假去了一家圈子内比较有名的公司呆了几天学了点东西。从今天开始整理下自己所学到东西，也为这几天的学习做一个总结。 这一篇写的是密码学方向的内容，因为之前看WEB的东西看的更多所以每次碰到密码学方向的题目我其实挺懵的，这次机会正好补补基础。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-17T04:57:16.555Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="密码学基础">
+<meta name="twitter:description" content="最近一直在忙，都没能抽出时间来认认真真的学点东西，寒假去了一家圈子内比较有名的公司呆了几天学了点东西。从今天开始整理下自己所学到东西，也为这几天的学习做一个总结。 这一篇写的是密码学方向的内容，因为之前看WEB的东西看的更多所以每次碰到密码学方向的题目我其实挺懵的，这次机会正好补补基础。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/15/密码学基础/">
+
+
+
+
+
+  <title>密码学基础 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bu1'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/15/密码学基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">密码学基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-15T14:12:04+08:00">
+                2020-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/15/密码学基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/15/密码学基础/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.6k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近一直在忙，都没能抽出时间来认认真真的学点东西，寒假去了一家圈子内比较有名的公司呆了几天学了点东西。从今天开始整理下自己所学到东西，也为这几天的学习做一个总结。</p>
+<p>这一篇写的是密码学方向的内容，因为之前看WEB的东西看的更多所以每次碰到密码学方向的题目我其实挺懵的，这次机会正好补补基础。</p>
+<a id="more"></a>
+
+<h1 id="古典密码"><a href="#古典密码" class="headerlink" title="古典密码"></a>古典密码</h1><h2 id="凯撒密码"><a href="#凯撒密码" class="headerlink" title="凯撒密码"></a>凯撒密码</h2><p>凯撒密码也称为移位密码，加密时会根据偏移量进行相应的移位。对照表是26个英文字母，例如当偏移量为1时明文A经过加密后就变成了B。</p>
+<p>在不知道偏移量的情况下我们可以进行爆破。偏移量取值范围为1~25。</p>
+<h2 id="乘法密码"><a href="#乘法密码" class="headerlink" title="乘法密码"></a>乘法密码</h2><p>乘法密码是替换密码的一种，加密时对已知明文进行编号，通过加密算法得到相应的位置表并且替换明文后得到密文。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">设明文消息元素个数为n，密钥为k。</span><br><span class="line">密钥k在选取的时候应满足两个条件：</span><br><span class="line">（1）0&lt;k&lt;n  #可以用欧拉函数直接求得K的可取值数量</span><br><span class="line">（2）k与n互素</span><br><span class="line">设明文消息为M，消息元素为m;</span><br><span class="line">则密文消息为C，密文元素为c=m*k mod n;</span><br><span class="line">其解密过程如下：</span><br><span class="line">首先要得到解密密钥，就是要求得加密密钥k模n的逆元；</span><br><span class="line">具体求法为k *mod n=1;</span><br><span class="line">然后计算m=c *mod n即可得到明文消息M。</span><br></pre></td></tr></table></figure>
+
+<p>解密时可以进行爆破，密钥有11种。</p>
+<h2 id="仿射密码"><a href="#仿射密码" class="headerlink" title="仿射密码"></a>仿射密码</h2><p>仿射密码为单表加密的一种，字母系统中所有字母都藉一简单数学方程加密，对应至数值，或转回字母。 其仍有所有替代密码之弱处。所有字母皆借由方程<code>(ax+b) mod (26)</code>加密，b为移动大小。</p>
+<p>密钥为<code>gcd(a,b)</code>一共是311种情况<strong>这里的明文全为字母</strong>。所以在破解时可以尝试暴力破解。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##判断是否与26互素</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isPN</span><span class="params">(a)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> range(<span class="number">2</span>,a):</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span>==a%num <span class="keyword">and</span> <span class="number">0</span>==<span class="number">26</span>%num:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##求得逆元a_</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_a_</span><span class="params">(a)</span>:</span></span><br><span class="line">    i=<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>!=(i*a)%<span class="number">26</span>):</span><br><span class="line">        i=i+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> i</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">##解密函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decodeMstr</span><span class="params">(mStr,a_,b)</span>:</span></span><br><span class="line">    yStr=<span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> Char <span class="keyword">in</span> mStr:</span><br><span class="line">        <span class="keyword">if</span> Char&gt;=<span class="string">'A'</span> <span class="keyword">and</span> Char&lt;=<span class="string">'Z'</span>:</span><br><span class="line">            Int=ord(Char)-ord(<span class="string">'A'</span>)</span><br><span class="line">            Int=((Int-b+<span class="number">26</span>)*a_)%<span class="number">26</span></span><br><span class="line">            yStr=yStr+chr(Int+ord(<span class="string">'A'</span>))</span><br><span class="line">        <span class="keyword">elif</span> Char&gt;=<span class="string">'a'</span> <span class="keyword">and</span> Char&lt;=<span class="string">'z'</span>:</span><br><span class="line">            Int=ord(Char)-ord(<span class="string">'a'</span>)</span><br><span class="line">            Int=((Int-b+<span class="number">26</span>)*a_)%<span class="number">26</span></span><br><span class="line">            yStr=yStr+chr(Int+ord(<span class="string">'a'</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            yStr=yStr+Char</span><br><span class="line">    <span class="keyword">return</span> yStr</span><br><span class="line"></span><br><span class="line">mStr=<span class="string">"achjbnpdfherebjsw"</span></span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">25</span>,<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="literal">False</span>==isPN(a):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        a_=get_a_(a)</span><br><span class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> range(<span class="number">-10</span>,<span class="number">10</span>):</span><br><span class="line">        yStr=decodeMstr(mStr,a_,b)</span><br><span class="line">        print(yStr,end=<span class="string">"\t"</span>)</span><br><span class="line">        print(a,b)</span><br></pre></td></tr></table></figure>
+
+<p>针对指定规则的简单代换密码，我们还可以采用词频分析的方法来进行破解，因为在现实情况中每个字母的使用频率是有很大的差异的。</p>
+<p>在线工具：<a href="https://quipqiup.com/" target="_blank" rel="noopener">https://quipqiup.com/</a></p>
+<h2 id="维吉尼亚密码"><a href="#维吉尼亚密码" class="headerlink" title="维吉尼亚密码"></a>维吉尼亚密码</h2><p>维吉尼亚密码是使用一系列凯撒密码组成密码字母表的加密算法，属于多表密码的一种简单形式。这个密码号称是不可破解的密码，因为它密钥空间够大杜绝了普通计算机暴力破解的可能。</p>
+<p>在破解时还是可以根据词频分析来尝试对密文进行破解</p>
+<p>在线工具:  <a href="https://www.guballa.de/vigenere-solver" target="_blank" rel="noopener">https://www.guballa.de/vigenere-solver</a></p>
+<p>在线工具:  <a href="https://www.qqxiuzi.cn/bianma/weijiniyamima.php" target="_blank" rel="noopener">https://www.qqxiuzi.cn/bianma/weijiniyamima.php</a></p>
+<h1 id="现代密码"><a href="#现代密码" class="headerlink" title="现代密码"></a>现代密码</h1><h2 id="序列密码"><a href="#序列密码" class="headerlink" title="序列密码"></a>序列密码</h2><p>序列密码也称为流密码，它是对称密码算法的一种。序列密码具有实现简单、便于硬件实施、加解密处理速度快、没有或只有有限的错误传播等特点。它模仿一次密码本的加密方式，但是密钥是伪随机的。伪随机的意思是实际上它并不能真正的随机出加密密钥，在实际加密中是利用密钥流产生器LFSR。</p>
+<p>获取伪随机序列的常用方法是线性反馈移位寄存器。</p>
+<h2 id="分组密码"><a href="#分组密码" class="headerlink" title="分组密码"></a>分组密码</h2><p>分组密码也可以称为块密码，将明文分成等长的块(如果位数不足则用0补齐)，然后对每一块进行加密操作。</p>
+<h3 id="DES加密"><a href="#DES加密" class="headerlink" title="DES加密"></a>DES加密</h3><p>des对称加密，是一种比较传统的加密方式，其加密运算、解密运算使用的是同样的密钥，信息的发送者和信息的接收者在进行信息的传输与处理时，必须共同持有该密码（称为对称密码），是一种对称加密算法。</p>
+<p>加密特点：分组长度为64比特；密钥长度为64比特（但只有56位有效）</p>
+<h3 id="AES加密"><a href="#AES加密" class="headerlink" title="AES加密"></a>AES加密</h3><p>AES技术是一种对称的分组加密技术，使用128位分组加密数据，提供比WEP/TKIPS的RC4算法更高的加密强度。AES的加密码表和解密码表是分开的，并且支持子密钥加密，这种做法优于以前用一个特殊的密钥解密的做法。AES算法支持任意分组大小，初始时间快。特别是它具有的并行性可以有效地利用处理器资源。</p>
+<p>加密特点：分组长度为128比特即16字节。而密钥长度为可选的，分别为128比特、192比特、256比特。</p>
+<h3 id="ECB工作模式"><a href="#ECB工作模式" class="headerlink" title="ECB工作模式"></a>ECB工作模式</h3><p>最简单的加密模式为电子密码本（Electronic Code Book, ECB）模式。需要加密的消息按照块密码的块大小被分为数个块，并对每个块进行独立加密。最后 直接将密文串连起来。</p>
+<h3 id="CBC工作模式"><a href="#CBC工作模式" class="headerlink" title="CBC工作模式"></a>CBC工作模式</h3><p>1976年，IBM发明了密码分组链接（CBC，Cipher-block chaining）模式。在CBC模式中，每个明文块先与前一个密文块进行异或后，再进行加密。在这种方法中，每个密文块都依赖于它前面的所有明文块。同时，为了保证每条消息的唯一性，在第一个块中需要使用初始化向量。</p>
+<p>加密特点：每个密文块都依赖于它前面的所有明文块，消除了明文统计特性。</p>
+<h3 id="填充攻击"><a href="#填充攻击" class="headerlink" title="填充攻击"></a>填充攻击</h3><h2 id="Hash函数"><a href="#Hash函数" class="headerlink" title="Hash函数"></a>Hash函数</h2><p>哈希（Hash）函数也叫杂凑函数、散列函数，是将任 意长度的消息 𝑚 转换成较短的、固定长度的哈希值 𝐻(𝑚) 的不需要密钥的不可逆的单向密码体制。</p>
+<p>常见的HASH函数：MD5、SHA-1、SHA-256。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在Linux shadow文件的加密中域密码由三部分组成$id$salt$encrypted</span><br><span class="line">ID为1时，采用MD5加密</span><br><span class="line">ID为5时，采用SHA256加密</span><br><span class="line">ID为6时，采用SHA512加密</span><br></pre></td></tr></table></figure>
+
+<p>常见的攻击方法暴力破解及彩虹币攻击(将所有已知的哈希值及明文存入数据库中)。彩虹表攻击在线地址 <a href="https://www.cmd5.com/" target="_blank" rel="noopener">https://www.cmd5.com/</a></p>
+<h2 id="RSA加密"><a href="#RSA加密" class="headerlink" title="RSA加密"></a>RSA加密</h2><p>RSA公开密钥密码体制。所谓的公开密钥密码体制就是使用不同的加密密钥与解密密钥，是一种“由已知加密密钥推导出解密密钥在计算上是不可行的”密码体制。RSA的安全性本质上是基于大数的因数分解，所以通过加密密钥来反推解密密钥在实际的情况中是行不通的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">密钥的生成：</span><br><span class="line">1. 选择两个大素数 𝑝和𝑞,（𝑝≠𝑞，需要保密，步骤4以后建议销毁）</span><br><span class="line">2. 计算𝑛=𝑝×𝑞，φ(𝑛) = (𝑝－1) × (𝑞－1)  #欧拉函数的计算</span><br><span class="line">3. 选择整数 𝑒 满足 (φ(𝑛)，𝑒) = 1, 1 &lt; 𝑒 &lt;φ(𝑛)（一般取 65537）</span><br><span class="line">4. 计算𝑑，使 𝑑 = 𝑒^-𝟏 𝑚𝑜𝑑 φ(𝑛),</span><br><span class="line">   得到：公钥为&#123;𝑒, 𝑛&#125;； 私钥为&#123;𝑑&#125;</span><br><span class="line">加密(用𝒆，𝒏)： 明文𝑀&lt;𝑛， 密文𝐶 = 𝑀^𝑒(𝑚𝑜𝑑 𝑛)</span><br><span class="line">解密(用𝒅，𝒏)： 密文𝐶， 明文 𝑀 = 𝐶^𝑑(𝑚𝑜𝑑 𝑛)</span><br></pre></td></tr></table></figure>
+
+<p>上面说过实际上RSA的安全性是基于大数的因数分解困难，在实际情况中我们可以利用工具暴力破解或者是利用在线工具查询已知大数的分解情况。</p>
+<p>工具：yafu；在线工具：<a href="http://factordb.com/" target="_blank" rel="noopener">http://factordb.com/</a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="密码学分类"><a href="#密码学分类" class="headerlink" title="密码学分类"></a>密码学分类</h2><ul>
+<li>加密密钥是否相同？<ul>
+<li>加解密密钥相同   –&gt;  对称密码</li>
+<li>加解密密钥不同   –&gt;  公钥密码(非对称密码)</li>
+<li>无密钥                  –&gt;  哈希函数</li>
+</ul>
+</li>
+<li>安全性取决于？<ul>
+<li>加密算法的保密   –&gt;  古典密码</li>
+<li>取决于密钥的保密，算法公开     –&gt;  现代密码</li>
+</ul>
+</li>
+</ul>
+<h2 id="对密码学的攻击"><a href="#对密码学的攻击" class="headerlink" title="对密码学的攻击"></a>对密码学的攻击</h2><ul>
+<li><p>暴力破解</p>
+</li>
+<li><p>统计分析</p>
+</li>
+<li><p>数学分析</p>
+</li>
+<li><p>侧信道攻击(物理方法)：</p>
+<p>边信道攻击(side channel attack 简称SCA)，又称侧信道攻击:针对加密电子设备在运行过程中的时间消耗、功率消耗或电磁辐射之类的侧信道信息泄露而对加密设备进行攻击的方法被称为边信道攻击。这类新型攻击的有效性远高于密码分析的数学方法，因此给密码设备带来了严重的威胁。</p>
+</li>
+</ul>
+<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><h2 id="凯撒相关"><a href="#凯撒相关" class="headerlink" title="凯撒相关"></a>凯撒相关</h2><p>原题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Jxyi yi oekh tqo.Jxyi yi oekh suburhqjyed., qdt jxu vbqw yi vv97v97t5t1ss32t9q5u62s2uu1t2v2s, ikrcyj myjx vbqw qdt &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解密：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">直接扔工具跑，位移16：</span><br><span class="line">this is your day.this is your celebration., and the flag is ff97f97d5d1cc32d9a5e62c2ee1d2f2c, submit with flag and &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="仿射密码-1"><a href="#仿射密码-1" class="headerlink" title="仿射密码"></a>仿射密码</h2><p>原题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">achjbnpdfherebjsw</span><br><span class="line">hint: b=7</span><br></pre></td></tr></table></figure>
+
+<p>解密：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">跑脚本，得到flag：flagisyouareright</span><br><span class="line"><span class="comment">##判断是否与26互素</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isPN</span><span class="params">(a)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> range(<span class="number">2</span>,a):</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span>==a%num <span class="keyword">and</span> <span class="number">0</span>==<span class="number">26</span>%num:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##求得逆元a_</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_a_</span><span class="params">(a)</span>:</span></span><br><span class="line">    i=<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>!=(i*a)%<span class="number">26</span>):</span><br><span class="line">        i=i+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> i</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">##解密函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decodeMstr</span><span class="params">(mStr,a_,b)</span>:</span></span><br><span class="line">    yStr=<span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> Char <span class="keyword">in</span> mStr:</span><br><span class="line">        <span class="keyword">if</span> Char&gt;=<span class="string">'A'</span> <span class="keyword">and</span> Char&lt;=<span class="string">'Z'</span>:</span><br><span class="line">            Int=ord(Char)-ord(<span class="string">'A'</span>)</span><br><span class="line">            Int=((Int-b+<span class="number">26</span>)*a_)%<span class="number">26</span></span><br><span class="line">            yStr=yStr+chr(Int+ord(<span class="string">'A'</span>))</span><br><span class="line">        <span class="keyword">elif</span> Char&gt;=<span class="string">'a'</span> <span class="keyword">and</span> Char&lt;=<span class="string">'z'</span>:</span><br><span class="line">            Int=ord(Char)-ord(<span class="string">'a'</span>)</span><br><span class="line">            Int=((Int-b+<span class="number">26</span>)*a_)%<span class="number">26</span></span><br><span class="line">            yStr=yStr+chr(Int+ord(<span class="string">'a'</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            yStr=yStr+Char</span><br><span class="line">    <span class="keyword">return</span> yStr</span><br><span class="line"></span><br><span class="line">mStr=<span class="string">"achjbnpdfherebjsw"</span></span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">25</span>,<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="literal">False</span>==isPN(a):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        a_=get_a_(a)</span><br><span class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> range(<span class="number">-10</span>,<span class="number">10</span>):</span><br><span class="line">        yStr=decodeMstr(mStr,a_,b)</span><br><span class="line">        print(yStr,end=<span class="string">"\t"</span>)</span><br><span class="line">        print(a,b)</span><br></pre></td></tr></table></figure>
+
+<h2 id="DES"><a href="#DES" class="headerlink" title="DES"></a>DES</h2><p>原题：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">deskey = <span class="string">"********"</span></span><br><span class="line">DES = pyDes.des(deskey)</span><br><span class="line">DES.setMode(<span class="string">'ECB'</span>)</span><br><span class="line">DES.Kn = [</span><br><span class="line">			[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">			[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>], </span><br><span class="line">			[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">			[<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>], </span><br><span class="line">			[<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">			[<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">			[<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">			[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">			[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">			[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">			[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">			[<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">			[<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">			[<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">			[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">			[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">		]</span><br><span class="line"><span class="comment">#cipher_list = base64.b64encode(DES.encrypt(mes))</span></span><br><span class="line">cipher_list= <span class="string">"gAN5RT1XWKI0OyUayZj35SlKQ+if2PAJ"</span></span><br><span class="line"><span class="comment">#flag = mes+deskey</span></span><br></pre></td></tr></table></figure>
+
+<p>解题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h2><p>原题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">r = random.randint(<span class="number">2</span>, <span class="number">10</span>)</span><br><span class="line">e =<span class="number">65537</span></span><br><span class="line">n=p**r</span><br><span class="line">m=flag</span><br><span class="line"><span class="keyword">assert</span>(int(m.encode(<span class="string">'hex'</span>), <span class="number">16</span>) &lt; n)</span><br><span class="line">c = pow(int(m.encode(<span class="string">'hex'</span>), <span class="number">16</span>),e,n)</span><br><span class="line">c=long_to_bytes(c)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'c =\n'</span>, c.encode(<span class="string">'base64'</span>),n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">c =</span></span><br><span class="line"><span class="string">apxy3z3DgGnzaEedcUy3A49wAsqyyn9sqx6eYZL5iDrCq0Wjs8BOY2Ofza5wuaFigm32PVpO5jpu</span></span><br><span class="line"><span class="string">Dgw9b6oX8KM2ZB9/dDmwQc7JKnAKhCQrIc1v9qt7iQbnTK0DTQj/xvQkz/IBeSjoWBmHOx4s0tDx</span></span><br><span class="line"><span class="string">ZRAjOPui5wwAywNM3ynULEPczv+xN2v+6HBeoS2YuyfF5mq/pIAMPwZs+QpkuwxSbNQ6xPNP9Ox1</span></span><br><span class="line"><span class="string">IeKz/41F7/D2fDsGB5CcFdAiQq+r95BhVeGzeaiQBpzwAXAPKIyO+fP6/M9XmpSJwjaMSiAUnksp</span></span><br><span class="line"><span class="string">9KfVOXgEG9Z0FmxP6rgqPl0vU+rVeJ2RsTUYCSP8Vy+PD3PGwDDdUtNzvcEXKr2BKiNoOUxprBAt</span></span><br><span class="line"><span class="string">yvcsmGqRLgDl1ZVgzSZ1U4MAmJ9x42mIU0XvolqaOCJZzaym1kJoBlw7/7+Nej4owEtan/c3TIkD</span></span><br><span class="line"><span class="string">kr/gCenUD/8MSlvnfTUMGdQLkSht2BZiuiHxVVRVzY5ETG6v+w9AtDMC</span></span><br><span class="line"><span class="string">4600616808891590817884946117009414083548013610469076381106568481948720521467073218024827360073980550620353792084520767372304347132535784875671026563160583598386773718586111034826555689602824563172463446924287072570386712719870348862904936370894695108302490867826094352072132696743116741635111860205049129717948520534270924834318704244999690532431941248905257880347561221151841978982240191397364038490250930604211256385925496658620755582058753376328583001312846508295319286941837220522563729215928111164274042890696771820759856790994461944209269732769269559257608440686713206622111649275898426040931301005711446055819707704086201357712959922814300067907536161841255533171805313149332383712997091780368142625499055149806043238057037400510197255364471685815004154357049874205884682322443391374020169114833722616851257895369648472048116320266548560787733764126281102645474252013714507014577620450816459153848279084910457288549191</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>解题：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python 3.8</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span> n2s</span><br><span class="line">p =</span><br><span class="line"><span class="number">16631778300856146161980935433814936995552950080487778469613539444556283756439226</span></span><br><span class="line"><span class="number">34783789967527660247694723110349300585359766249520227964497116507661553073595082</span></span><br><span class="line"><span class="number">89724267180551758503427912271216717074610090283635131622612435152898135011648054</span></span><br><span class="line"><span class="number">004511857955351506722712213877180074987292198905073222084609633471831</span></span><br><span class="line">n = pow(p, <span class="number">3</span>)</span><br><span class="line">phi_n = pow(p, <span class="number">3</span>)-pow(p, <span class="number">2</span>)</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">d = pow(e, <span class="number">-1</span>, phi_n)</span><br><span class="line">c =</span><br><span class="line"><span class="string">"apxy3z3DgGnzaEedcUy3A49wAsqyyn9sqx6eYZL5iDrCq0Wjs8BOY2Ofza5wuaFigm32PVpO5jpuDgw</span></span><br><span class="line"><span class="string">9b6oX8KM2ZB9/dDmwQc7JKnAKhCQrIc1v9qt7iQbnTK0DTQj/xvQkz/IBeSjoWBmHOx4s0tDxZRAjOPu</span></span><br><span class="line"><span class="string">i5wwAywNM3ynULEPczv+xN2v+6HBeoS2YuyfF5mq/pIAMPwZs+QpkuwxSbNQ6xPNP9Ox1IeKz/41F7/D</span></span><br><span class="line"><span class="string">2fDsGB5CcFdAiQq+r95BhVeGzeaiQBpzwAXAPKIyO+fP6/M9XmpSJwjaMSiAUnksp9KfVOXgEG9Z0Fmx</span></span><br><span class="line"><span class="string">P6rgqPl0vU+rVeJ2RsTUYCSP8Vy+PD3PGwDDdUtNzvcEXKr2BKiNoOUxprBAtyvcsmGqRLgDl1ZVgzSZ</span></span><br><span class="line"><span class="string">1U4MAmJ9x42mIU0XvolqaOCJZzaym1kJoBlw7/7+Nej4owEtan/c3TIkDkr/gCenUD/8MSlvnfTUMGdQ</span></span><br><span class="line"><span class="string">LkSht2BZiuiHxVVRVzY5ETG6v+w9AtDMC"</span></span><br><span class="line">c = int.from_bytes(base64.b64decode(c), byteorder=<span class="string">'big'</span>)</span><br><span class="line">m = pow(c, d, n)</span><br><span class="line">print(n2s(m))</span><br></pre></td></tr></table></figure>
+
+<h2 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h2><p>原题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">以下是数行数据，每行第一个，第二个数字代表这条路的两个端点国家，第三个数字代表路途长度，最后一个字符串便是神秘代码。路在附件中~ 帮助救世主尼奥吧，他快被吓尿了。。。</span><br><span class="line"></span><br><span class="line">1 2 100 FLAG&#123;</span><br><span class="line">2 3 87 AFQWE</span><br><span class="line">2 4 57 ETKLS</span><br><span class="line">2 5 50 WEIVK</span><br><span class="line">2 6 51 AWEIW</span><br><span class="line">3 7 94 QIECJF</span><br><span class="line">3 8 78 QSXKE</span><br><span class="line">3 9 85 QWEIH</span><br><span class="line">4 13 54 WQOJF</span><br><span class="line">4 14 47 KDNVE</span><br><span class="line">4 15 98 QISNV</span><br><span class="line">5 10 43 AEWJV</span><br><span class="line">5 11 32 QWKXF</span><br><span class="line">5 12 44 ASJVL</span><br><span class="line">6 16 59 ASJXJ</span><br><span class="line">6 17 92 QJXNV</span><br><span class="line">6 18 39 SCJJF</span><br><span class="line">6 23 99 SJVHF</span><br><span class="line">7 19 99 WJCNF</span><br><span class="line">8 20 96 SKCNG</span><br><span class="line">9 20 86 SJXHF</span><br><span class="line">10 21 60 SJJCH</span><br><span class="line">11 21 57 SJHGG</span><br><span class="line">12 22 47 SJCHF</span><br><span class="line">14 10 55 EJFHG</span><br><span class="line">16 17 59 ASJVH</span><br><span class="line">18 12 53 SJFHG</span><br><span class="line">18 24 93 SHFVG</span><br><span class="line">21 22 33 SJFHB</span><br><span class="line">19 25 88 ASHHF</span><br><span class="line">20 25 96 SJVHG</span><br><span class="line">22 25 23 SJVHJ</span><br><span class="line">25 26 75 SDEV&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这是一道算法题，求最短路径。</span><br><span class="line">由题最短路径的点为：1-2-5-12-22-25-26</span><br><span class="line">FLAG&#123;WEIVKSJCHFSJCHFSDEV&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Bu1
+  </li>
+<li class="post-copyright-link">
+  <strong>本文链接：</strong>
+  <a href="http://bu1.github.io/2020/01/15/密码学基础/" title="密码学基础">http://bu1.github.io/2020/01/15/密码学基础/</a>
+</li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------END<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/11/upload-labs-env靶场②/" rel="next" title="upload-labs-env靶场②">
+                <i class="fa fa-chevron-left"></i> upload-labs-env靶场②
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  
+  
+  
+  
+  
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Bu1">
+            
+              <p class="site-author-name" itemprop="name">Bu1</p>
+              <p class="site-description motion-element" itemprop="description">最为惊艳的是思想碰撞产生的火花。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tanpuhan.github.io" title="CoCo1er" target="_blank">CoCo1er</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.y1nhui.com" title="y1nhui" target="_blank">y1nhui</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#古典密码"><span class="nav-number">1.</span> <span class="nav-text">古典密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#凯撒密码"><span class="nav-number">1.1.</span> <span class="nav-text">凯撒密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乘法密码"><span class="nav-number">1.2.</span> <span class="nav-text">乘法密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仿射密码"><span class="nav-number">1.3.</span> <span class="nav-text">仿射密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#维吉尼亚密码"><span class="nav-number">1.4.</span> <span class="nav-text">维吉尼亚密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#现代密码"><span class="nav-number">2.</span> <span class="nav-text">现代密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#序列密码"><span class="nav-number">2.1.</span> <span class="nav-text">序列密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组密码"><span class="nav-number">2.2.</span> <span class="nav-text">分组密码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DES加密"><span class="nav-number">2.2.1.</span> <span class="nav-text">DES加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AES加密"><span class="nav-number">2.2.2.</span> <span class="nav-text">AES加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ECB工作模式"><span class="nav-number">2.2.3.</span> <span class="nav-text">ECB工作模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CBC工作模式"><span class="nav-number">2.2.4.</span> <span class="nav-text">CBC工作模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填充攻击"><span class="nav-number">2.2.5.</span> <span class="nav-text">填充攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash函数"><span class="nav-number">2.3.</span> <span class="nav-text">Hash函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSA加密"><span class="nav-number">2.4.</span> <span class="nav-text">RSA加密</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码学分类"><span class="nav-number">3.1.</span> <span class="nav-text">密码学分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对密码学的攻击"><span class="nav-number">3.2.</span> <span class="nav-text">对密码学的攻击</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#练习题"><span class="nav-number">4.</span> <span class="nav-text">练习题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#凯撒相关"><span class="nav-number">4.1.</span> <span class="nav-text">凯撒相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仿射密码-1"><span class="nav-number">4.2.</span> <span class="nav-text">仿射密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DES"><span class="nav-number">4.3.</span> <span class="nav-text">DES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSA"><span class="nav-number">4.4.</span> <span class="nav-text">RSA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最短路径"><span class="nav-number">4.5.</span> <span class="nav-text">最短路径</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">36.8k</span>
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>"
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2020/01/15/密码学基础/';
+          this.page.identifier = '2020/01/15/密码学基础/';
+          this.page.title = '密码学基础';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
