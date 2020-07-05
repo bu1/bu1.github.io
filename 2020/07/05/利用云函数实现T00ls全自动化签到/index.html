@@ -115,17 +115,24 @@
 
 
 
-<meta name="description" content="内网渗透基础之共享连接及定时任务，稍微总结了下，写的东西都比较浅。">
+<meta name="description" content="好久没有更新了，一直鸽鸽鸽…最近这一段时间搞安全的时间确实是少了，一直在做学业上的事情。上次看到T00ls公众号推了一篇ios全自动签到的文章，但是自己手里没有ios的设备，所以就想到写一个脚本用腾讯云函数来实现全自动化签到。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="任务执行和建立共享">
-<meta property="og:url" content="http://yoursite.com/2020/01/18/任务执行和建立共享/index.html">
+<meta property="og:title" content="利用云函数实现T00ls全自动化签到">
+<meta property="og:url" content="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/index.html">
 <meta property="og:site_name" content="Bu1&#39;Blog">
-<meta property="og:description" content="内网渗透基础之共享连接及定时任务，稍微总结了下，写的东西都比较浅。">
+<meta property="og:description" content="好久没有更新了，一直鸽鸽鸽…最近这一段时间搞安全的时间确实是少了，一直在做学业上的事情。上次看到T00ls公众号推了一篇ios全自动签到的文章，但是自己手里没有ios的设备，所以就想到写一个脚本用腾讯云函数来实现全自动化签到。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-18T11:49:21.837Z">
+<meta property="og:image" content="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705114648506.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705115025223.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705120049451.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705120340949.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705120454998.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705120809785.png">
+<meta property="og:updated_time" content="2020-07-05T04:14:44.095Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="任务执行和建立共享">
-<meta name="twitter:description" content="内网渗透基础之共享连接及定时任务，稍微总结了下，写的东西都比较浅。">
+<meta name="twitter:title" content="利用云函数实现T00ls全自动化签到">
+<meta name="twitter:description" content="好久没有更新了，一直鸽鸽鸽…最近这一段时间搞安全的时间确实是少了，一直在做学业上的事情。上次看到T00ls公众号推了一篇ios全自动签到的文章，但是自己手里没有ios的设备，所以就想到写一个脚本用腾讯云函数来实现全自动化签到。">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705114648506.png">
 
 
 
@@ -155,13 +162,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/18/任务执行和建立共享/">
+  <link rel="canonical" href="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/">
 
 
 
 
 
-  <title>任务执行和建立共享 | Bu1'Blog</title>
+  <title>利用云函数实现T00ls全自动化签到 | Bu1'Blog</title>
   
 
 
@@ -288,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/18/任务执行和建立共享/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bu1">
@@ -305,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">任务执行和建立共享</h1>
+          <h1 class="post-title" itemprop="name headline">利用云函数实现T00ls全自动化签到</h1>
         
 
         <div class="post-meta">
@@ -317,8 +324,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-18T16:06:54+08:00">
-                2020-01-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-05T11:25:36+08:00">
+                2020-07-05
               </time>
             
 
@@ -340,8 +347,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/内网渗透/" itemprop="url" rel="index">
-                    <span itemprop="name">内网渗透</span>
+                  <a href="/categories/编程记录/" itemprop="url" rel="index">
+                    <span itemprop="name">编程记录</span>
                   </a>
                 </span>
 
@@ -358,8 +365,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/01/18/任务执行和建立共享/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/18/任务执行和建立共享/" itemprop="commentCount"></span>
+                <a href="/2020/07/05/利用云函数实现T00ls全自动化签到/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/05/利用云函数实现T00ls全自动化签到/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -381,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  914 字
+                  641 字
                 </span>
               
 
@@ -397,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -418,95 +425,50 @@
       
 
       
-        <p>内网渗透基础之共享连接及定时任务，稍微总结了下，写的东西都比较浅。</p>
+        <p>好久没有更新了，一直鸽鸽鸽…最近这一段时间搞安全的时间确实是少了，一直在做学业上的事情。上次看到T00ls公众号推了一篇ios全自动签到的文章，但是自己手里没有ios的设备，所以就想到写一个脚本用腾讯云函数来实现全自动化签到。</p>
 <a id="more"></a>
 
-<h1 id="共享连接"><a href="#共享连接" class="headerlink" title="共享连接"></a>共享连接</h1><h2 id="ipc"><a href="#ipc" class="headerlink" title="ipc$"></a>ipc$</h2><p>IPC$(Internet Process Connection)是共享 “命名管道 “的资源(大家都是这么说的)，它是为了让进程间通信而开放的命名管道，可以通过验证用户名和密码获得相应的权限,在远程管理计算机和查看计算机的共享资源时使用。</p>
-<p><strong>如果远程服务器未开启139、445端口，无法使用IPC$进行连接；在同一时间内，两个ip之间只允许建立一个连接。</strong></p>
-<blockquote>
-<p>在初次安装系统时还打开了默认共享，即所有的逻辑共享(c$,d$,e$……)和系统目录winnt或管理员目录(admin$)共享。</p>
-</blockquote>
-<h2 id="建立ipc-连接"><a href="#建立ipc-连接" class="headerlink" title="建立ipc$连接"></a>建立ipc$连接</h2><ul>
-<li>net use \\192.168.3.122\ipc$ /u:”” “” 先空连接探测</li>
-<li>net use  查看当前机器中的ipc连接有哪些</li>
-<li>net use \\192.168.3.122\ipc$ “password” /user:admin  有密码的连接</li>
-<li>net use \\192.168.3.122\ipc$ /del       #删除指定ipc连接</li>
-<li>net use * /del    #删除所有连接</li>
-<li>net share  查看共享</li>
-<li>删除共享(重启后默认共享仍然存在)<ul>
-<li>net share ipc$ /delete</li>
-<li>net share admin$ /delete</li>
-<li>net share c$ /delete</li>
-<li>net share d$ /delete </li>
-<li>… e,f盘类似</li>
-</ul>
-</li>
-</ul>
-<h2 id="检验ipc-连接"><a href="#检验ipc-连接" class="headerlink" title="检验ipc$连接"></a>检验ipc$连接</h2><ul>
-<li>dir \\192.169.226.139\c$  查看远程连接对象的目录</li>
-</ul>
-<h2 id="传输文件"><a href="#传输文件" class="headerlink" title="传输文件"></a>传输文件</h2><ul>
-<li>copy calc.bat \\192.169.226.139\c$  传输文件</li>
-</ul>
-<h2 id="硬盘映射"><a href="#硬盘映射" class="headerlink" title="硬盘映射"></a>硬盘映射</h2><ul>
-<li>net use p:  \\192.168.226.139\c$  映射远控机器的C盘到本地</li>
-<li>net use p:  /del     删除映射(实际的渗透过程中应该尽可能缩短映射时间防止被发现)</li>
-</ul>
-<h1 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h1><h2 id="At命令"><a href="#At命令" class="headerlink" title="At命令"></a>At命令</h2><ul>
-<li><p>建立任务</p>
-<p>win7以前一般是使用“AT”命令进行定时操作。一般在ipc$连接后可以开始定时任务。命令格式： at \\计算机名字或者ip 执行时间 程序目录</p>
-<p><code>假如执行C盘下的脚本:at \\192.168.226.139 11:30 c:\\calc.bat</code></p>
-</li>
-<li><p>清除任务</p>
-<p><code>at \\192.168.226.139 id /delete</code></p>
-<p><strong>id为空则会删除所有的作业</strong> </p>
-</li>
-<li><p>执行任务</p>
-<p><code>at \\192.168.226.139 11:30 cmd.exe /c &quot;ipconfig &gt; c:\1.txt&quot;</code></p>
-<p><strong>由于没有回显结果，所以可以存储在文本文件中查看命令执行后的回显</strong></p>
-</li>
-</ul>
-<h2 id="schtasks"><a href="#schtasks" class="headerlink" title="schtasks"></a>schtasks</h2><p>win7以后可使用schtasks，这个命令的好处在于可以更加灵活的控制脚本的启动时间。</p>
+<h1 id="0x00-源代码"><a href="#0x00-源代码" class="headerlink" title="0x00 源代码"></a>0x00 源代码</h1><p>直接先给代码，会用的就自己配置，不会的按照下面的方式自己配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&apos;&apos;&apos;</span><br><span class="line">Title: T00ls云函数自动签到脚本</span><br><span class="line">Author: Qinghuan</span><br><span class="line">Data: 2020.07.05</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line">import requests</span><br><span class="line">import os</span><br><span class="line">import re</span><br><span class="line">def main_handler(event, context):</span><br><span class="line">    login_url = &quot;https://www.t00ls.net/login.json&quot;</span><br><span class="line">    check_url = &quot;https://www.t00ls.net/ajax-sign.json&quot;</span><br><span class="line">    # 定义server酱推送地址</span><br><span class="line">    server_url = &quot;https://sc.ftqq.com/你的SCKEY.send?text=&quot;</span><br><span class="line"></span><br><span class="line">    # 防止二次登录时获取不到formhash</span><br><span class="line">    login_header = &#123;</span><br><span class="line">        &apos;Cookie&apos;: &apos;&apos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # 设置登录数据(官方文档：https://www.t00ls.net/api.html)</span><br><span class="line">    login_data = &#123;</span><br><span class="line">        &apos;action&apos;: &apos;login&apos;,</span><br><span class="line">        &apos;username&apos;: &apos;&apos;,</span><br><span class="line">        &apos;password&apos;: &apos;&apos;,</span><br><span class="line">        &apos;questionid&apos;: &apos;&apos;,</span><br><span class="line">        &apos;answer&apos;: &apos;&apos;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    # 发送登录请求</span><br><span class="line">    try:</span><br><span class="line">        r = requests.post(login_url, data=login_data, headers=login_header)</span><br><span class="line">        check_cookies = r.cookies</span><br><span class="line">        res = re.search(&apos;formhash&quot;:&quot;(.*?)&quot;&apos;, r.text)</span><br><span class="line">        formhash = res.group(1)</span><br><span class="line">    except:</span><br><span class="line">        requests.get(server_url + &quot;登录失败&quot;)</span><br><span class="line">        os._exit(0)</span><br><span class="line">		</span><br><span class="line">    # 设置签到数据</span><br><span class="line">    check_data = &#123;</span><br><span class="line">        &apos;formhash&apos;: formhash,</span><br><span class="line">        &apos;signsubmit&apos;: &apos;true&apos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # 发送签到请求</span><br><span class="line">    try:</span><br><span class="line">        r = requests.post(check_url, data=check_data, cookies=check_cookies)</span><br><span class="line">        res = re.search(&apos;message&quot;:&quot;(.*?)&quot;&apos;, r.text)</span><br><span class="line">        message = res.group(1)</span><br><span class="line">        if message == &apos;success&apos;:</span><br><span class="line">            requests.get(server_url + &quot;签到成功啦&quot;)</span><br><span class="line">        else:</span><br><span class="line">            requests.get(server_url + &quot;今天你已经签到啦&quot;)</span><br><span class="line">    except:</span><br><span class="line">        requests.get(server_url + &quot;签到请求异常&quot;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="0x01-签到信息配置"><a href="#0x01-签到信息配置" class="headerlink" title="0x01 签到信息配置"></a>0x01 签到信息配置</h1><p>官方api文档：<a href="https://www.t00ls.net/api.html" target="_blank" rel="noopener">https://www.t00ls.net/api.html</a></p>
+<p>SCKEY 获取地址：<a href="http://sc.ftqq.com/?c=code" target="_blank" rel="noopener">http://sc.ftqq.com/?c=code</a>   <code>绑定好微信</code></p>
+<p>参数配置说明</p>
 <ul>
-<li><p>创建任务</p>
-<p><code>schtasks /create /s 192.168.226.139 /tn name /sc onstart /tr c:\calc.bat /ru system /f</code></p>
-<blockquote>
-<p> onstart代表任务在每次系统启动的时候运行 ，name是为任务取得名字</p>
-</blockquote>
+<li><p>SCKEY                #替换掉server_url中你的SCKEY字段</p>
 </li>
-<li><p>激活任务</p>
-<p><code>schtasks /run /s 192.168.226.139 /i /tn &quot;name&quot;</code></p>
+<li><p>cookie                #填写username的值</p>
 </li>
-<li><p>删除任务</p>
-<p><code>schtasks /delete /s 192.168.226.139 /tn &quot;name&quot; /f</code></p>
+<li><p>username         #填写username的值</p>
+</li>
+<li><p>password          #填写md5加密后的32位小写值</p>
+</li>
+<li><p>questionid        #参考官方文档</p>
+</li>
+<li><p>answer              #参考官方文档</p>
 </li>
 </ul>
-<p><strong>注意：这个命令在使用时会产生大量的日志</strong></p>
-<h2 id="Psexec"><a href="#Psexec" class="headerlink" title="Psexec"></a>Psexec</h2><p>第一次使用会弹窗，输入–accepteula这个参数就可以绕过。</p>
+<h1 id="0x02-云函数配置"><a href="#0x02-云函数配置" class="headerlink" title="0x02 云函数配置"></a>0x02 云函数配置</h1><p>腾讯云函数:<a href="https://console.cloud.tencent.com/scf" target="_blank" rel="noopener">https://console.cloud.tencent.com/scf</a></p>
+<ol>
+<li><p>创建一个空白模板，环境为Python 3.6。</p>
+<p><img src="/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705114648506.png" alt="image-20200705114648506"></p>
+</li>
+<li><p>清空index默认代码将配置好的代码复制进去</p>
+<p><img src="/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705115025223.png" alt="image-20200705115025223"></p>
+</li>
+<li><p>点击完成进入配置页面并点击底部测试按钮</p>
+<p>看一下日志，调用成功的话就进入下一步。</p>
+<p><img src="/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705120049451.png" alt="image-20200705120049451"></p>
+</li>
+<li><p>每天定时执行签到任务</p>
 <ul>
-<li><p>执行任务</p>
-<p><code>psexec.exe \\ip –accepteula -u username -p password program.exe</code></p>
-</li>
-<li><p>假如已经建立ipc连接</p>
-<p><code>psexec.exe \\ip –accepteula cmd.exe</code></p>
-</li>
-<li><p>骚操作(-s 管理员 -i 靶机是否能看到 –d命令执行后返回)</p>
-<ul>
-<li>psexec \\ip -u admini -p pwd -d -s calc   管理员权限且靶机不显示</li>
-<li>psexec \\ip -u admini -p pwd -i -d cmd /c start http:// <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>  靶机打开浏览器且靶机弹窗</li>
-<li>psexec \\ip -u admin -p pwd -s cmd 此条命令会反弹靶机的cmd到本机</li>
+<li>创建一个触发器<img src="/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705120340949.png" alt="image-20200705120340949"></li>
+<li>每天6时6分6秒自动签到(t00ls服务器有时候会抽风，建议多定时一个时段，具体设置方法参考Cron文档)<img src="/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705120454998.png" alt="image-20200705120454998"></li>
 </ul>
 </li>
-</ul>
-<blockquote>
-<p>cmd建立非空文件命令</p>
-<ul>
-<li>copy con 1.txt 创建文件并开始输入内容 ctrl+z 后加回车键结束输入</li>
-<li>echo 内容 &gt; 1.txt 将内容输出到1.txt</li>
-<li>echo 内容 &gt;&gt; 1.txt 将内容追加到1.txt</li>
-<li>type 1.txt 查看文件内容</li>
-</ul>
-</blockquote>
+</ol>
+<h1 id="0x03-最终效果"><a href="#0x03-最终效果" class="headerlink" title="0x03 最终效果"></a>0x03 最终效果</h1><p>微信接到推送消息：</p>
+<p><img src="/2020/07/05/利用云函数实现T00ls全自动化签到/image-20200705120809785.png" alt="image-20200705120809785"></p>
 
       
     </div>
@@ -527,7 +489,7 @@
   </li>
 <li class="post-copyright-link">
   <strong>本文链接：</strong>
-  <a href="http://bu1.github.io/2020/01/18/任务执行和建立共享/" title="任务执行和建立共享">http://bu1.github.io/2020/01/18/任务执行和建立共享/</a>
+  <a href="http://bu1.github.io/2020/07/05/利用云函数实现T00ls全自动化签到/" title="利用云函数实现T00ls全自动化签到">http://bu1.github.io/2020/07/05/利用云函数实现T00ls全自动化签到/</a>
 </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -557,8 +519,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/17/内网渗透基础之信息收集/" rel="next" title="内网渗透基础之信息收集">
-                <i class="fa fa-chevron-left"></i> 内网渗透基础之信息收集
+              <a href="/2020/01/19/代理与端口转发/" rel="next" title="代理与端口转发">
+                <i class="fa fa-chevron-left"></i> 代理与端口转发
               </a>
             
           </div>
@@ -566,10 +528,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/19/代理与端口转发/" rel="prev" title="代理与端口转发">
-                代理与端口转发 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -728,7 +686,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#共享连接"><span class="nav-number">1.</span> <span class="nav-text">共享连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ipc"><span class="nav-number">1.1.</span> <span class="nav-text">ipc$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立ipc-连接"><span class="nav-number">1.2.</span> <span class="nav-text">建立ipc$连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检验ipc-连接"><span class="nav-number">1.3.</span> <span class="nav-text">检验ipc$连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输文件"><span class="nav-number">1.4.</span> <span class="nav-text">传输文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘映射"><span class="nav-number">1.5.</span> <span class="nav-text">硬盘映射</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定时任务"><span class="nav-number">2.</span> <span class="nav-text">定时任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#At命令"><span class="nav-number">2.1.</span> <span class="nav-text">At命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#schtasks"><span class="nav-number">2.2.</span> <span class="nav-text">schtasks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Psexec"><span class="nav-number">2.3.</span> <span class="nav-text">Psexec</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-源代码"><span class="nav-number">1.</span> <span class="nav-text">0x00 源代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-签到信息配置"><span class="nav-number">2.</span> <span class="nav-text">0x01 签到信息配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-云函数配置"><span class="nav-number">3.</span> <span class="nav-text">0x02 云函数配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-最终效果"><span class="nav-number">4.</span> <span class="nav-text">0x03 最终效果</span></a></li></ol></div>
             
 
           </div>
@@ -900,9 +858,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2020/01/18/任务执行和建立共享/';
-          this.page.identifier = '2020/01/18/任务执行和建立共享/';
-          this.page.title = '任务执行和建立共享';
+          this.page.url = 'http://yoursite.com/2020/07/05/利用云函数实现T00ls全自动化签到/';
+          this.page.identifier = '2020/07/05/利用云函数实现T00ls全自动化签到/';
+          this.page.title = '利用云函数实现T00ls全自动化签到';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
