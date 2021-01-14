@@ -122,18 +122,18 @@
 <meta property="og:site_name" content="Bu1&#39;Blog">
 <meta property="og:description" content="任务标题：Web 安全之 SSRF 漏洞学习实战1、编写一个存在 ssrf 漏洞页面，思考造成该漏洞的函数有哪些 2、利用 ssrf 进行内网端口扫描（思考利用 ssrf 可以做什么，为什么）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112164336938.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112171819795.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112171753568.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112174020245.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112173851062.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112220216997.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112223950560.png">
-<meta property="og:updated_time" content="2021-01-14T08:57:09.794Z">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112164336938.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112171819795.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112171753568.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112174020245.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112173851062.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112220216997.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112223950560.png">
+<meta property="og:updated_time" content="2021-01-14T09:13:14.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第十三周：SSRF漏洞学习实战">
 <meta name="twitter:description" content="任务标题：Web 安全之 SSRF 漏洞学习实战1、编写一个存在 ssrf 漏洞页面，思考造成该漏洞的函数有哪些 2、利用 ssrf 进行内网端口扫描（思考利用 ssrf 可以做什么，为什么）">
-<meta name="twitter:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112164336938.png">
+<meta name="twitter:image" content="http://yoursite.com/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112164336938.png">
 
 
 
@@ -434,7 +434,7 @@
 <h1 id="学习报告"><a href="#学习报告" class="headerlink" title="学习报告"></a>学习报告</h1><h2 id="0x01-SSRF漏洞原理"><a href="#0x01-SSRF漏洞原理" class="headerlink" title="0x01 SSRF漏洞原理"></a>0x01 SSRF漏洞原理</h2><p>SSRF，英文全称为Server-Side Request Forgery，中文直译服务端请求伪造。从字面意思来理解，伪造服务端请求，那么很容易就可以想到用这个漏洞可以突破客户端获取不到敏感数据的限制。（服务端请求，突破了内外网限制）</p>
 <p>现在很多WEB应用都可以使用指定的URL从其他的服务器获取资源，如：获取图片、下载文件。假如这个<strong>URL完全可控</strong>，服务端为对它做任何的限制，那么我们便可以构造恶意请求地址，如读取服务器的文件<code>www.demo.com/ssrf.php?url=file:///C:/windows/win.ini</code>这样就可以被称为一次SSRF攻击。</p>
 <p>亦或是另一种情况，有些敏感资源客户端读取不到，限制了服务器读取，所以可以伪造服务器请求完成一次SSRF攻击，示意图如下：</p>
-<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112164336938.png" alt="image-20210112164336938"></p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112164336938.png" alt="image-20210112164336938"></p>
 <h2 id="0x02-SSRF漏洞代码示例"><a href="#0x02-SSRF漏洞代码示例" class="headerlink" title="0x02 SSRF漏洞代码示例"></a>0x02 SSRF漏洞代码示例</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(E_ALL ^ E_NOTICE);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl</span><span class="params">($url)</span></span>&#123;</span><br><span class="line">	$ch = curl_init();<span class="comment">//初始化curl会话</span></span><br><span class="line">	curl_setopt($ch,CURLOPT_URL,$url);<span class="comment">//指定请求的url</span></span><br><span class="line">	curl_setopt($ch,CURLOPT_HEADER,<span class="number">0</span>);<span class="comment">// 启用时会将头文件的信息作为数据流输出。参数为1表示输出信息头,为0表示不输出</span></span><br><span class="line">	curl_exec($ch);</span><br><span class="line">	curl_close($ch);</span><br><span class="line">&#125;</span><br><span class="line">$url = $_GET[<span class="string">'url'</span>];</span><br><span class="line">curl($url);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>常见的可能引起SSRF的PHP函数有：<code>file_get_contents()</code>，<code>fsockopen()</code>和<code>curl_exec()</code></p>
@@ -447,21 +447,21 @@
 <h2 id="0x03-SSRF漏洞利用"><a href="#0x03-SSRF漏洞利用" class="headerlink" title="0x03 SSRF漏洞利用"></a>0x03 SSRF漏洞利用</h2><p>利用上面编好的SSRF漏洞来测试一下：</p>
 <ul>
 <li><p>探测一下本地是否存在mysql服务器</p>
-<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112171819795.png" alt="image-20210112171819795"></p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112171819795.png" alt="image-20210112171819795"></p>
 <p>出现mysql相关的提示，说明这个服务器上存在mysql。</p>
 <blockquote>
 <p>Tips：如果对url后缀有限制则可以用<code>?</code>或者<code>#</code>绕过，如<code>http://127.0.0.1/SSRF/ssrf.php?url=127.0.0.1:3306/?.jpg</code></p>
 </blockquote>
 </li>
 <li><p>伪造请求访问百度(用服务器做跳板访问别的网站)</p>
-<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112171753568.png" alt="image-20210112171753568"></p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112171753568.png" alt="image-20210112171753568"></p>
 </li>
 <li><p>伪造请求探测服务器开放的端口</p>
 <p>和第一点相同，更改不同的端口号进行遍历来判断端口是否开放。</p>
-<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112174020245.png" alt="image-20210112174020245"></p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112174020245.png" alt="image-20210112174020245"></p>
 </li>
 <li><p>伪造请求读取服务器(内网)敏感资料</p>
-<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112173851062.png" alt="image-20210112173851062"></p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112173851062.png" alt="image-20210112173851062"></p>
 </li>
 </ul>
 <p>其余的利用点：</p>
@@ -566,7 +566,7 @@
 <li>使用正则防止畸形绕过</li>
 </ol>
 <h2 id="0x05-XXE"><a href="#0x05-XXE" class="headerlink" title="0x05 XXE"></a>0x05 XXE</h2><h3 id="1-XXE介绍"><a href="#1-XXE介绍" class="headerlink" title="1. XXE介绍"></a>1. XXE介绍</h3><p>XXE，英文全称为XML External Entity Injection，翻译成中文为XML外部实体注入。通过字面意思就可以知道这是通过外部实体进行注入的，那么要知道外部实体是什么就必须先看一下XML结构示意图。</p>
-<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112220216997.png" alt="image-20210112220216997"></p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112220216997.png" alt="image-20210112220216997"></p>
 <p>首先是XML声明这是固定不变的，然后是文档类型定义，不同的文档类型有不同的文档元素。例如上文中的DTD定义文档的根元素是note，则下面note文档元素应该如定义的写法一样。当允许应用外部实体时就可以构造恶意内容进行攻击。</p>
 <h3 id="2-引入外部实体"><a href="#2-引入外部实体" class="headerlink" title="2. 引入外部实体"></a>2. 引入外部实体</h3><ul>
 <li><p>方式一</p>
@@ -594,7 +594,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> <span class="meta">?&gt;</span> </span><br><span class="line">&lt;!DOCTYPE ANY[   <span class="comment">//这里的ANY定义了文档元素可以为任意元素</span></span><br><span class="line">&lt;!ENTITY xxe SYSTEM <span class="string">"http://demo.com:8080/struts2-blank"</span>&gt;</span><br><span class="line">]&gt; </span><br><span class="line">&lt;x&gt;&amp;xxe;&lt;/x&gt;</span><br><span class="line">    </span><br><span class="line">原理类似于ssrf的攻击内网网站，都是基于内网机器可以对内网机器发起请求引起的。</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>常用的协议</p>
-<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/Users/11761/Desktop/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/AAAA%E4%BB%BB%E5%8A%A1/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8-SSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Bu1-1499/image-20210112223950560.png" alt="image-20210112223950560"></p>
+<p><img src="/2021/01/14/第十三周：SSRF漏洞学习实战/image-20210112223950560.png" alt="image-20210112223950560"></p>
 </li>
 </ul>
 <h3 id="4-XXE防御手段"><a href="#4-XXE防御手段" class="headerlink" title="4. XXE防御手段"></a>4. XXE防御手段</h3><ol>
@@ -681,6 +681,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/14/第十四周：文件上传漏洞/" rel="prev" title="第十四周：文件上传漏洞">
+                第十四周：文件上传漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -775,7 +779,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -873,7 +877,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">54.3k</span>
+    <span title="Site words total count">56.6k</span>
   
 </div>
 
