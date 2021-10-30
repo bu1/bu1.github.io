@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文简要介绍了Windows的基本常识、基本概念以及重要的文件及目录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows基础(一)：常识、术语、文件夹">
+<meta property="og:url" content="http://yoursite.com/2021/10/30/Windows基础(一)：常识、术语、文件夹/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="本文简要介绍了Windows的基本常识、基本概念以及重要的文件及目录。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-10-30T04:50:16.339Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows基础(一)：常识、术语、文件夹">
+<meta name="twitter:description" content="本文简要介绍了Windows的基本常识、基本概念以及重要的文件及目录。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/10/30/Windows基础(一)：常识、术语、文件夹/">
+
+
+
+
+
+  <title>Windows基础(一)：常识、术语、文件夹 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bu1'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/10/30/Windows基础(一)：常识、术语、文件夹/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Windows基础(一)：常识、术语、文件夹</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-30T12:46:16+08:00">
+                2021-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Windows安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Windows安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/10/30/Windows基础(一)：常识、术语、文件夹/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/10/30/Windows基础(一)：常识、术语、文件夹/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文简要介绍了Windows的基本常识、基本概念以及重要的文件及目录。</p>
+<a id="more"></a>
+
+<h2 id="基本常识"><a href="#基本常识" class="headerlink" title="基本常识"></a>基本常识</h2><ul>
+<li><p>在windows操作系统家族中，system.ini和win.ini这两个文件包含了操作系统所有的控制功能和应用程序的信息，system.ini管理计算机硬件而win.ini管理桌面和应用程序。后来，注册表取代了这两个文件的功能，而这两个文件则保留下来并依然有用。</p>
+</li>
+<li><p>Windows采用模块化设计，可由许多组件来拼装组合成需要的功能。常见的组件有COM组件，DCOM组件等。通过COM接口，可以调用COM组件完成某些操作。</p>
+<blockquote>
+<p>COM接口有两种表示方式：ProgID和CLSID。它们都唯一地表示一个组件服务程序，二者是等值的，前者用一个名称（例如<br>VBScript）来表示，后者用一个16字节的号码（例如{B54F3741-5B07-11cf-A4B0-00AA004A55E8}）来表示。它们都相当于一个环境<br>变量路径，指明了一个程序及位置。</p>
+</blockquote>
+</li>
+<li><p>Windows最底层的东西是API，所有操作都是系统API完成的(也可以自己写API来完成相关操作)。Windows是由无数API函数堆积成的魔厦。32位Windows系统的核心是Win32 API函数。Win32 API是C语言函数集。Win32 API函数存放在dll文件中，最常用的两个dll文件user32.dll和kernel32.dll中包含了很多重要的Win32 API。</p>
+</li>
+<li><p>Windows只使用了CPU四个特权模式（0-3）中的两个：特权级0(Ring0)和特权级3(Ring3)。Ring0留给操作系统代码，设备驱动程序代码使用，它们工作在内核态，运行于处理器核心态的代码不受任何的限制，在此种状态下CPU可以执行任何指令。</p>
+<p>Ring3给普通的用户程序使用，它们工作在用户态，此种状态下CPU只能执行非特权指令。以上所言仅对Windows这样的保护模式操作系统有效，像DOS这样的实模式操作系统无所谓用户态，其所有代码都可以看作是运行在内核态。</p>
+</li>
+<li><p>在Win32下提供的进程间通信方式有9种：剪贴板、COM/DCOM、DDE、文件映射、邮槽、管道、RPC、Sockets、消息。</p>
+</li>
+<li><p>Windows文件系统，常用有FAT32和NTFS格式,也就是说磁盘可以格式化成FAT32或者NTFS。NTFS格式较为安全（可以对文件夹和文件指定权限），删掉的数据也很容易恢复，存储的文件允许超过4GB；FAT32格式下，存储的数据不能超过4GB，删掉的文件不易恢复，而且相对来说，当系统盘为FAT32格式时，系统运行速度较快。</p>
+</li>
+</ul>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li><p><strong>服务：</strong>随系统启动，在后台运行，对前台运行的程序提供支持，不与用户进行交互的程序。Windows下的服务由3部分构成：1、一个服务可执行文件；2、一个服务控制程序(SCP ——Service Control Program)；3、服务控制管理器(SCM)，负责在HKLM\SYSTEM\CurrentControlSet\Services下创建服务键值。用户可通过 SCP 控制服务的启动、停止、暂停等，SCP 会通过 SCM 调用服务程序。</p>
+</li>
+<li><p><strong>进程：</strong>处于动态活动的程序。可以理解为，被系统加载进了内存，正在运行和被执行的程序。进程有3个状态：就绪、运行、等待。其中，父进程是行为的发起者、子进程是行为的目标。例如explorer.exe运行firefox.exe和explorer.exe修改firefox.exe的内存，这两种情况下，explorer.exe是父进程而firefox.exe是子进程。</p>
+</li>
+<li><p><strong>线程：</strong>可以独立运行的基本单元。一个进程内可以有多个线程，最少必须有一个线程。进程与线程的关系简单来看：进程是指在系统中正在运行的一个应用程序，而线程是进程之内独立执行的一个单元。对于操作系统而言，其调度单元是线程。作个通俗的比喻，进程就是工作组，线程就是工作人员，任务虽然由工作组承包，实际的完成者是每一位工作人员。任务可以切分为小块，由各位工作人员来协同完成。</p>
+<p>线程有7个状态：就绪，备用，运行，等待，转换，终止，初始化。</p>
+</li>
+<li><p><strong>钩子：</strong>英文名称hook，中文名称钩子函数，简称钩子。一种底层操作。通过钩子函数，可以捕捉当前进程或其它进程发生的事件。通过“钩挂”，可以截获、过滤、拦截、伪造事件信息，达到监控、注入、窃取、拦截等目的。下钩子，是安全软件和病毒最喜欢的伎俩。</p>
+</li>
+<li><p><strong>驱动：</strong>驱动程序（Device Driver），驱使硬件设备正常运转，并使之能和操作系统进行通信的程序。驱动程序运行于内核态（Ring0），其代码具有不受限的权限，可以执行任何操作。通过驱动程序，Windows与设备进行通信，传达指令，完成操作。除了硬件驱动，还有软件驱动。软件驱动是为了软件能够持续稳定地提供某种服务，而虚拟出一个“硬件设备”，为“该设备”编写程序进行驱动。当我们安装好一个软件驱动，注册一个服务后，启动服务就会加载驱动。</p>
+</li>
+<li><p><strong>可执行镜像控制：</strong>可执行文件的镜像控制。当执行一个可执行文件时，系统会复制该文件的一个副本，加载到内存中去执行；这个复制的副本，称为该文件的镜像。因此，所谓的可执行镜像控制，换句话说，就是允许不允许某个可执行文件加载进内存去执行。（采用镜像机制是为了安全需要，设想一下，如果运行IE时，系统不是使用IE镜像，而是直接把IE移动到内存中执行，一旦出错或者停电等故障，IE程序很可能就废了）</p>
+<blockquote>
+<p>通过修改注册表里面的HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows  NT\CurrentVersion\Image File Execution  Options键来劫持程序，比如，双击杀毒软件运行的却是记事本，点击关机按钮运行的却是播放器等。</p>
+</blockquote>
+</li>
+<li><p><strong>SSDT：</strong>SSDT的全称是System Services Descriptor Table，系统服务描述符表。这个表就是一个把ring3的Win32 API和ring0的内核API联系起来。通过修改此表的函数地址可以对常用windows函数及API进行hook，从而实现对一些关心的系统动作进行过滤、监控的目的。一些HIPS、防毒软件、系统监控、注册表监控软件往往会采用此接口来实现自己的监控模块。</p>
+<blockquote>
+<p>SSDT HOOK就是将SSDT表中相应服务号的函数地址改为自己的函数，在自己的函数中进行相应处理后，回调原函数。也就是说，通过SSDT挂钩获取了事件处理的控制权。</p>
+</blockquote>
+</li>
+<li><p><strong>系统盘和引导盘：</strong>当windows操作系统装在C盘时，C盘既是系统盘又是引导盘。当操作系统装在D盘时，存放MSDOS.SYS，IO.SYS等引导文件的C盘称为<strong>系统盘</strong>，存放windows操作系统文件的D盘被称为<strong>引导盘</strong>，与一般人的习惯认识<strong>相反</strong>，微软就是这么规定的。（记住，boot.ini、IO.SYS等引导系统所用的文件永远是存放在C盘上的，这可能跟磁盘分区时习惯设定C盘为开机盘有关）</p>
+</li>
+</ul>
+<h2 id="重要的文件和目录"><a href="#重要的文件和目录" class="headerlink" title="重要的文件和目录"></a>重要的文件和目录</h2><ul>
+<li><p>System Volume Information(默认隐藏)</p>
+<p>系统备份还原文件夹，存放备份文件用的。一度是病毒最喜欢藏身的首选之地。</p>
+</li>
+<li><p>Recycle</p>
+<p>回收站，删除文件移动到这里存放。一度是病毒最喜欢藏身的首选之地。</p>
+</li>
+<li><p>Documents and Settings</p>
+<p>「开始」菜单\程序\启动\ 添加项目会随系统启动。</p>
+</li>
+<li><p>%windir%\system32</p>
+<p>系统文件目录，最重要的目录，系统文件基本上都在这个目录下。极少数程序安装时会创建exe或dll文件到该目录下；有驱动的程序还会创建驱动程序到该目录下的drivers目录里。病毒喜欢进行域名劫持的hosts文件也在该目录下。该目录下的文件，99%都是不应该被随便修改和删除的，也不应该随便允许程序创建文件到该目录下。</p>
+</li>
+<li><p>%windir%\system</p>
+<p>系统文件目录，存放有一些dll及设备驱动文件，绝对不会有exe文件，有则为病毒。</p>
+</li>
+<li><p>%windir%\servicing</p>
+<p>服务目录，win2008用来存放软件包的目录，作用可能类似于xp的<code>%windir%\SoftwareDistribution</code>目录。</p>
+</li>
+<li><p>%windir%\SoftwareDistribution</p>
+<p>系统更新文件目录，补丁程序会下载到这里面存放和执行。系统默认把该文件夹做安装更新程序用，也就是说该目录权限很大，如果一个病毒文件创建到这里，后果很严重。</p>
+</li>
+<li><p>%windir%\Downloaded Program Files</p>
+<p>IE的扩展功能如ActiveX插件会被下载到这里，3721病毒曾经把很多病毒文件创建到这里并执行。</p>
+</li>
+<li><p>%windir%\Tasks</p>
+<p>计划任务处，添加一个计划任务，系统将按时执行。一些病毒喜欢到这里面创建一个job文件，系统就会在设定的时间运行病毒。</p>
+</li>
+<li><p>Temporary Internet Files</p>
+<p>IE缓存目录，完整路径是C:\Documents and Settings\Administrator\Local  Settings\Temporary Internet Files，LE上网时产生的临时文件放在该目录下，下载exe等文件时也是在该目录中缓存。</p>
+</li>
+<li><p>%windir%\system.ini</p>
+<p>硬件配置文件，作用等同于注册表，一些病毒喜欢修改这个文件以添加启动信息。HIPS防御时建议写作*\system.ini</p>
+</li>
+<li><p>%windir%\wininit.ini</p>
+<p>软件配置文件，作用等同于注册表，一些病毒喜欢修改这个文件以添加启动信息。HIPS防御时建议写作*\win.ini</p>
+</li>
+<li><p>%windir%\winstart.bat</p>
+<p>系统启动的批处理文件，用来复制和删除文件，会被一些病毒利用。</p>
+</li>
+<li><p>%windir%</p>
+<p>windows目录。一般情况下，这种写法表示整个windows目录下的所有文件（包括所有目录及子目录下的文件），对于EQ之类可以选择是否“包括该目录下的所有文件”的HIPS可以设定仅指windows目录而不包括其下的子目录。病毒除了喜欢把文件创建到系统文件目录system32下面外，还喜欢创建到windows目录下。 追求完整监控时，建议对受保护的系统文件使用%windir%*来进行监控，这样就比使用%windir%\system32*  更全面，相应地，需要排除的东西多一些，麻烦多一点。</p>
+</li>
+<li><p>autorun.inf</p>
+<p>自动运行驱动文件，作用就是允许双击磁盘时自动运行指定的文件。磁盘根目录病毒，U盘病毒用烂的技术，应该加强防范。</p>
+</li>
+<li><p>boot.ini </p>
+<p>系统引导信息文件，它告诉启动程序本计算机有几个操作系统、各系统的位置在哪里等信息。丢失该文件后只能从C盘启动。如果删除boot.ini、ntldr、bootmgr 这三个系统引导文件，计算机重启后无法成功引导，那就进不了系统。</p>
+</li>
+<li><p>ntldr</p>
+<p>系统启动时，DOS状态下用来载入windows的程序，修改破坏或者删除该文件后，你就没法进windows了。系统启动时有五个文件是至关重要的：BOOT.INI、BOOTFONT.BIN、BOOTSECT.DOS、NTDETECT.COM、NTLDR。其中BOOTSECT.DOS仅存在于win9系统，用来存放启动扇区里面的全部数据。</p>
+</li>
+<li><p>bootfont.bin</p>
+<p>汉化引导菜单用，删除后引导菜单会变成英文。</p>
+</li>
+<li><p>CONFIG.SYS </p>
+<p>DOS（磁盘操作系统，Disk Operating System）中的一个文本文件命令，它告诉操作系统计算机如何初始化。多数情况下，CONFIG.SYS命令制定内存设备驱动和程序，以控制硬件设备；开启或进制系统特征；以及限制系统资源。CONFIG.SYS在 autoexec.bat（自动批处理程序）文件执行前载入。它的配置直接影响到系统的使用及其效率。由于CONFIG.SYS是一个文本文件，因此它可以使用文本编辑程序编辑。</p>
+</li>
+<li><p>ntdetect.com</p>
+<p>用于对硬件设备初始化的一个系统级别的文件，然后把这些硬件信息传递给下一个启动步骤，最终完成操作系统的启动。这个文件仅存于NT架构的操作系统里面。</p>
+</li>
+<li><p>IO.SYS</p>
+<p>DOS环境控制输入输出的文件，系统启动时会用到。删除它可能导致\ntldr工作出错，系统不能启动。</p>
+</li>
+<li><p>MSDOS.SYS</p>
+<p>文件管理模块，DOS内核，是整个DOS系统的核心，它提供系统与用户的高级接口，其任务是：管理所有磁盘文件、磁盘空间 …删除它可能导致\系统不能正常启动。</p>
+</li>
+<li><p>COMMAND.COM</p>
+<p>(COMMAND是“命令”的意思)是DOS与用户的接口，它主要提供了一些DOS的内部命令，并能接受、判别并执行用户输入 的命令。该文件是DOS启动盘必备的文件，在windows下一般不存在。</p>
+<blockquote>
+<p>MSDOS.SYS和IO.SYS两个文件的存储位置是有限制的，它们必须位于磁盘物理位置的最前面，否则将失去引导能力。 三个基本文件是MSDOS.SYS，IO.SYS和COMMAND.COM(如果是PC- DOS，则为IBMDOS.COM，IBMBIO.COM和 COMMAND.COM)。磁盘是否具有启动DOS的能力，就看是否具有这三个文件，具有这三个文件的磁盘，就称作引导盘。</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Bu1
+  </li>
+<li class="post-copyright-link">
+  <strong>本文链接：</strong>
+  <a href="http://bu1.github.io/2021/10/30/Windows基础(一)：常识、术语、文件夹/" title="Windows基础(一)：常识、术语、文件夹">http://bu1.github.io/2021/10/30/Windows基础(一)：常识、术语、文件夹/</a>
+</li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------END<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/19/第十五周：命令执行漏洞/" rel="next" title="第十五周：命令执行漏洞">
+                <i class="fa fa-chevron-left"></i> 第十五周：命令执行漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/30/Windows基础(二)：进程、目录、通配符/" rel="prev" title="Windows基础(二)：进程、目录、通配符">
+                Windows基础(二)：进程、目录、通配符 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  
+  
+  
+  
+  
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Bu1">
+            
+              <p class="site-author-name" itemprop="name">Bu1</p>
+              <p class="site-description motion-element" itemprop="description">最为惊艳的是思想碰撞产生的火花。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tanpuhan.github.io" title="CoCo1er" target="_blank">CoCo1er</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.y1nhui.com" title="y1nhui" target="_blank">y1nhui</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本常识"><span class="nav-number">1.</span> <span class="nav-text">基本常识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要的文件和目录"><span class="nav-number">3.</span> <span class="nav-text">重要的文件和目录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">67.5k</span>
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>"
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2021/10/30/Windows基础(一)：常识、术语、文件夹/';
+          this.page.identifier = '2021/10/30/Windows基础(一)：常识、术语、文件夹/';
+          this.page.title = 'Windows基础(一)：常识、术语、文件夹';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

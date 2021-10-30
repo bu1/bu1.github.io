@@ -115,22 +115,19 @@
 
 
 
-<meta name="description" content="本文首发于公众号合天智汇，博客仅作记录之用。">
+<meta name="description" content="本文简要介绍了Windows的注册表以及自启动管理。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅析Shiro Padding Oracle Attack">
-<meta property="og:url" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/index.html">
+<meta property="og:title" content="Windows基础(三)：注册表与自启动">
+<meta property="og:url" content="http://yoursite.com/2021/10/30/Windows基础(三)：注册表与自启动/index.html">
 <meta property="og:site_name" content="Bu1&#39;Blog">
-<meta property="og:description" content="本文首发于公众号合天智汇，博客仅作记录之用。">
+<meta property="og:description" content="本文简要介绍了Windows的注册表以及自启动管理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/padding.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/image-20191126220711116.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/dec.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/image-20191127165610917.png">
-<meta property="og:updated_time" content="2019-12-03T12:01:30.525Z">
+<meta property="og:image" content="http://yoursite.com/2021/10/30/Windows基础(三)：注册表与自启动/image-20211022104321690-16355699982711.png">
+<meta property="og:updated_time" content="2021-10-30T05:02:29.829Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅析Shiro Padding Oracle Attack">
-<meta name="twitter:description" content="本文首发于公众号合天智汇，博客仅作记录之用。">
-<meta name="twitter:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/padding.png">
+<meta name="twitter:title" content="Windows基础(三)：注册表与自启动">
+<meta name="twitter:description" content="本文简要介绍了Windows的注册表以及自启动管理。">
+<meta name="twitter:image" content="http://yoursite.com/2021/10/30/Windows基础(三)：注册表与自启动/image-20211022104321690-16355699982711.png">
 
 
 
@@ -160,13 +157,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/">
+  <link rel="canonical" href="http://yoursite.com/2021/10/30/Windows基础(三)：注册表与自启动/">
 
 
 
 
 
-  <title>浅析Shiro Padding Oracle Attack | Bu1'Blog</title>
+  <title>Windows基础(三)：注册表与自启动 | Bu1'Blog</title>
   
 
 
@@ -293,7 +290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/10/30/Windows基础(三)：注册表与自启动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bu1">
@@ -310,7 +307,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅析Shiro Padding Oracle Attack</h1>
+          <h1 class="post-title" itemprop="name headline">Windows基础(三)：注册表与自启动</h1>
         
 
         <div class="post-meta">
@@ -322,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-03T19:57:34+08:00">
-                2019-12-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-30T12:58:52+08:00">
+                2021-10-30
               </time>
             
 
@@ -345,8 +342,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/漏洞整理/" itemprop="url" rel="index">
-                    <span itemprop="name">漏洞整理</span>
+                  <a href="/categories/Windows安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Windows安全</span>
                   </a>
                 </span>
 
@@ -363,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/03/浅析Shiro-Padding-Oracle-Attack/" itemprop="commentCount"></span>
+                <a href="/2021/10/30/Windows基础(三)：注册表与自启动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/10/30/Windows基础(三)：注册表与自启动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -386,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.5k 字
+                  1.2k 字
                 </span>
               
 
@@ -402,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -423,64 +420,92 @@
       
 
       
-        <p><strong>本文首发于公众号合天智汇，博客仅作记录之用。</strong></p>
+        <p>本文简要介绍了Windows的注册表以及自启动管理。</p>
 <a id="more"></a>
 
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Shiro这个词最近在安全圈挺火的，我是第一次接触到这个，所以Apache发漏洞通告的时候还是给我整的有点懵。在看师傅们的复现时也感到有点吃力，因此整理了下关于这个漏洞的相关知识点，写了点自己的理解以供还未接触过这个知识点的同学们参考，同时也给今后复习留下参考。个人水平有限，可能存在理解偏差，请路过的大佬们指正。</p>
-<blockquote>
-<p>cookie的cookiememeMe已通过AES-128-CBC模式加密，这很容易受到Padding oracle攻击的影响。攻击者可以使用有效的RememberMe cookie作为Padding Oracle Attack 的前缀，然后制作精心制作的RememberMe来执行Java反序列化攻击。</p>
-<p>重现此问题的步骤：</p>
-<ol>
-<li>登录网站，并从cookie中获取RememberMe。</li>
-<li>使用RememberMe cookie作为Padding Oracle Attack的前缀。</li>
-<li>加密syserial的序列化有效负载，以通过Padding Oracle Attack制作精心制作的RememberMe。</li>
-<li>请求带有新的RememberMe cookie的网站，以执行反序列化攻击。</li>
-</ol>
-<p>攻击者无需知道RememberMe加密的密码密钥。</p>
-<p>注:此条为Apache-721官方通告(谷歌翻译)</p>
+<h2 id="注册表"><a href="#注册表" class="headerlink" title="注册表"></a>注册表</h2><blockquote>
+<p>注册表是控制计算机硬件和软件的一整套数据。如果对注册表熟练了解，完全可以通过注册表来控制计算机。对于普通用户来说，很难完全了解和彻底掌握注册表，我们只需对重要的注册表键进行控制即可：如自启动，系统设置，IE键，winlogon，文件关联，网络设置，高危键（映像劫持，安全模式，禁用注册表及硬盘等）。这些比较重要的键值经常被病毒进行利用。</p>
 </blockquote>
-<h1 id="shiro框架"><a href="#shiro框架" class="headerlink" title="shiro框架"></a>shiro框架</h1><p>我们先来了解一下什么是shiro框架，根据百度百科的资料，可以知道Apache Shiro是一个强大且易用的Java安全框架而且它具有执行身份验证、授权、密码和会话管理的功能。shiro简单来说就是权限管理组件，而通过shiro-721这个漏洞结合反序列化攻击可以达到远程执行的目的。根据漏洞公告来看，需要搞懂什么是padding oracle攻击以及它有什么效果，什么是shiro反序列化攻击为什么通过这个可以达到远程执行的目的，以及为什么要采用RememberMe cookie 来作为攻击的前缀。</p>
-<h1 id="shiro反序列化攻击"><a href="#shiro反序列化攻击" class="headerlink" title="shiro反序列化攻击"></a>shiro反序列化攻击</h1><p>shiro反序列化攻击其实也就是对shrio-550漏洞的利用过程，网上对于这个漏洞的复现过程的相关记录还是挺多的，有兴趣的同学可以去找找相关的资料进行一个复现。这里我简单说说为什么会存在shiro反序列化攻击，根据Apache官网的资料，默认情况下shiro会使用CookieRememberMeManager。它会对用户的身份进行序列化，加密和编码，以供以后检索。</p>
-<p>流程图如下：</p>
-<p>![检索RememberMe cookie 的值](浅析Shiro-Padding-Oracle-Attack/检索RememberMe cookie 的值.png)</p>
-<p>有过CTF经验的同学可能会对反序列化这个词比较敏感，这在CTF赛题中是一个常常出现的题型，有的同学可能立马就能想到能不能构造一个恶意的对象，当它被反序列化时自动触发魔术方法以达到攻击的目的。没错，这正是Shiro的反序列化攻击流程：构造一个恶意对象发送给服务器，当服务器执行反序列时便能触发攻击。根据流程图来看RememberMe Cookie采用的双重加密，先是使用了Base64加密，再用AES加密。Base64我们都知道怎么样去加解密，可是AES采用的是对称加密，要加密的话还必须有一个密钥Key。这也是Shiro-550漏洞存在的关键点：在默认情况下加密密钥Key是硬编码的，也就是说加密密钥Key编码在源码内。只要可以拿到源代码就可以拿到这个Key，从而进行shiro的反序列化攻击。但是在Shiro1.2.5以上，官方已经修复了这个漏洞，已经拿不到KEY了。</p>
-<p>我们知道Shiro Padding Oracle Attack利用到了shiro反序列化，通过上面的知识知道要利用这个漏洞必须构造出一个可以让服务器反序列化的恶意对象，那么Shiro Padding Oracle Attack是可以拿到AES的加密密钥吗？还是有别方法可以绕过AES解密达到反序列化的目的呢？</p>
-<p>接下来我们了解下padding oracle攻击。</p>
-<h1 id="padding-oracle攻击"><a href="#padding-oracle攻击" class="headerlink" title="padding oracle攻击"></a>padding oracle攻击</h1><p>在了解这个攻击方式之前我们首先了解下Shiro所采用的AES-128-CBC加密模式：AES代表加密方式，CBC是分组模式，128也就是16个字节，这里采用的是PKCS#5填充方式。</p>
-<p>AES-128-CBC对明文进行加密时，首先会对明文进行分组，这里每一组是16个字节。我们很容易可以想到的是并不是每一组明文都可以正好分配，也就是说最后一组明文可能存在需要数据填充的情况。<strong>实际上，采用分组方式时是必须要填充的，如果满了则填充满一个新组</strong>。</p>
+<p>Windows注册表是帮助Windows控制硬件、软件、用户环境和 Windows界面的一套数据文件，注册表包含在Windows目录下两个文件system.dat和user.dat里，还有它们的备份 system.da0和user.da0。通过Windows目录下的regedit.exe程序可以存取注册表数据库。在以前，在windows的更早版本（在Win95以前），这些功能是靠win.ini，system.ini和其他和应用程序有关联的.ini文件来实现的.</p>
+<p>WINDOWS的注册表有五大根键，相当于一个硬盘被分成了五个分区。</p>
+<table>
+<thead>
+<tr>
+<th>根键名</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HKEY_CLASSES_ROOT</td>
+<td>该主根键是从HKEY_LOCAL_MACHINE\software\classes映射复制的。它包含启动应用程序所需的全部信息，包括扩展名，应用程序与文档之间的关系，驱动程序名，<code>DDE</code>和<code>OLE</code>信息，类<code>ID</code>编号和应用程序与文档的图标等。</td>
+</tr>
+<tr>
+<td>HKEY_CURRENT_USER</td>
+<td>该主根键包含本地工作站中存放的当前登录的用户信息：包括用户登录用户名和暂存的密码以及环境变量，桌面设置等配置信息。用户登录操作系统时，其信息从HKEY_USERS中相应的项拷贝到HKEY_CURRENT_USER中。</td>
+</tr>
+<tr>
+<td>HKEY_LOCAL_MACHINE</td>
+<td>该主根键存放本地计算机硬件数据与软件数据，此根键下的子关键字包括在SYSTEM.DAT中，用来提供HKEY_LOCAL_MACHINE所需的信息。该根键中的许多子键与System.ini文件中设置项类似。</td>
+</tr>
+<tr>
+<td>HKEY_USERS</td>
+<td>该主根键保存了存放在本地计算机口令列表中的所有用户标识和密码列表。每个用户的预配置信息都存储在HKEY_USERS根键中。HKEY_USERS是远程计算机中访问的根键之一。</td>
+</tr>
+<tr>
+<td>HKEY_CURRENT_CONFIG</td>
+<td>该主根键存放着定义当前用户桌面配置(如显示器等)的数据，最后使用的文档列表（MRU）和其他有关当前用户的操作系统中文版的安装的信息。</td>
+</tr>
+</tbody></table>
+<p>注册表数据的主要五种类型是</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>REG_SZ</td>
+<td>字符串类型，文本字符串</td>
+</tr>
+<tr>
+<td>REG_BINARY</td>
+<td>二进制类型，不定长度的二进制值，以16进制形式显示</td>
+</tr>
+<tr>
+<td>REG_DWORD</td>
+<td>双字，32 位的二进制值，显示为 8 位的十六进制值</td>
+</tr>
+<tr>
+<td>REG_MULTI_SZ</td>
+<td>多字符串，有多个文本值的字符串，字符串间用 nul 分隔、结尾两个 nul</td>
+</tr>
+<tr>
+<td>REG_EXPAND_SZ</td>
+<td>可扩展字符串，包含环境变量的字符串</td>
+</tr>
+</tbody></table>
+<p>主要的时间格式：</p>
+<ul>
+<li><code>FILETIME</code>：64位值，代表间隔多少个单位为100纳秒的时间（从UTC1601年1月1日开始）</li>
+<li><code>Unix Time</code>：32位值，代表间隔多少秒（从UTC1970年1月1日开始）。</li>
+<li><code>DOS Date/Time</code>：两个16位值，详细记录了当地时间和年月日。</li>
+</ul>
+<p>注册表的存储：</p>
+<p>注册表在<code>Windows NT</code>操作系统中被分为多个文件存储，这些文件被称为<code>Registry Hives</code>，每一个文件被称为一个配置单元。定位到<code>C:\Windows\System32\config</code>可以看到这些文件。</p>
+<p><img src="/2021/10/30/Windows基础(三)：注册表与自启动/image-20211022104321690-16355699982711.png" alt="image-20211022104321690"></p>
+<p>主要的配置单元有：</p>
+<ul>
+<li><code>SYSTEM</code>：对应的注册表分支为<code>HKEY_LOCAL_MACHINE\SYSTEM</code>，对应的存储文件是<code>\Windows\System32\config\SYSTEM</code>，其作用是存储计算机硬件和系统的信息。</li>
+<li><code>NTUSER.DAT</code>：对应的注册表分支是<code>HKEY_CURRENT_USER</code>，存储在用户目录下，与其他注册表文件是分开的，主要用于存储用户的配置信息。</li>
+<li><code>SAM</code>：分支是<code>HKEY_LOCAL_MACHINE\SAM</code>，存储在<code>C:\Windows\System32\config\SAM</code>文件中，保存了用户的密码信息。</li>
+<li><code>SECURITY</code>：对应的分支<code>HKEY_LOCAL_MACHINE\SECURITY</code>，存储在<code>C:\Windows\System32\config\SECURITY</code>文件中，保存了安全性设置信息。</li>
+<li><code>SOFTWARE</code>：分支是<code>HKEY_LOCAL_MACHINE\SOFTWARE</code>，文件存储在<code>C:\Windows\System32\config\SOFTWARE</code>中，保存安装软件的信息。</li>
+</ul>
 <blockquote>
-<p><img src="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/padding.png" alt="padding"></p>
-<p>注：图来源于网络；此图为8位填充示意图，16位与之类似。</p>
+<p>为了防止注册表出错和损坏，<code>Registry hives</code>还包括注册的事务日志文件和注册表的备份文件。事务日志文件名与注册表文件一致，且在同一个路径中，只是后缀不同。事务日志文件以<code>.LOG</code>为后缀，多个日志后缀会显示<code>LOG1</code>、<code>LOG2</code>这样。（如果要查看这些日志文件，需要打开文件夹选项，取消勾选“隐藏受保护的操作系统文件”）</p>
 </blockquote>
-<p>在明文被分组完成后便是对明文进行分组加密。流程图如下：</p>
-<blockquote>
-<p><img src="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/image-20191126220711116.png" alt></p>
-<p>注：图片来源于网络</p>
-</blockquote>
-<p>从图中我们可以看出CBC是分组加密的，每一组先与一个初始向量IV进行异或(<strong>异或：A异或B得C，C异或B得A</strong>)，异或得到的值我们称之为中间值(IMV)，再用KEY对中间值进行加密得到了第一组密文。第一组密文再作为IV与第二组明文进行异或得到第二个中间值，同样也是用Key将这个中间值加密后得到第二组密文，以此类推。看到这里其实我们可以思考一个问题，最后一组明文其实是经过填充的，这是它与其余几组的不同之处，那么是否意味着我们可以在这个地方有什么利用呢？</p>
-<p>接下来我们看下解密流程，其实解密就是加密的翻转。</p>
-<blockquote>
-<p><img src="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/dec.png" alt="dec"></p>
-<p>注：图片来源于网络</p>
-</blockquote>
-<p>从上图我们可以看到，第一组密文块经过KEY解密后得到中间值，中间值与IV异或得到了第一组明文。然后，第一组密文块作为IV与第二组的中间异或得到了第二组明文，以此类推完成全部解密。这里我们还需要关注下服务器的解密过程：当我们提交一个IV时，服务器会用中间值与它异或得值然后<strong>先</strong>校验填充情况<strong>而非</strong>直接比对明文。此时服务器会返回<strong>两种</strong>情况：正确的密文返回200或者302；错误的密文返回500。</p>
-<p>现在我们对AES加解密有了一定的了解，接下来就来看看padding oracle攻击到底是怎么实现的。上面我们已经提到了最后一个分组存在填充情况，并且填充情况应该是下面的其中一种。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">①：明文 0x01</span><br><span class="line">②：明文 0x02 0x02</span><br><span class="line">③：明文 0x03 0x03 0x03</span><br><span class="line">...</span><br><span class="line">⑧：0x08 0x08 0x08 0x08 0x08 0x08 0x08 0x08</span><br></pre></td></tr></table></figure>
-
-<p>打起精神，重难点来啦：</p>
-<p>整理下思路，现在我们可以捕获到密文，并且知道了加密算法也知道初始向量IV，在对密文进行分组后，只要我们有办法绕过KEY解密的过程拿到中间值是不是就能直接用中间值(IMV)与初始向量IV进行异或操作从而拿到所有的明文。</p>
-<p>根据服务器会对填充错误进行报错这个关键点，我们构造出一个虚假的IV值来反推中间值，首先假定明文最后一位填充的是0x01，也就是上面八种填充情况中提到第①种情况。根据异或的特性，只有唯一的IV值与中间值异或能得到0x01，IV值最后一个字节的取值范围是 0×01~0xFF，一共255种情况。如下图所示，当我们试验到0x66时发现服务器返回了200，所以很容易可以知道IMV就是0x01与0x66的异或结果0x67。</p>
-<p>回想下上面所写我们的解密过程，我们用初始向量IV与爆破得到的IMV值异或便可以得到最后一位明文。接下来我们再推导数第二个明文，根据填充规则，此时应该是上面八种填充情况中提到第②种情况。我们已经知道了IMV最后一字节是0x67，那么此次构造的IV最后一字节就是0x67与0x02异或的结果0x65。此时固定最后一位字节爆破倒数第二个字节，以此类推完成所有的解密。</p>
-<blockquote>
-<p><img src="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/image-20191127165610917.png" alt="image-20191127165610917"></p>
-<p>注：图片来源于网络</p>
-</blockquote>
-<p>总的来讲，padding oracle并不是可以拿到AES的密钥，而是可以绕过。正常的解密流程需要IV、密文、key；而padding oracle攻击只需要IV、密文即可。</p>
-<p>以上是利用padding oracle攻击解密密文，与之类似的是利用padding oracle攻击加密明文。我们想一想在加密过程中是不是第一组的密文作为第二组的IV，此时这个中间量(IMV)我们是可以推导出来的，那么根据异或的唯一性如果攻击者想改变明文是不是通过改变密文就可以实现呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">明文 = 密文(已知) 异或 IMV(已确定)</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>回到最初提出的问题，padding oralce攻击可以没有KEY的情况下加密密文或者解密密文，而shiro反序列化攻击可以达到远程执行的目的，但是想要成功让服务器反序列化必须传输符合格式的密文。因次通过padding oralce攻击构造恶意的对象再通过shiro反序列化攻击便能达到最终的Shiro Padding Oracle Attack。至于为什么需要RememberMe cookie是因为Shiro会先获取用户信息，当存在有效的用户信息时才会进入下一阶段的流程。</p>
-
+<h2 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h2>
       
     </div>
     
@@ -500,7 +525,7 @@
   </li>
 <li class="post-copyright-link">
   <strong>本文链接：</strong>
-  <a href="http://bu1.github.io/2019/12/03/浅析Shiro-Padding-Oracle-Attack/" title="浅析Shiro Padding Oracle Attack">http://bu1.github.io/2019/12/03/浅析Shiro-Padding-Oracle-Attack/</a>
+  <a href="http://bu1.github.io/2021/10/30/Windows基础(三)：注册表与自启动/" title="Windows基础(三)：注册表与自启动">http://bu1.github.io/2021/10/30/Windows基础(三)：注册表与自启动/</a>
 </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -530,8 +555,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/03/kali更新遇坑记录/" rel="next" title="kali更新遇坑记录">
-                <i class="fa fa-chevron-left"></i> kali更新遇坑记录
+              <a href="/2021/10/30/Windows基础(二)：进程、目录、通配符/" rel="next" title="Windows基础(二)：进程、目录、通配符">
+                <i class="fa fa-chevron-left"></i> Windows基础(二)：进程、目录、通配符
               </a>
             
           </div>
@@ -539,10 +564,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/12/09/WEB缓存欺骗攻击技术/" rel="prev" title="WEB缓存欺骗攻击技术">
-                WEB缓存欺骗攻击技术 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -701,7 +722,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shiro框架"><span class="nav-number">2.</span> <span class="nav-text">shiro框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shiro反序列化攻击"><span class="nav-number">3.</span> <span class="nav-text">shiro反序列化攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#padding-oracle攻击"><span class="nav-number">4.</span> <span class="nav-text">padding oracle攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注册表"><span class="nav-number">1.</span> <span class="nav-text">注册表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自启动"><span class="nav-number">2.</span> <span class="nav-text">自启动</span></a></li></ol></div>
             
 
           </div>
@@ -873,9 +894,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/';
-          this.page.identifier = '2019/12/03/浅析Shiro-Padding-Oracle-Attack/';
-          this.page.title = '浅析Shiro Padding Oracle Attack';
+          this.page.url = 'http://yoursite.com/2021/10/30/Windows基础(三)：注册表与自启动/';
+          this.page.identifier = '2021/10/30/Windows基础(三)：注册表与自启动/';
+          this.page.title = 'Windows基础(三)：注册表与自启动';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
