@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
 <script>
@@ -30,8 +30,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -50,7 +50,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -84,9 +84,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -104,7 +104,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -118,26 +118,26 @@
 <meta name="description" content="本文首发于公众号合天智汇，博客仅作记录之用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅析Shiro Padding Oracle Attack">
-<meta property="og:url" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/index.html">
 <meta property="og:site_name" content="Bu1&#39;Blog">
 <meta property="og:description" content="本文首发于公众号合天智汇，博客仅作记录之用。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/padding.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/image-20191126220711116.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/dec.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/image-20191127165610917.png">
-<meta property="og:updated_time" content="2019-12-03T12:01:30.525Z">
+<meta property="og:locale">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/padding.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/image-20191126220711116.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/dec.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/image-20191127165610917.png">
+<meta property="article:published_time" content="2019-12-03T11:57:34.000Z">
+<meta property="article:modified_time" content="2019-12-03T12:01:30.525Z">
+<meta property="article:author" content="Bu1">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅析Shiro Padding Oracle Attack">
-<meta name="twitter:description" content="本文首发于公众号合天智汇，博客仅作记录之用。">
-<meta name="twitter:image" content="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/padding.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/padding.png">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
@@ -160,7 +160,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/"/>
 
 
 
@@ -176,7 +176,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -194,7 +194,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Bu1'Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -222,9 +222,9 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -232,9 +232,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/archives/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -242,9 +242,9 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
+          <a href="/categories/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -252,9 +252,9 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
+          <a href="/about/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -293,11 +293,11 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bu1">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
@@ -333,7 +333,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -345,7 +345,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/漏洞整理/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/" itemprop="url" rel="index">
                     <span itemprop="name">漏洞整理</span>
                   </a>
                 </span>
@@ -363,8 +363,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/03/浅析Shiro-Padding-Oracle-Attack/" itemprop="commentCount"></span>
+                <a href="/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/12/03/浅析Shiro-Padding-Oracle-Attack/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -424,7 +425,7 @@
 
       
         <p><strong>本文首发于公众号合天智汇，博客仅作记录之用。</strong></p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Shiro这个词最近在安全圈挺火的，我是第一次接触到这个，所以Apache发漏洞通告的时候还是给我整的有点懵。在看师傅们的复现时也感到有点吃力，因此整理了下关于这个漏洞的相关知识点，写了点自己的理解以供还未接触过这个知识点的同学们参考，同时也给今后复习留下参考。个人水平有限，可能存在理解偏差，请路过的大佬们指正。</p>
 <blockquote>
@@ -449,35 +450,37 @@
 <h1 id="padding-oracle攻击"><a href="#padding-oracle攻击" class="headerlink" title="padding oracle攻击"></a>padding oracle攻击</h1><p>在了解这个攻击方式之前我们首先了解下Shiro所采用的AES-128-CBC加密模式：AES代表加密方式，CBC是分组模式，128也就是16个字节，这里采用的是PKCS#5填充方式。</p>
 <p>AES-128-CBC对明文进行加密时，首先会对明文进行分组，这里每一组是16个字节。我们很容易可以想到的是并不是每一组明文都可以正好分配，也就是说最后一组明文可能存在需要数据填充的情况。<strong>实际上，采用分组方式时是必须要填充的，如果满了则填充满一个新组</strong>。</p>
 <blockquote>
-<p><img src="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/padding.png" alt="padding"></p>
+<p><img src="/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/padding.png" alt="padding"></p>
 <p>注：图来源于网络；此图为8位填充示意图，16位与之类似。</p>
 </blockquote>
 <p>在明文被分组完成后便是对明文进行分组加密。流程图如下：</p>
 <blockquote>
-<p><img src="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/image-20191126220711116.png" alt></p>
+<p><img src="/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/image-20191126220711116.png"></p>
 <p>注：图片来源于网络</p>
 </blockquote>
 <p>从图中我们可以看出CBC是分组加密的，每一组先与一个初始向量IV进行异或(<strong>异或：A异或B得C，C异或B得A</strong>)，异或得到的值我们称之为中间值(IMV)，再用KEY对中间值进行加密得到了第一组密文。第一组密文再作为IV与第二组明文进行异或得到第二个中间值，同样也是用Key将这个中间值加密后得到第二组密文，以此类推。看到这里其实我们可以思考一个问题，最后一组明文其实是经过填充的，这是它与其余几组的不同之处，那么是否意味着我们可以在这个地方有什么利用呢？</p>
 <p>接下来我们看下解密流程，其实解密就是加密的翻转。</p>
 <blockquote>
-<p><img src="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/dec.png" alt="dec"></p>
+<p><img src="/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/dec.png" alt="dec"></p>
 <p>注：图片来源于网络</p>
 </blockquote>
 <p>从上图我们可以看到，第一组密文块经过KEY解密后得到中间值，中间值与IV异或得到了第一组明文。然后，第一组密文块作为IV与第二组的中间异或得到了第二组明文，以此类推完成全部解密。这里我们还需要关注下服务器的解密过程：当我们提交一个IV时，服务器会用中间值与它异或得值然后<strong>先</strong>校验填充情况<strong>而非</strong>直接比对明文。此时服务器会返回<strong>两种</strong>情况：正确的密文返回200或者302；错误的密文返回500。</p>
 <p>现在我们对AES加解密有了一定的了解，接下来就来看看padding oracle攻击到底是怎么实现的。上面我们已经提到了最后一个分组存在填充情况，并且填充情况应该是下面的其中一种。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">①：明文 0x01</span><br><span class="line">②：明文 0x02 0x02</span><br><span class="line">③：明文 0x03 0x03 0x03</span><br><span class="line">...</span><br><span class="line">⑧：0x08 0x08 0x08 0x08 0x08 0x08 0x08 0x08</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">①：明文 0x01</span><br><span class="line">②：明文 0x02 0x02</span><br><span class="line">③：明文 0x03 0x03 0x03</span><br><span class="line">...</span><br><span class="line">⑧：0x08 0x08 0x08 0x08 0x08 0x08 0x08 0x08</span><br></pre></td></tr></table></figure>
 
 <p>打起精神，重难点来啦：</p>
 <p>整理下思路，现在我们可以捕获到密文，并且知道了加密算法也知道初始向量IV，在对密文进行分组后，只要我们有办法绕过KEY解密的过程拿到中间值是不是就能直接用中间值(IMV)与初始向量IV进行异或操作从而拿到所有的明文。</p>
 <p>根据服务器会对填充错误进行报错这个关键点，我们构造出一个虚假的IV值来反推中间值，首先假定明文最后一位填充的是0x01，也就是上面八种填充情况中提到第①种情况。根据异或的特性，只有唯一的IV值与中间值异或能得到0x01，IV值最后一个字节的取值范围是 0×01~0xFF，一共255种情况。如下图所示，当我们试验到0x66时发现服务器返回了200，所以很容易可以知道IMV就是0x01与0x66的异或结果0x67。</p>
 <p>回想下上面所写我们的解密过程，我们用初始向量IV与爆破得到的IMV值异或便可以得到最后一位明文。接下来我们再推导数第二个明文，根据填充规则，此时应该是上面八种填充情况中提到第②种情况。我们已经知道了IMV最后一字节是0x67，那么此次构造的IV最后一字节就是0x67与0x02异或的结果0x65。此时固定最后一位字节爆破倒数第二个字节，以此类推完成所有的解密。</p>
 <blockquote>
-<p><img src="/2019/12/03/浅析Shiro-Padding-Oracle-Attack/image-20191127165610917.png" alt="image-20191127165610917"></p>
+<p><img src="/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/image-20191127165610917.png" alt="image-20191127165610917"></p>
 <p>注：图片来源于网络</p>
 </blockquote>
 <p>总的来讲，padding oracle并不是可以拿到AES的密钥，而是可以绕过。正常的解密流程需要IV、密文、key；而padding oracle攻击只需要IV、密文即可。</p>
 <p>以上是利用padding oracle攻击解密密文，与之类似的是利用padding oracle攻击加密明文。我们想一想在加密过程中是不是第一组的密文作为第二组的IV，此时这个中间量(IMV)我们是可以推导出来的，那么根据异或的唯一性如果攻击者想改变明文是不是通过改变密文就可以实现呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">明文 = 密文(已知) 异或 IMV(已确定)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">明文 = 密文(已知) 异或 IMV(已确定)</span><br></pre></td></tr></table></figure>
+
+
 
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>回到最初提出的问题，padding oralce攻击可以没有KEY的情况下加密密文或者解密密文，而shiro反序列化攻击可以达到远程执行的目的，但是想要成功让服务器反序列化必须传输符合格式的密文。因次通过padding oralce攻击构造恶意的对象再通过shiro反序列化攻击便能达到最终的Shiro Padding Oracle Attack。至于为什么需要RememberMe cookie是因为Shiro会先获取用户信息，当存在有效的用户信息时才会进入下一阶段的流程。</p>
 
@@ -500,7 +503,7 @@
   </li>
 <li class="post-copyright-link">
   <strong>本文链接：</strong>
-  <a href="http://bu1.github.io/2019/12/03/浅析Shiro-Padding-Oracle-Attack/" title="浅析Shiro Padding Oracle Attack">http://bu1.github.io/2019/12/03/浅析Shiro-Padding-Oracle-Attack/</a>
+  <a target="_blank" rel="noopener" href="http://bu1.github.io/2019/12/03/浅析Shiro-Padding-Oracle-Attack/" title="浅析Shiro Padding Oracle Attack">http://bu1.github.io/2019/12/03/浅析Shiro-Padding-Oracle-Attack/</a>
 </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -530,7 +533,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/03/kali更新遇坑记录/" rel="next" title="kali更新遇坑记录">
+              <a href="/2019/12/03/kali%E6%9B%B4%E6%96%B0%E9%81%87%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="next" title="kali更新遇坑记录">
                 <i class="fa fa-chevron-left"></i> kali更新遇坑记录
               </a>
             
@@ -540,7 +543,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/12/09/WEB缓存欺骗攻击技术/" rel="prev" title="WEB缓存欺骗攻击技术">
+              <a href="/2019/12/09/WEB%E7%BC%93%E5%AD%98%E6%AC%BA%E9%AA%97%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF/" rel="prev" title="WEB缓存欺骗攻击技术">
                 WEB缓存欺骗攻击技术 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -582,7 +585,7 @@
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
         </noscript>
       </div>
     </div>
@@ -624,10 +627,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Bu1">
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="" />
             
-              <p class="site-author-name" itemprop="name">Bu1</p>
-              <p class="site-description motion-element" itemprop="description">最为惊艳的是思想碰撞产生的火花。</p>
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -635,7 +640,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/archives/%20%7C%7C%20archive">
               
                   <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
@@ -701,7 +706,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shiro框架"><span class="nav-number">2.</span> <span class="nav-text">shiro框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shiro反序列化攻击"><span class="nav-number">3.</span> <span class="nav-text">shiro反序列化攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#padding-oracle攻击"><span class="nav-number">4.</span> <span class="nav-text">padding oracle攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shiro%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">shiro框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shiro%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB"><span class="nav-number">3.</span> <span class="nav-text">shiro反序列化攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#padding-oracle%E6%94%BB%E5%87%BB"><span class="nav-number">4.</span> <span class="nav-text">padding oracle攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -735,7 +740,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">68k</span>
   
 </div>
 
@@ -873,7 +878,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/12/03/浅析Shiro-Padding-Oracle-Attack/';
+          this.page.url = 'http://yoursite.com/2019/12/03/%E6%B5%85%E6%9E%90Shiro-Padding-Oracle-Attack/';
           this.page.identifier = '2019/12/03/浅析Shiro-Padding-Oracle-Attack/';
           this.page.title = '浅析Shiro Padding Oracle Attack';
         };

