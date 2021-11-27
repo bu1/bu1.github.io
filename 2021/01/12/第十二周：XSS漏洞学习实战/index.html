@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="任务标题：web安全之XSS漏洞学习实战1、编写一个存在 xss 漏洞的页面 2、利用 xss 漏洞获取当前用户 cookie 3、思考，利用 xss 漏洞能干嘛（参考 beef） 报告要求：记录编写的页面代码、操作流程、思考总结 扩展学习：学习如何防御 xss、总结防御策略加到报告里   学习报告0x01 XSS简介XSS（Cross Site Scripting）攻击全称跨站脚本攻击，是为不和">
+  <meta name="description" content="任务标题：web安全之XSS漏洞学习实战1、编写一个存在 xss 漏洞的页面 2、利用 xss 漏洞获取当前用户 cookie 3、思考，利用 xss 漏洞能干嘛（参考 beef） 报告要求：记录编写的页面代码、操作流程、思考总结 扩展学习：学习如何防御 xss、总结防御策略加到报告里">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第十二周：XSS漏洞学习实战">
 <meta property="og:url" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/index.html">
 <meta property="og:site_name" content="Bu1&#39;Blog">
-<meta property="og:description" content="任务标题：web安全之XSS漏洞学习实战1、编写一个存在 xss 漏洞的页面 2、利用 xss 漏洞获取当前用户 cookie 3、思考，利用 xss 漏洞能干嘛（参考 beef） 报告要求：记录编写的页面代码、操作流程、思考总结 扩展学习：学习如何防御 xss、总结防御策略加到报告里   学习报告0x01 XSS简介XSS（Cross Site Scripting）攻击全称跨站脚本攻击，是为不和">
+<meta property="og:description" content="任务标题：web安全之XSS漏洞学习实战1、编写一个存在 xss 漏洞的页面 2、利用 xss 漏洞获取当前用户 cookie 3、思考，利用 xss 漏洞能干嘛（参考 beef） 报告要求：记录编写的页面代码、操作流程、思考总结 扩展学习：学习如何防御 xss、总结防御策略加到报告里">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108094756253.png">
 <meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108102719695.png">
@@ -45,7 +45,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108153631445.png">
 <meta property="og:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108155930639.png">
 <meta property="article:published_time" content="2021-01-12T07:41:14.000Z">
-<meta property="article:modified_time" content="2021-01-12T07:47:14.354Z">
+<meta property="article:modified_time" content="2021-11-27T08:05:36.460Z">
 <meta property="article:author" content="Bu1">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2021/01/12/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%91%A8%EF%BC%9AXSS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/image-20210108094756253.png">
@@ -191,10 +191,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-01-12 15:41:14 / 修改时间：15:47:14" itemprop="dateCreated datePublished" datetime="2021-01-12T15:41:14+08:00">2021-01-12</time>
+              <time title="创建时间：2021-01-12 15:41:14" itemprop="dateCreated datePublished" datetime="2021-01-12T15:41:14+08:00">2021-01-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-27 16:05:36" itemprop="dateModified" datetime="2021-11-27T16:05:36+08:00">2021-11-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -221,7 +227,7 @@
 <p>3、思考，利用 xss 漏洞能干嘛（参考 beef）</p>
 <p>报告要求：记录编写的页面代码、操作流程、思考总结</p>
 <p>扩展学习：学习如何防御 xss、总结防御策略加到报告里</p>
-<!--  more -->
+<span id="more"></span>
 
 <h1 id="学习报告"><a href="#学习报告" class="headerlink" title="学习报告"></a>学习报告</h1><h2 id="0x01-XSS简介"><a href="#0x01-XSS简介" class="headerlink" title="0x01 XSS简介"></a>0x01 XSS简介</h2><p>XSS（Cross Site Scripting）攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种经常出现在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给其它用户使用的页面中，当受害者访问这些页面时，浏览器会解析并执行这些恶意代码，从而达到窃取用户身份/钓鱼/传播恶意代码等行为。主要有三种类型：存储型XSS、反射型XSS<code>也叫做非持久性</code>、Dom型XSS。</p>
 <h3 id="1-存储型XSS"><a href="#1-存储型XSS" class="headerlink" title="1. 存储型XSS"></a>1. 存储型XSS</h3><h4 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h4><p>存储型XSS又称为持久型XSS，攻击者将XSS代码发送给了服务器，而服务器没有对这些代码做任何处理就直接存储在了数据库中，当下一个用户访问网站时直接从数据库调用出来传给前端，浏览器解析XSS代码就造成了XSS攻击。常见的攻击点在个人信息、发表文章、留言板等地方。</p>
@@ -448,7 +454,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
