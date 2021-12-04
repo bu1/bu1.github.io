@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="双11买了腾讯的一个云服务器，暂时没有什么用处，索性搭建一个代理服务器玩一玩~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Squid搭建HTTP代理服务器">
+<meta property="og:url" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="双11买了腾讯的一个云服务器，暂时没有什么用处，索性搭建一个代理服务器玩一玩~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202174005887.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202174022282.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202174949585.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202190634526.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202191253822.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202210858694.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202211038469.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202211115489.png">
+<meta property="article:published_time" content="2021-12-04T08:14:36.000Z">
+<meta property="article:modified_time" content="2021-12-04T08:17:39.534Z">
+<meta property="article:author" content="Bu1">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202174005887.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>使用Squid搭建HTTP代理服务器 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bu1'Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content="最为惊艳的是思想碰撞产生的火花。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Squid搭建HTTP代理服务器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-04 16:14:36 / 修改时间：16:17:39" itemprop="dateCreated datePublished" datetime="2021-12-04T16:14:36+08:00">2021-12-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>双11买了腾讯的一个云服务器，暂时没有什么用处，索性搭建一个代理服务器玩一玩~</p>
+<span id="more"></span>
+
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>这里使用的是CentOS 6.7来搭建代理服务器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@Q1nghuan ~]# uname -a</span><br><span class="line">Linux Q1nghuan 3.10.0-1160.45.1.el7.x86_64 #1 SMP Wed Oct 13 17:20:51 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux</span><br><span class="line">[root@Q1nghuan ~]# cat /etc/redhat-release </span><br><span class="line">CentOS Linux release 7.9.2009 (Core)</span><br><span class="line">[root@Q1nghuan ~]# </span><br></pre></td></tr></table></figure>
+
+<h2 id="安装Squid"><a href="#安装Squid" class="headerlink" title="安装Squid"></a>安装Squid</h2><p>使用yum命令安装Squid</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install squid -y</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202174005887.png" alt="image-20211202174005887"></p>
+<p>确定安装版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa |grep squid</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202174022282.png" alt="image-20211202174022282"></p>
+<h2 id="配置Squid"><a href="#配置Squid" class="headerlink" title="配置Squid"></a>配置Squid</h2><p>首先要开启服务器网卡的数据转发功能，<strong>0为关闭</strong>，<strong>1为开启</strong>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@Q1nghuan ~]# sysctl -a |grep -w ip_forward</span><br><span class="line">net.ipv4.ip_forward = 0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>临时生效： sysctl -w net.ipv4.ip_forward=1</p>
+</blockquote>
+<p>修改<code>/etc/sysctl.conf</code>配置文件中的<code>net.ipv4.ip_forward</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@Q1nghuan ~]# vim /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202174949585.png" alt="image-20211202174949585"></p>
+<p>刷新配置文件使之生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@Q1nghuan ~]# sysctl -p</span><br><span class="line">[root@Q1nghuan ~]# sysctl -a |grep -w ip_forward</span><br><span class="line">net.ipv4.ip_forward = 1</span><br></pre></td></tr></table></figure>
+
+<p>Squid安装后默认设置为了拒绝所有服务器连接，只需要修改成所有服务器连接即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> vim /etc/squid/squid.conf</span></span><br><span class="line">http_access allow all</span><br></pre></td></tr></table></figure>
+
+<p>启动Squid</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start squid.service</span><br><span class="line"><span class="meta">#</span><span class="bash"> systemctl <span class="built_in">enable</span> squid.service 设置成开机启动</span></span><br><span class="line">systemctl status squid</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@Q1nghuan ~]# systemctl status squid</span><br><span class="line">● squid.service - Squid caching proxy</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/squid.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Thu 2021-12-02 19:00:34 CST; 40s ago</span><br><span class="line"> Main PID: 29411 (squid)</span><br><span class="line">   CGroup: /system.slice/squid.service</span><br><span class="line">           ├─29411 /usr/sbin/squid -f /etc/squid/squid.conf</span><br><span class="line">           ├─29413 (squid-1) -f /etc/squid/squid.conf</span><br><span class="line">           └─29414 (logfile-daemon) /var/log/squid/access.log</span><br><span class="line"></span><br><span class="line">Dec 02 19:00:34 Q1nghuan systemd[1]: Starting Squid caching proxy...</span><br><span class="line">Dec 02 19:00:34 Q1nghuan squid[29411]: Squid Parent: will start 1 kids</span><br><span class="line">Dec 02 19:00:34 Q1nghuan squid[29411]: Squid Parent: (squid-1) process 29413 started</span><br><span class="line">Dec 02 19:00:34 Q1nghuan systemd[1]: Started Squid caching proxy.</span><br></pre></td></tr></table></figure>
+
+<p>此时已经是处于可用的状态了。</p>
+<blockquote>
+<p>如果是云服务器可能存在策略限制，需要放行默认的3128端口。</p>
+</blockquote>
+<h2 id="测试连通性"><a href="#测试连通性" class="headerlink" title="测试连通性"></a>测试连通性</h2><p><strong>Windows下测试</strong>：</p>
+<p>使用SwitchyOmega工具，配置一条HTTP代理，默认端口是<strong>3128</strong>。</p>
+<p><img src="/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202190634526.png" alt="image-20211202190634526"></p>
+<p>切换到新建的策略，代理成功</p>
+<p><img src="/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202191253822.png" alt="image-20211202191253822"></p>
+<p><strong>Linux下测试</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -e &quot;http_proxy=http://***.**.**.***&quot; https://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@Ubuntu ~]# wget -e &quot;http_proxy=http://***.**.**.***&quot; https://www.baidu.com</span><br><span class="line">--2021-12-02 19:26:05--  https://www.baidu.com/</span><br><span class="line">正在解析主机 www.baidu.com (www.baidu.com)... 180.101.49.12, 180.101.49.11</span><br><span class="line">正在连接 www.baidu.com (www.baidu.com)|180.101.49.12|:443... 已连接。</span><br><span class="line">已发出 HTTP 请求，正在等待回应... 200 OK</span><br><span class="line">长度： 2443 (2.4K) [text/html]</span><br><span class="line">正在保存至: “index.html”</span><br><span class="line"></span><br><span class="line">index.html                          100%[==================================================================&gt;]   2.39K  --.-KB/s    用时 0s    </span><br><span class="line"></span><br><span class="line">2021-12-02 19:26:05 (112 MB/s) - 已保存 “index.html” [2443/2443])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>全局代理配置</strong></p>
+<p>vim /etc/profile </p>
+<p>#在最后加入（有认证的情况） </p>
+<p>export http_proxy=”<a href="http://squid:123456@192.168.0.200:3128&quot;">http://squid:123456@192.168.0.200:3128&quot;</a> </p>
+<p>export https_proxy=”<a href="http://squid:123456@192.168.0.200:3128&quot;">http://squid:123456@192.168.0.200:3128&quot;</a> </p>
+<p>如果没有开启认证</p>
+<p>http_proxy=<a target="_blank" rel="noopener" href="http://192.168.0.200:3128/">http://192.168.0.200:3128</a> </p>
+<p>https_proxy=<a target="_blank" rel="noopener" href="http://192.168.0.200:3128/">http://192.168.0.200:3128</a> </p>
+<p>source /etc/profile</p>
+</blockquote>
+<h2 id="增加安全验证"><a href="#增加安全验证" class="headerlink" title="增加安全验证"></a>增加安全验证</h2><p>直接裸奔不太安全，首先把默认的端口改了，改成一个自己喜欢的端口(<strong>记得同步放行策略</strong>)。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> vim /etc/squid/squid.conf</span></span><br><span class="line">http_port 3129</span><br></pre></td></tr></table></figure>
+
+<p>然后可以使用<code>httpd-tools</code>工具添加密码验证</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 没有就先安装yum install httpd-tools -y</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成密码文件，指定文件路径，其中squid是用户名，密码不能超过8个字符</span></span><br><span class="line">htpasswd -cd /etc/squid3/passwords squid</span><br></pre></td></tr></table></figure>
+
+<p>测试生成的密码文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> /usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords</span>                </span><br><span class="line">squid 123456</span><br><span class="line">ok</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试完成，crtl + c 打断</span></span><br></pre></td></tr></table></figure>
+
+<p>配置Squid文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> vim /etc/squid/squid.conf</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> And finally deny all other access to this proxy</span></span><br><span class="line">auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords #账户密码文件</span><br><span class="line">auth_param basic realm proxy</span><br><span class="line">auth_param basic children 50 #最多 50 个账户同时运行</span><br><span class="line">auth_param basic realm CoolTube Proxy Server #密码框描述</span><br><span class="line">auth_param basic credentialsttl 2 hours #认证持续时间</span><br><span class="line">acl authenticated proxy_auth REQUIRED #对 authenticated 进行外部认证</span><br><span class="line">http_access allow authenticated #允许 authenticated 中的成员访问</span><br><span class="line">http_access deny all #拒绝所有其他访问</span><br><span class="line">visible_hostname squid.CoolTube #代理机名字</span><br></pre></td></tr></table></figure>
+
+<p>重启服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@Q1nghuan ~]# squid -z</span><br><span class="line">2021/12/02 21:05:35| Squid is already running!  Process ID 29413</span><br><span class="line">[root@Q1nghuan ~]# systemctl restart squid.service</span><br><span class="line">[root@Q1nghuan ~]# systemctl status squid</span><br><span class="line">● squid.service - Squid caching proxy</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/squid.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Thu 2021-12-02 21:05:46 CST; 22s ago</span><br><span class="line">  Process: 26752 ExecStop=/usr/sbin/squid -k shutdown -f $SQUID_CONF (code=exited, status=0/SUCCESS)</span><br><span class="line">  Process: 26761 ExecStart=/usr/sbin/squid $SQUID_OPTS -f $SQUID_CONF (code=exited, status=0/SUCCESS)</span><br><span class="line">  Process: 26754 ExecStartPre=/usr/libexec/squid/cache_swap.sh (code=exited, status=0/SUCCESS)</span><br><span class="line"> Main PID: 26763 (squid)</span><br><span class="line">   CGroup: /system.slice/squid.service</span><br><span class="line">           ├─26763 /usr/sbin/squid -f /etc/squid/squid.conf</span><br><span class="line">           ├─26765 (squid-1) -f /etc/squid/squid.conf</span><br><span class="line">           └─26766 (logfile-daemon) /var/log/squid/access.log</span><br><span class="line"></span><br><span class="line">Dec 02 21:05:46 Q1nghuan systemd[1]: Starting Squid caching proxy...</span><br><span class="line">Dec 02 21:05:46 Q1nghuan squid[26763]: Squid Parent: will start 1 kids</span><br><span class="line">Dec 02 21:05:46 Q1nghuan squid[26763]: Squid Parent: (squid-1) process 26765 started</span><br><span class="line">Dec 02 21:05:46 Q1nghuan systemd[1]: Started Squid caching proxy.</span><br></pre></td></tr></table></figure>
+
+<p>连接测试，弹出需要账号密码</p>
+<p><img src="/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202210858694.png" alt="image-20211202210858694"></p>
+<p>在SwitchyOmega中配置账号密码</p>
+<p><img src="/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202211038469.png" alt="image-20211202211038469"></p>
+<p>连接成功</p>
+<p><img src="/2021/12/04/%E4%BD%BF%E7%94%A8Squid%E6%90%AD%E5%BB%BAHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211202211115489.png" alt="image-20211202211115489"></p>
+<h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p>查看运行日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># tail -f /var/log/squid/cache.log </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tail默认显示最后10行。-f参数代表实时更新</p>
+</blockquote>
+<p>查看连接日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># tail -f /var/log/squid/access.log </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="增强流量匿名性"><a href="#增强流量匿名性" class="headerlink" title="增强流量匿名性"></a>增强流量匿名性</h2><p>普通的代理会把原来的<code>client</code>信息放在<code>X-Forwarded-For:</code>这个<code>header</code>当中，这样子，我们请求的服务器就会知道我们的请求是从哪里来的了，这样子，我们显然没有做到匿名。所以我们通过<code>forwarded_for off</code>把这个信息去掉达到匿名的效果。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ANONYMOUS PROXY</span></span><br><span class="line">forwarded_for off</span><br><span class="line">request_header_access Allow allow all</span><br><span class="line">request_header_access Authorization allow all</span><br><span class="line">request_header_access WWW-Authenticate allow all</span><br><span class="line">request_header_access Proxy-Authorization allow all</span><br><span class="line">request_header_access Proxy-Authenticate allow all</span><br><span class="line">request_header_access Cache-Control allow all</span><br><span class="line">request_header_access Content-Encoding allow all</span><br><span class="line">request_header_access Content-Length allow all</span><br><span class="line">request_header_access Content-Type allow all</span><br><span class="line">request_header_access Date allow all</span><br><span class="line">request_header_access Expires allow all</span><br><span class="line">request_header_access Host allow all</span><br><span class="line">request_header_access If-Modified-Since allow all</span><br><span class="line">request_header_access Last-Modified allow all</span><br><span class="line">request_header_access Location allow all</span><br><span class="line">request_header_access Pragma allow all</span><br><span class="line">request_header_access Accept allow all</span><br><span class="line">request_header_access Accept-Charset allow all</span><br><span class="line">request_header_access Accept-Encoding allow all</span><br><span class="line">request_header_access Accept-Language allow all</span><br><span class="line">request_header_access Content-Language allow all</span><br><span class="line">request_header_access Mime-Version allow all</span><br><span class="line">request_header_access Retry-After allow all</span><br><span class="line">request_header_access Title allow all</span><br><span class="line">request_header_access Connection allow all</span><br><span class="line">request_header_access Proxy-Connection allow all</span><br><span class="line">request_header_access User-Agent allow all</span><br><span class="line">request_header_access Cookie allow all</span><br><span class="line">request_header_access All deny all</span><br><span class="line"></span><br><span class="line">request_header_access Via deny all</span><br><span class="line">request_header_access Forwarded-For deny all</span><br><span class="line">request_header_access X-Forwarded-For deny all</span><br></pre></td></tr></table></figure>
+
+<p><code>request_header_access</code>中的<code>allow all</code>是指<code>squid</code>保留我们<code>client</code>请求的<code>header</code>信息，如果使用<code>deny</code>则<code>squid</code>会把我们对应的<code>header</code>也一起隐藏掉。我们最好是保留<code>header</code>,因为我们用到了不同的<code>useragent</code>。</p>
+<p>重启服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@Q1nghuan ~]# squid -z</span><br><span class="line">[root@Q1nghuan ~]# systemctl restart squid.service</span><br><span class="line">[root@Q1nghuan ~]# systemctl status squid</span><br></pre></td></tr></table></figure>
+
+<p>也可以在配置中增加一条关闭缓存服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">vim /etc/squid/squid.conf</span></span><br><span class="line">cache deny all</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ssgeek/p/12302135.html#31%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86">https://www.cnblogs.com/ssgeek/p/12302135.html#31%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010093140/article/details/51396585">https://blog.csdn.net/u010093140/article/details/51396585</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/" rel="prev" title="COM组件劫持学习：从初识到简单利用">
+      <i class="fa fa-chevron-left"></i> COM组件劫持学习：从初识到简单利用
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Squid"><span class="nav-number">2.</span> <span class="nav-text">安装Squid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AESquid"><span class="nav-number">3.</span> <span class="nav-text">配置Squid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%9E%E9%80%9A%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">测试连通性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E5%AE%89%E5%85%A8%E9%AA%8C%E8%AF%81"><span class="nav-number">5.</span> <span class="nav-text">增加安全验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97"><span class="nav-number">6.</span> <span class="nav-text">查看日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%BC%BA%E6%B5%81%E9%87%8F%E5%8C%BF%E5%90%8D%E6%80%A7"><span class="nav-number">7.</span> <span class="nav-text">增强流量匿名性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bu1</p>
+  <div class="site-description" itemprop="description">最为惊艳的是思想碰撞产生的火花。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
