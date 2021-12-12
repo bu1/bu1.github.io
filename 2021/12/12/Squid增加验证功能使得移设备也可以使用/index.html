@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="写了很久，越写坑越多…最后发现了一个别的方案~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Squid增加验证功能使得移设备也可以使用">
+<meta property="og:url" content="http://yoursite.com/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="写了很久，越写坑越多…最后发现了一个别的方案~">
+<meta property="og:locale">
+<meta property="og:image" content="http://yoursite.com/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/image-20211209160417851.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/image-20211210140217623.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/image-20211210140528102.png">
+<meta property="article:published_time" content="2021-12-12T08:48:21.000Z">
+<meta property="article:modified_time" content="2021-12-12T08:58:48.672Z">
+<meta property="article:author" content="Bu1">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/image-20211209160417851.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/12/12/Squid增加验证功能使得移设备也可以使用/"/>
+
+
+
+
+
+  <title>Squid增加验证功能使得移设备也可以使用 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bu1'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Squid增加验证功能使得移设备也可以使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-12T16:48:21+08:00">
+                2021-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">杂七杂八</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/12/12/Squid增加验证功能使得移设备也可以使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>写了很久，越写坑越多…最后发现了一个别的方案~</p>
+<span id="more"></span>
+
+<h2 id="0x01-在WIFI与APN接入点中直接新建HTTP代理"><a href="#0x01-在WIFI与APN接入点中直接新建HTTP代理" class="headerlink" title="0x01 在WIFI与APN接入点中直接新建HTTP代理"></a>0x01 在WIFI与APN接入点中直接新建HTTP代理</h2><ul>
+<li><p>WIFI</p>
+<p>长按连接上WIFI，点击修改网络后，选择代理并填入相关信息即可，支持自动验证~</p>
+</li>
+<li><p>移动流量</p>
+<p>选择移动数据，点击接入点名称(APN)，新建APN即可，数据不知道怎么填可以先看下系统默认的APN接入点。新建的时候如果代理设置了密码记得勾选身份验证类型。</p>
+</li>
+</ul>
+<p><strong>注：</strong>如果不是开放式代理以上两种方法均会导致阿里云盘、抖音等软件无法使用。通过实验发现是这些流量不会自带账号密码，所以直接被拒绝了。等待后续优化~</p>
+<h2 id="0x02-参考链接"><a href="#0x02-参考链接" class="headerlink" title="0x02 参考链接"></a>0x02 参考链接</h2><ul>
+<li>APN各个参数含义<a target="_blank" rel="noopener" href="https://docs.citrix.com/zh-cn/xenmobile/server/policies/apn-policy.html">https://docs.citrix.com/zh-cn/xenmobile/server/policies/apn-policy.html</a></li>
+<li>配置教程<a target="_blank" rel="noopener" href="https://www.kuaidaili.com/doc/using/android/">https://www.kuaidaili.com/doc/using/android/</a></li>
+</ul>
+<hr>
+<h2 id="以下为旧内容"><a href="#以下为旧内容" class="headerlink" title="以下为旧内容"></a>以下为旧内容</h2><p>通过mysql存储用户验证通过的ip，通过实际验证改方案不怎么靠谱，会无限循环验证请求ip。</p>
+<h2 id="0x01-安装宝塔"><a href="#0x01-安装宝塔" class="headerlink" title="0x01 安装宝塔"></a>0x01 安装宝塔</h2><p>需要用到mysql本来想手工安装的，但是想了下还是用宝塔吧~省时省心。</p>
+<p>CentOS一键安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+
+<p>更换一下登录端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;8881&#x27; &gt; /www/server/panel/data/port.pl &amp;&amp; /etc/init.d/bt restart</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>安装完后自动打开系统防火墙</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">查看防火墙状态</span></span><br><span class="line">systemctl status firewalld.service</span><br></pre></td></tr></table></figure>
+
+<p>查看是否放行端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --query-port=8881/tcp</span><br></pre></td></tr></table></figure>
+
+<p>放行指定的端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#--permanent永久生效，没有此参数重启后失效</span></span></span><br><span class="line">firewall-cmd --zone=public --add-port=8881/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<p>重启防火墙</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x02-安装Mysql"><a href="#0x02-安装Mysql" class="headerlink" title="0x02 安装Mysql"></a>0x02 安装Mysql</h2><p>宝塔可视化安装，或者手动安装也行，安装完后新建数据库<code>squid</code>，用户名<code>squid</code>。自定义也行记得住就行~。</p>
+<p>之后新建一个表<code>sq_client_ip</code>用来存储数据。</p>
+<p>还需要三个字段：</p>
+<ul>
+<li>id(设置为主键)</li>
+<li>username</li>
+<li>client_ip</li>
+<li>add_time</li>
+</ul>
+<p>这里我直接可视化安装了，所以就没有贴代码了。整体结构为：</p>
+<p><img src="/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/image-20211209160417851.png" alt="image-20211209160417851"></p>
+<h2 id="0x03-安装python"><a href="#0x03-安装python" class="headerlink" title="0x03 安装python"></a>0x03 安装python</h2><p>如果没有安装的话直接安装就好了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install python</span><br></pre></td></tr></table></figure>
+
+<p>如果没有自动安装pip的话可以手动安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install python-pip -y</span><br></pre></td></tr></table></figure>
+
+<p>再安装一下python的mysqldb库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install MySQL-python</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>python2对应的模块是mysqldb, mysqldb不支持python3</p>
+<p>python3对应的模块是pymysql</p>
+</blockquote>
+<p>安装报错可以先升级下pip版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 指定pip源</span></span><br><span class="line">pip install packagename -i http://pypi.douban.com/simple --trusted-host pypi.douban.com</span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新pip</span></span><br><span class="line">pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x04-编写基本验证器"><a href="#0x04-编写基本验证器" class="headerlink" title="0x04 编写基本验证器"></a>0x04 编写基本验证器</h2><p>在文件夹<code>/etc/squid</code>里新建<code>AuthPro.py</code>文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># coding=UTF-8</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> MySQLdb</span><br><span class="line"><span class="string">&quot;&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">matchpasswd</span>(<span class="params">login,passwd</span>):</span></span><br><span class="line">    <span class="comment">#用户名和密码，用于验证输入的用户名和密码。</span></span><br><span class="line">    <span class="comment">#你可以自定义验证通过的要求，验证通过，返回True，验证不通过返回False</span></span><br><span class="line">    <span class="keyword">if</span> (login == <span class="string">&#x27;修改为你的用户名&#x27;</span> <span class="keyword">and</span> passwd == <span class="string">&#x27;修改为你的验证密码&#x27;</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_client_ip_to_db</span>(<span class="params">username,client_ip</span>):</span></span><br><span class="line">    <span class="comment">#数据库地址，数据库用户名，数据库密码，数据库名，数据库编码格式</span></span><br><span class="line">    db=MySQLdb.connect(<span class="string">&quot;localhost&quot;</span>,<span class="string">&quot;squid&quot;</span>,<span class="string">&quot;修改为你的密码&quot;</span>,<span class="string">&quot;squid&quot;</span>,charset=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">    <span class="comment"># 使用cursor()方法获取操作游标 </span></span><br><span class="line">    cursor = db.cursor()</span><br><span class="line">    <span class="comment"># 向sq_client_ip表中插入用户名和用户ip</span></span><br><span class="line">    sql = <span class="string">&quot;INSERT INTO sq_client_ip(username, client_ip) VALUES (&#x27;%s&#x27;, &#x27;%s&#x27;)&quot;</span> % (username,client_ip)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">       <span class="comment"># 执行sql语句</span></span><br><span class="line">       cursor.execute(sql)</span><br><span class="line">       <span class="comment">#Ok 后面的print语句可以向cache日志中输出提示。/var/log/squid/cache.log查看</span></span><br><span class="line">       <span class="built_in">print</span>(<span class="string">&quot;执行sql语句&quot;</span>)</span><br><span class="line">       <span class="comment"># 提交到数据库执行</span></span><br><span class="line">       db.commit()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">       <span class="comment">#打印错误内容</span></span><br><span class="line">       info = sys.exc_info()  </span><br><span class="line">       <span class="built_in">print</span>( info[<span class="number">0</span>], <span class="string">&quot;:&quot;</span>, info[<span class="number">1</span>]) </span><br><span class="line">	   <span class="comment">#发生错误时回滚</span></span><br><span class="line">       db.rollback()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 关闭数据库连接</span></span><br><span class="line">    db.close()</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># read a line from stdin</span></span><br><span class="line">    line = sys.stdin.readline()</span><br><span class="line">    line = line.strip()</span><br><span class="line">    <span class="comment">#提取输入参数。</span></span><br><span class="line">    username,password,client_ip = line.split()</span><br><span class="line">    <span class="comment">#判断密码是否匹配</span></span><br><span class="line">    <span class="keyword">if</span> matchpasswd(username, password):</span><br><span class="line">        <span class="comment">#输出ok表示验证通过</span></span><br><span class="line">        sys.stdout.write(<span class="string">&#x27;OK\n 密码验证通过&#x27;</span>)</span><br><span class="line">      	<span class="comment">#将客户端ip添加至数据库ip白名单</span></span><br><span class="line">      	write_client_ip_to_db(username,client_ip)</span><br><span class="line">      	</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        sys.stdout.write(<span class="string">&#x27;ERR\n 密码验证失败&#x27;</span>)</span><br><span class="line">    <span class="comment"># Flush the output to stdout.</span></span><br><span class="line">    sys.stdout.flush()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0x05-编写外部ACL辅助器"><a href="#0x05-编写外部ACL辅助器" class="headerlink" title="0x05 编写外部ACL辅助器"></a>0x05 编写外部ACL辅助器</h2><p>在文件夹<code>/etc/squid</code>里新建<code>AclHelper.py</code>文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># coding=UTF-8</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> MySQLdb</span><br><span class="line"><span class="string">&quot;&quot;&quot;当用户连接squid，传递用户客户端ip地址到外部辅助器，辅助器通过标准输入读取。辅助器查询数据库符合客户端ip的所有项，如果查询结果，显示客户ip在数据库中，则输出ok，否则输出ERR&quot;&quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">matchclientip</span>(<span class="params">client_ip</span>):</span></span><br><span class="line">    <span class="comment">#数据库地址，数据库名，数据库密码，数据库用户名，数据库编码格式</span></span><br><span class="line">    db=MySQLdb.connect(<span class="string">&quot;localhost&quot;</span>,<span class="string">&quot;squid&quot;</span>,<span class="string">&quot;你的数据库密码&quot;</span>,<span class="string">&quot;squid&quot;</span>,charset=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">    <span class="comment"># 使用cursor()方法获取操作游标 </span></span><br><span class="line">    cursor = db.cursor()</span><br><span class="line">    <span class="comment"># SQL 插入语句</span></span><br><span class="line">    sql = <span class="string">&quot;SELECT * FROM sq_client_ip  WHERE client_ip = &#x27;%s&#x27;&quot;</span> % (client_ip)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">       <span class="comment"># 执行sql语句</span></span><br><span class="line">       cursor.execute(sql)</span><br><span class="line">       result = cursor.fetchone()</span><br><span class="line">       <span class="keyword">if</span> result:</span><br><span class="line">          exist_ip = <span class="literal">True</span></span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">          exist_ip = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">       <span class="comment"># 发生错误时回滚</span></span><br><span class="line">       db.rollback()</span><br><span class="line">       exist_ip = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 关闭数据库连接</span></span><br><span class="line">    db.close()</span><br><span class="line">    <span class="keyword">return</span> exist_ip</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># 从标准输入读取一行，“client_ip”</span></span><br><span class="line">    line = sys.stdin.readline()</span><br><span class="line">    <span class="comment">#提取输入参数。squid，输入给辅助器的字符串是&quot;0 xx.xx.xx.xx&quot;格式</span></span><br><span class="line">    <span class="comment">#利用split分割字符串，得到0和client_ip的list</span></span><br><span class="line">    client_ip = line.strip().split()[<span class="number">1</span>]</span><br><span class="line">    <span class="comment">#判断密码是否匹配</span></span><br><span class="line">    <span class="keyword">if</span> matchclientip(client_ip):</span><br><span class="line">        <span class="comment">#输出ok表示验证通过</span></span><br><span class="line">        sys.stdout.write(<span class="string">&#x27;OK\n&#x27;</span>)</span><br><span class="line">        <span class="comment">#print会将信息输出到/var/log/squid/cache.log中。</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Acl辅助器验证成功&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        sys.stdout.write(<span class="string">&#x27;ERR\n&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;ACL辅助器验证失败&quot;</span>)</span><br><span class="line">    <span class="comment"># Flush the output to stdout.</span></span><br><span class="line">    sys.stdout.flush()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0x06-修改squid配置文件"><a href="#0x06-修改squid配置文件" class="headerlink" title="0x06 修改squid配置文件"></a>0x06 修改squid配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http_port 设置监听端口，默认为3128</span></span><br><span class="line">http_port 6666</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">父squid配置，配合国外服务器server2使用</span></span><br><span class="line">nonhierarchical_direct off</span><br><span class="line"><span class="meta">#</span><span class="bash">转发请求通过stunnel至父squid</span></span><br><span class="line">cache_peer localhost parent 3128 0 default</span><br><span class="line">never_direct allow all</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> access_log 设置access日志，daemon表示在后台将日志写入/var/<span class="built_in">log</span>/squid/access.log文件,</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> combined是一个预定义的logformat，也可以使用自定义的logformat</span></span><br><span class="line">access_log daemon:/var/log/squid/access.log combined</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACLs all, manager, localhost, and to_localhost are predefined.</span></span><br><span class="line">acl SSL_ports port 443</span><br><span class="line">acl Safe_ports port 80		# http</span><br><span class="line">acl Safe_ports port 21		# ftp</span><br><span class="line">acl Safe_ports port 443		# https</span><br><span class="line">acl Safe_ports port 70		# gopher</span><br><span class="line">acl Safe_ports port 210		# wais</span><br><span class="line">acl Safe_ports port 1025-65535  # unregistered ports</span><br><span class="line">acl Safe_ports port 280		# http-mgmt</span><br><span class="line">acl Safe_ports port 488		# gss-http</span><br><span class="line">acl Safe_ports port 591		# filemaker</span><br><span class="line">acl Safe_ports port 777		# multiling http</span><br><span class="line">acl CONNECT method CONNECT</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 拒绝所有非Safe_ports的请求</span></span><br><span class="line">http_access deny !Safe_ports</span><br><span class="line"><span class="meta">#</span><span class="bash"> 拒绝所有非SSL_prots的CONNECT请求</span></span><br><span class="line">http_access deny CONNECT !SSL_ports</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Only allow cachemgr access from localhost</span></span><br><span class="line">http_access allow localhost manager</span><br><span class="line"><span class="meta">#</span><span class="bash">http_access deny manager</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 允许来自本地的请求</span></span><br><span class="line">http_access allow localhost</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">定义一个外部ACL辅助器</span></span><br><span class="line"><span class="meta">#</span><span class="bash">使用python解释器，negativettl表示验证错误时的缓存时间单位秒，concurrency表示最多接收的认证通过用户，ipv4必须，如果没有ipv4会报错。</span></span><br><span class="line">external_acl_type MyAclHelper negative_ttl=1 concurrency=30 ipv4 %SRC /usr/bin/python /etc/squid/AclHelper.py</span><br><span class="line">acl MyAcl external MyAclHelper</span><br><span class="line">http_access allow MyAcl</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">定义一个验证器</span></span><br><span class="line"><span class="meta">#</span><span class="bash">指定python运行目录，和python程序的目录</span></span><br><span class="line">auth_param basic program /usr/bin/python /etc/squid/AuthPro.py</span><br><span class="line"><span class="meta">#</span><span class="bash">向python程序中输入key_extras变量客户端ip<span class="string">&quot;%&gt;a&quot;</span></span></span><br><span class="line">auth_param basic key_extras &quot;%&gt;a&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash">允许多少个子程序</span></span><br><span class="line">auth_param basic children 30</span><br><span class="line"><span class="meta">#</span><span class="bash">输入框提示信息</span></span><br><span class="line">auth_param basic realm 输入用户名和密码</span><br><span class="line"><span class="meta">#</span><span class="bash">验证信息的缓存时长</span></span><br><span class="line">auth_param basic credentialsttl 1 second</span><br><span class="line"><span class="meta">#</span><span class="bash">用户名和密码是否区分大小写</span></span><br><span class="line">auth_param basic casesensitive on</span><br><span class="line"><span class="meta">#</span><span class="bash">强制用户验证</span></span><br><span class="line">acl authenticated proxy_auth REQUIRED</span><br><span class="line">http_access allow authenticated</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###############################################</span></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 拒绝所有请求，最后兜底的规则</span></span><br><span class="line">http_access deny all</span><br></pre></td></tr></table></figure>
+
+<p>重启squid使之生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">squid -z</span><br><span class="line">systemctl restart squid.service</span><br><span class="line">systemctl status squid</span><br></pre></td></tr></table></figure>
+
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>连接数据库时报错</p>
+<p><img src="/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/image-20211210140217623.png" alt="image-20211210140217623"></p>
+<p>找一下这个文件位置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@Q1nghuan squid]# find / -name mysql.sock</span><br><span class="line">/tmp/mysql.sock</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>我看网上的文章一般是/tmp/目录下没有但是/var/目录下有？？？</p>
+</blockquote>
+<p>既然这个模块要用到这个文件就做个软链接过去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/lib/mysql/</span><br><span class="line">ln -s /tmp/mysql.sock /var/lib/mysql/mysql.sock</span><br></pre></td></tr></table></figure>
+
+<p>再次测试连接</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python testdb.py</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/image-20211210140528102.png" alt="image-20211210140528102"></p>
+<p>这里的<code>testdb.py</code>使用的是菜鸟教程的参考实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> MySQLdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开数据库连接</span></span><br><span class="line">db = MySQLdb.connect(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;testuser&quot;</span>, <span class="string">&quot;test123&quot;</span>, <span class="string">&quot;TESTDB&quot;</span>, charset=<span class="string">&#x27;utf8&#x27;</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用cursor()方法获取操作游标 </span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用execute方法执行SQL语句</span></span><br><span class="line">cursor.execute(<span class="string">&quot;SELECT VERSION()&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 fetchone() 方法获取一条数据</span></span><br><span class="line">data = cursor.fetchone()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Database version : %s &quot;</span> % data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭数据库连接</span></span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0x07-参考"><a href="#0x07-参考" class="headerlink" title="0x07 参考"></a>0x07 参考</h2><ul>
+<li>验证器<a target="_blank" rel="noopener" href="https://sci.ci/2020/06/02/Squid-MySQL%E5%82%A8%E5%AD%98%E7%94%A8%E6%88%B7%E9%AA%8C%E8%AF%81%E9%80%9A%E8%BF%87%E7%9A%84IP/">https://sci.ci/2020/06/02/Squid-MySQL%E5%82%A8%E5%AD%98%E7%94%A8%E6%88%B7%E9%AA%8C%E8%AF%81%E9%80%9A%E8%BF%87%E7%9A%84IP/</a></li>
+<li>宝塔手册<a target="_blank" rel="noopener" href="https://www.bt.cn/btcode.html">https://www.bt.cn/btcode.html</a></li>
+<li>Firewall常用命令<a target="_blank" rel="noopener" href="https://blog.csdn.net/lvqingyao520/article/details/81075094">https://blog.csdn.net/lvqingyao520/article/details/81075094</a></li>
+<li>python操纵mysql<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-mysql.html">https://www.runoob.com/python/python-mysql.html</a></li>
+<li>squid中文手册<a target="_blank" rel="noopener" href="http://www.dba.cn/book/squid/SQUIDZhongWenQuanWeiZhiNan/Di6ZhangFangWenKongZhi.html#a0">http://www.dba.cn/book/squid/SQUIDZhongWenQuanWeiZhiNan/Di6ZhangFangWenKongZhi.html#a0</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Bu1
+  </li>
+<li class="post-copyright-link">
+  <strong>本文链接：</strong>
+  <a target="_blank" rel="noopener" href="http://bu1.github.io/2021/12/12/Squid增加验证功能使得移设备也可以使用/" title="Squid增加验证功能使得移设备也可以使用">http://bu1.github.io/2021/12/12/Squid增加验证功能使得移设备也可以使用/</a>
+</li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------END<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/12/12/CentOS7%E5%8D%87%E7%BA%A7python3%E4%BB%A5%E5%8F%8A%E6%9B%B4%E6%8D%A2pip%E6%BA%90%E8%AE%B0%E5%BD%95/" rel="next" title="CentOS7升级python3以及更换pip源记录">
+                <i class="fa fa-chevron-left"></i> CentOS7升级python3以及更换pip源记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/12/12/Powershell%E5%AE%9E%E7%94%A8%E5%9E%8B%E5%91%BD%E4%BB%A4%E7%A7%AF%E7%B4%AF/" rel="prev" title="Powershell实用型命令积累">
+                Powershell实用型命令积累 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  
+  
+  
+  
+  
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tanpuhan.github.io" title="CoCo1er" target="_blank">CoCo1er</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.y1nhui.com" title="y1nhui" target="_blank">y1nhui</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E5%9C%A8WIFI%E4%B8%8EAPN%E6%8E%A5%E5%85%A5%E7%82%B9%E4%B8%AD%E7%9B%B4%E6%8E%A5%E6%96%B0%E5%BB%BAHTTP%E4%BB%A3%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">0x01 在WIFI与APN接入点中直接新建HTTP代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">0x02 参考链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8B%E4%B8%BA%E6%97%A7%E5%86%85%E5%AE%B9"><span class="nav-number">3.</span> <span class="nav-text">以下为旧内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94"><span class="nav-number">4.</span> <span class="nav-text">0x01 安装宝塔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E5%AE%89%E8%A3%85Mysql"><span class="nav-number">5.</span> <span class="nav-text">0x02 安装Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E5%AE%89%E8%A3%85python"><span class="nav-number">6.</span> <span class="nav-text">0x03 安装python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E7%BC%96%E5%86%99%E5%9F%BA%E6%9C%AC%E9%AA%8C%E8%AF%81%E5%99%A8"><span class="nav-number">7.</span> <span class="nav-text">0x04 编写基本验证器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-%E7%BC%96%E5%86%99%E5%A4%96%E9%83%A8ACL%E8%BE%85%E5%8A%A9%E5%99%A8"><span class="nav-number">8.</span> <span class="nav-text">0x05 编写外部ACL辅助器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-%E4%BF%AE%E6%94%B9squid%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">9.</span> <span class="nav-text">0x06 修改squid配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">10.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-%E5%8F%82%E8%80%83"><span class="nav-number">11.</span> <span class="nav-text">0x07 参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">77.1k</span>
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>"
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2021/12/12/Squid%E5%A2%9E%E5%8A%A0%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E4%BD%BF%E5%BE%97%E7%A7%BB%E8%AE%BE%E5%A4%87%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8/';
+          this.page.identifier = '2021/12/12/Squid增加验证功能使得移设备也可以使用/';
+          this.page.title = 'Squid增加验证功能使得移设备也可以使用';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
